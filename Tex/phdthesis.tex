@@ -1,0 +1,178 @@
+%%
+
+\documentclass[phd, print]{nuthesis}
+%% Needed to typset the math in this sample
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bm}
+
+%% Let's use a different font
+\usepackage[sc,osf]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+
+%% superscript and subscript
+\usepackage{fixltx2e}
+
+%% To support chemical formula e.g. \ce{SO2}
+\usepackage[version=3]{mhchem}
+
+%% Support to fix table width
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}m{#1}}
+
+% Heading font size
+\usepackage{titlesec}
+\titleformat{\chapter} % command
+	[display] % shape
+	{\normalfont\bfseries \centering \vspace{-2ex}} % format
+	{\normalfont\large\MakeUppercase{\chaptertitlename} 
+     \MakeUppercase{\thechapter} }
+	{0.5em}{\large \centering \MakeUppercase}
+
+%% Makes things look better
+\usepackage{microtype}
+%\usepackage{indentfirst}
+
+%% Makes things look better
+\usepackage{booktabs}
+
+%% Gives us extra list environments
+\usepackage{paralist}
+
+%% Be able to include graphicsx
+\usepackage{graphicx}
+
+%% For spacing
+\usepackage{setspace}
+
+%% Natbib for reference
+\usepackage[square]{natbib}
+\renewcommand{\bibname}{References}
+
+%% I like darker colors
+\usepackage{color}
+\definecolor{dark-red}{rgb}{0.6,0,0}
+\definecolor{dark-green}{rgb}{0,0.6,0}
+\definecolor{dark-blue}{rgb}{0,0,0.6}
+
+%% If you use hyperref, you need to load memhfixc *after* it.
+%% See the memoir docs for details.
+\usepackage[%
+pdfauthor={Xiaoguang Xu},
+pdftitle={Dissertation},
+pdfsubject={Dissertation},
+pdfkeywords={LaTeX, Dissertation, University of Nebraska, Xiaoguang Xu},
+linkcolor=dark-blue,
+pagecolor=dark-green,
+citecolor=dark-blue,
+urlcolor=dark-red,
+colorlinks=true,
+backref,
+plainpages=false,% This helps to fix the issue with hyperref with page numbering
+pdfpagelabels% This helps to fix the issue with hyperref with page numbering
+]{hyperref}
+
+%% Needed by memoir to fix things with hyperref
+\usepackage{memhfixc}
+
+%% New commands
+
+%% For equations
+\newcommand{\bdeps}{\boldsymbol{\epsilon} } 
+\newcommand{\bdsa} {\mathbf{S}_\text{a}}
+\newcommand{\bdsy} {\mathbf{S}_\text{y}}
+\newcommand{\bdxa} {\mathbf{x}_\text{a}}
+
+\begin{document}
+%% Start formating the first few special pages
+%% frontmatter is needed to set the page numbering correctly
+\frontmatter
+
+\title{Retrieval of Aerosol Microphysical Properties from the AERONET
+Photo-Polarimetric Measurements}
+\author{Xiaoguang Xu}
+\adviser{Professor Jun Wang}
+\adviserAbstract{Jun Wang}
+\major{Earth \& Atmospheric Sciences \\ (Meteorology/Climatology)}
+\degreemonth{May}
+\degreeyear{2015}
+%%
+%% For most people the defaults will be correct, so they are commented
+%% out. To manually set these, just uncomment and make the needed
+%% changes.
+%% \college{Your college}
+%% \city{Your City}
+%%
+%% For most people the following can be changed with a class
+%% option. To manually set these, just uncomment the following and
+%% make the needed changes.
+%% \doctype{Thesis or Dissertation}
+%% \degree{Your degree}
+%% \degreeabbreviation{Your degree abbr.}
+%%
+%% Now that we know everything we need, we can generate the title page
+%% itself.
+%%
+\maketitle
+
+%% Front matters, including abstract, dedication, acknowledgements etc.
+%\include{./chapters/frontmatters}
+
+%% The ToC is required
+%% Uncomment these if need be
+
+%% The ToC is required
+\tableofcontents*
+%% Uncomment these if need be
+\begin{onehalfspacing}
+\listoffigures
+\listoftables
+\end{onehalfspacing}
+
+%% mainmatter is needed after the ToC, (LoF, and LoT) to set the
+%% page numbering correctly for the main body
+\mainmatter
+
+%% Thesis goes here
+
+% Chapters
+\include{./chapters/ch01} 
+\include{./chapters/ch02} 
+\include{./chapters/ch03} 
+\include{./chapters/ch04} 
+\include{./chapters/ch05} 
+
+%% backmatter is needed at the end of the main body of your thesis to
+%% set up page numbering correctly for the remainder of the thesis
+\backmatter
+
+%% Start the correct formatting for the appendices
+\appendix
+
+\chapter{Abbreviations and Acronyms}
+\chapter{Symbols}
+
+%% Bibliography goes here (You better have one)
+%% BibTeX is your friend
+\begin{onehalfspacing}
+\bibliographystyle{agu08}
+\bibliography{phdthesis}
+\end{onehalfspacing}
+%% Pull in all the entries in the bibtex file. Is is a useful trick to
+%% check all your references.
+%\nocite{*}
+
+\newpage
+\begin{listofpub}
+  List my publication here
+\end{listofpub}
+
+%% Index go here (if you have one)
+
+\end{document}
+\endinput
+%%
+%% End of file `thesis-test.tex'.
