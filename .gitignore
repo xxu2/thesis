@@ -1,3 +1,9 @@
+## Mac folder files
+.DS_Store
+
+## Material folder
+materials/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
