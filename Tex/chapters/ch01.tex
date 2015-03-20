@@ -51,31 +51,39 @@ optical scattering measurements with spectral extinctions to recover particle
 size spectrum. \citet{Kaufman94} suggested useful information contained in
 the sky radiances of larger scattering angles to retrieve the aerosol
 scattering phase function and PSD. The first operational retrieval algorithm
-for aerosol microphysical properties was introduced by Nakajima et al. [1996],
+for aerosol microphysical properties was introduced by \citet{Nakajima96},
 when the multi-band automatic sun- and sky-scanning radiometer was deployed in
-the AErosol RObotic NETwork, or the AERONET [Holben et al., 1994, 1998]. All of
+the AErosol RObotic NETwork, or the AERONET \citep{holben98}. All of
 above mentioned methods treated aerosol particles as homogeneous spheres and
 with refractive index assumed a priori, even though the refractive index can
-highly impact the optical, especially the scattering characteristics [Hansen
-and Travis, 1974].  Tanaka et al. [1982, 1983] developed an inversion library
+highly impact the optical, especially the scattering characteristics \citep{hansen74}.
+\citet{Tanaka82,Tanaka83} developed an inversion library
 method to estimate the complex refractive index and PSD simultaneously from
 measurements of scattered radiances polarized in the perpendicular and parallel
 directions. Another concept for determining refractive index from both direct
-and diffuse angular radiances was developed by Wendisch and von Hoyningen-Huene
-[1994] and Yamasoe et al. [1998], which were based on the fact that
+and diffuse angular radiances was developed by \citet{Wendisch94} and 
+\citet{Yamasoe98}, which were based on the fact that
 sensitivities of scattered radiances to the PSD and those to the refractive
 index are dominated on different scattering-angular regions. The current
-AERONET operational inversion algorithm was developed by Dubovik and King
-[2000], which has heritage from algorithms developed by King et al. [1978] and
-Nakajima et al. [1983, 1996] but was implemented for simultaneous retrieval of
+AERONET operational inversion algorithm was developed by \citet{Dubovik00a},
+which has heritage from algorithms developed by \citet{King78} and
+\citet{Nakajima83,Nakajima96} but was implemented for simultaneous retrieval of
 particle size distribution and complex refractive index with sophisticated
-inclusion of multiple a priori constraints. Dubovik et al. [2002, 2006] further
+inclusion of multiple a priori constraints. \citet{Dubovik02,Dubovik06} further
 implemented the spheroids in the particle shape consideration for desert dust
 in the retrieval, and added fractional volume of non-spherical particles to the
 inversion products.
 
-
 \subsection{The AERONET measurements}
+
+With over 400 locations around the word, most AERONET sites are equipped with
+an automatic sun and sky scanning spectral radiometer, or the CIMEL-318 type
+SunPhotometer, to measure direct and diffuse solar radiation in various
+atmospheric window channels \citep{holben98}. 
+Direct sun radiances at various atmospheric window channels from the
+ultra-violet (UV) to near infrared are used to infer the spectral AODs with the
+Beer-Lambert-Bouguer Law \citep{holben98,Smirnov00}. 
+
 
 \subsection{Challenges and opportunities}
 
