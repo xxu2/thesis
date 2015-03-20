@@ -6,34 +6,78 @@
 Atmospheric aerosols play a crucial role in the global climate change. They
 affect earth energy budget directly by scattering and absorbing solar and
 terrestrial radiation, and indirectly through altering the cloud formation,
-lifetime, and radiative properties [Haywood and Boucher, 2000; Ramanathan et
-al., 2001]. However, quantification of these effects in the current climate
+lifetime, and radiative properties \citep{haywood00,ramanathan01}.
+However, quantification of these effects in the current climate
 models is fraught with uncertainties. The global average of aerosol effective
-radiative forcing (ERF) were estimated to range from --0.1 to --1.9 Wm$^{-2}$ with the 
-best estimate of --0.9 Wm$^{-2}$ [Boucher et al., 2013], indicating that the cooling
+radiative forcing were estimated to range from --0.1 to --1.9 Wm$^{-2}$ with the 
+best estimate of --0.9 Wm$^{-2}$ \citep{boucher13}, indicating that the cooling
 effects of aerosol might counteract the warming effects of 1.82$\pm$0.19 Wm$^{-2}$
-caused by the increase of carbon dioxide since the industrial revolution [Myhre 
-et al., 2013]. The climate effects of aerosol particles depend on their
+caused by the increase of carbon dioxide since the industrial revolution 
+\citep{myhre13}. The climate effects of aerosol particles depend on their
 geographical distribution, optical properties, and efficiency as cloud
-condensation nuclei (CCN). Key quantities pertain to the aerosol optical and
+condensation nuclei and ice nuclei. 
+Key quantities pertain to the aerosol optical and
 cloud-forming properties include particle size distribution (PSD), chemical
 composition, mixing state, and morphology [Boucher et al., 2013]. While the
 daily aerosol optical depth (AOD) can be well measured from current satellite
-and ground-based remote sensing instrumentations [e.g., Holben et al., 1998;
-Kaufman et al., 2002], the accurate quantification of aerosol ERF is in no
+and ground-based remote sensing instrumentations \citep[e.g.,][]{holben98,kaufman02},
+the accurate quantification of aerosol ERF is in no
 small part hindered by our limited knowledge about the aerosol PSD and
 refractive index (describing chemical composition and mixing state). 
 
 To fully understand the role of aerosol particles in the global climate change, 
 further development in observations along with retrieval algorithms for these
 aerosol microphysical properties from different platforms are thus highly
-needed [Mishchenko et al., 2004], and the focus of this two-part series study
+needed \citep{Mishchenko04}, and the focus of this two-part series study
 is the characterization of aerosol properties from ground-based passive remote
 sensing.
 
 \subsection{Previous studies on aerosol microphysical retrievals}
 
-\subsection{Challenges and Opportunities}
+There have been continuous efforts in determining aerosol microphysical
+properties from ground-based measurements of direct and/or diffuse solar
+radiation since \citet{angstrom29} first suggested an empirical relationship
+between the spectral dependency of extinction coefficients and the size of
+aerosol particles. Over thirty years later, \citet{curcio61} inferred the aerosol
+PSD from the spectral particulate extinction coefficients in the visible and
+near-infrared regions. Soon with the effective numerical inversion technique
+developed by \citet{Phillips62} and \citet{twomey63} specifically for error-involved
+optimization, a number of studies explored the use of either spectral
+attenuations or scattered radiances (in a small range of scattering angles) to
+determine the aerosol PSD
+\citep{Twomey67,Yamamoto69,Dave71,Grassl71,Herman71,King78}.
+\citet{Shaw79} and \citet{Nakajima83} were among the first studies that have combined
+optical scattering measurements with spectral extinctions to recover particle
+size spectrum. \citet{Kaufman94} suggested useful information contained in
+the sky radiances of larger scattering angles to retrieve the aerosol
+scattering phase function and PSD. The first operational retrieval algorithm
+for aerosol microphysical properties was introduced by Nakajima et al. [1996],
+when the multi-band automatic sun- and sky-scanning radiometer was deployed in
+the AErosol RObotic NETwork, or the AERONET [Holben et al., 1994, 1998]. All of
+above mentioned methods treated aerosol particles as homogeneous spheres and
+with refractive index assumed a priori, even though the refractive index can
+highly impact the optical, especially the scattering characteristics [Hansen
+and Travis, 1974].  Tanaka et al. [1982, 1983] developed an inversion library
+method to estimate the complex refractive index and PSD simultaneously from
+measurements of scattered radiances polarized in the perpendicular and parallel
+directions. Another concept for determining refractive index from both direct
+and diffuse angular radiances was developed by Wendisch and von Hoyningen-Huene
+[1994] and Yamasoe et al. [1998], which were based on the fact that
+sensitivities of scattered radiances to the PSD and those to the refractive
+index are dominated on different scattering-angular regions. The current
+AERONET operational inversion algorithm was developed by Dubovik and King
+[2000], which has heritage from algorithms developed by King et al. [1978] and
+Nakajima et al. [1983, 1996] but was implemented for simultaneous retrieval of
+particle size distribution and complex refractive index with sophisticated
+inclusion of multiple a priori constraints. Dubovik et al. [2002, 2006] further
+implemented the spheroids in the particle shape consideration for desert dust
+in the retrieval, and added fractional volume of non-spherical particles to the
+inversion products.
+
+
+\subsection{The AERONET measurements}
+
+\subsection{Challenges and opportunities}
 
 \section{Objectives}
 
