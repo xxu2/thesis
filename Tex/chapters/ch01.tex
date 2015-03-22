@@ -101,6 +101,26 @@ modes.}
   \label{fig:cimel318}
 \end{figure}
 
+
+\begin{table}[b]
+  \centering
+  \small
+  \caption{Measurement sequences of the CIMEL-318 SunPhotometer}
+  \label{tab:cimel318}
+  \begin{tabular}{m{3em} C{5em} C{15em} C{6em} }
+    \toprule
+           & Spectral Bands & Viewing Geometry & Applications \\ 
+    \midrule
+    \ce{SO2} & 520.8 & 592.0 & 113.7  \\
+    \ce{NH3} & 219.3 & 249.2 & 113.7  \\
+    \ce{NOx} & 338.8 & 365.3 & 107.8  \\
+    BC & 23.3 & 23.8 & 102.3  \\
+    OC & 39.7 & 41.1 & 103.4  \\
+    Dust & 2301 & 1697 & 73.7 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 Sky radiance measurements, which are performed at 440, 670, 870, and 1020-nm
 bands with full width spectrum at half maximum (FWHM) of 10 nm, are acquired
 from both solar almucantar and solar principal plane. An almucantar is a series
@@ -116,7 +136,7 @@ angles. Hereinafter, we will use $\ialm$ and $\ippl$ to represent the sky radian
 from the solar almucantar and solar principal plane, respectively.
 
 These sky radiance data are used in the current AEROENT operational inversion
-algorithm \citep{Dubovik00a,Dubovik06} (hereafter \Dub) to derive: 
+algorithm \citep{Dubovik00a,Dubovik06} (hereafter Dubovik00\&06) to derive: 
 (1) the aerosol particle size distribution (PSD) in
 terms of the aerosol volume (in the atmospheric column) at 22 size bins, (2)
 the fractional volume of non-spherical particles, and (3) the complex
@@ -230,6 +250,45 @@ coarse modes, however, they concluded that the retrieval of bi-modal refractive
 indices is essentially non-unique due to limited information in the AERONET
 radiance-only observations. 
 
-\section{Objectives}
+Therefore, this work aims to developing an algorithm to retrieve the aerosol
+microphysical properties of both fine and coarse aerosol modes,
+which embraces the future opportunities of
+deploying polarization measurements through AERONET, and ameliorates the
+aforementioned limitations in the \Dub algorithm by incorporating both
+radiance and polarization data. Polarization measurements contain valuable
+information on aerosol microphysical properties \citep{Mishchenko97},
+as the polarization of the scattered light is highly sensitive to aerosol size
+and refractive index \citep{Hansen74, Mishchenko02}. We note, however, their
+conclusions were based on consideration of
+spherical aerosol particles and were primarily from a theoretical point of
+view. In contrast, the studies by \citet{Dubovik06} and \citet{Deuze93,
+Deuze01} revealed serious limitation of polarimetric retrieval of the properties
+for coarse, especially non-spherical aerosols. Moreover, \citet{Dubovik06}
+have shown that while the polarimetic observation of fine particles and large
+spheres are highly sensitive to real part of refractive index, even they have
+non-negligible sensitivity to particle shape. Therefore, adding polarization
+measurements to the inversion has great potential to improve the accuracy of
+AERONET microphysical retrievals, provided that the difficulty of representing
+aerosol particle shapes is recognized or adequately addressed. In these
+regards, most of the past efforts seem to suggest clear improvements in
+characterization of fine mode aerosol using polarimetric observations. For
+example, \citet{Li09}, based upon the \Dub algorithm, demonstrated
+the possibility to reduce errors in the fine-mode size distribution, real part
+of the refractive index, and particle shape parameters. 
 
-\section{Organization}
+\section{General Research Goals}
+
+As discussed above, this dissertation seeks to contribute to an improved
+research algorithm to retrieval aerosol micriphysical properties from AERONET
+measurements of light radiance and polarization, with emphasis on elucidating
+the potentially important role of polarization measurements. It does so by 
+pursuing three following spcifci objectives:
+
+\begin{enumerate}
+\item \textit{Develop ground-based inversion algorithms for the retrieval of $\reff$,
+$\veff$, $\mreal$, and $\mimag$ from a combined use of direct solar radiance, 
+skylight radiance and skylight linear polarization measurements from AERONET.}
+\item Lalala
+\end{enumerate}
+
+\section{Theis Outline}
