@@ -80,7 +80,7 @@ With over 400 locations around the word, most AERONET sites are equipped with
 an automatic sun and sky scanning spectral radiometer, or the CIMEL-318 type
 SunPhotometer (Figure \ref{fig:cimel318}a), to routinely measure direct and 
 diffuse solar radiation in various atmospheric window channels \citep{Holben98}. 
-As listed in Table XX as illustrated in Figure \ref{fig:cimel318}, these
+As listed in Table \ref{tab:cimel318} and illustrated in Figure \ref{fig:cimel318}, these
 measurements include direct sun radiances, sky radiance on both the solar
 almuncantar and pruncipal planes, as well as the optional polarization of sky
 light on the solar principal plane.
@@ -101,39 +101,56 @@ modes.}
   \label{fig:cimel318}
 \end{figure}
 
-
-\begin{table}[b]
-  \centering
-  \small
-  \caption{Measurement sequences of the CIMEL-318 SunPhotometer}
-  \label{tab:cimel318}
-  \begin{tabular}{m{3em} C{5em} C{15em} C{6em} }
-    \toprule
-           & Spectral Bands & Viewing Geometry & Applications \\ 
-    \midrule
-    \ce{SO2} & 520.8 & 592.0 & 113.7  \\
-    \ce{NH3} & 219.3 & 249.2 & 113.7  \\
-    \ce{NOx} & 338.8 & 365.3 & 107.8  \\
-    BC & 23.3 & 23.8 & 102.3  \\
-    OC & 39.7 & 41.1 & 103.4  \\
-    Dust & 2301 & 1697 & 73.7 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
 Sky radiance measurements, which are performed at 440, 670, 870, and 1020-nm
 bands with full width spectrum at half maximum (FWHM) of 10 nm, are acquired
-from both solar almucantar and solar principal plane. An almucantar is a series
-of measurements taken at the viewing angle of the sun for 76 specified relative
+from both solar almucantar and solar principal plane. An almucantar is a series 
+of measurements taken at the viewing angle of the sun for 76 specified relative 
 azimuthal angles (for detail see table 2 of citep{holben98}). To achieve an
 enough range of scattering angles, almucantar scans are usually made at an
 optical air mass of 1.7 or more (corresponding to solar zenith angle larger
-than about 50$^\circ$). The principal-plane sequence for each spectrum performs right
-after almucantar scans. It begins with a sun observation, moves 6$^\circ$) below the
-sunray, sweeps up through the sun, and ends at a scattering angle of
-150$^\circ$) or viewing angle achieves horizon, collecting radiances from up to 42 viewing
-angles. Hereinafter, we will use $\ialm$ and $\ippl$ to represent the sky radiances
-from the solar almucantar and solar principal plane, respectively.
+than about 50$^\circ$). The principal-plane sequence for each spectrum performs
+right after almucantar scans. It begins with a sun observation, moves 6$^\circ$)
+below the sunray, sweeps up through the sun, and ends at a scattering angle of
+150$^\circ$) or viewing angle achieves horizon, collecting radiances from up to
+42 viewing angles. Hereinafter, we will use $\ialm$ and $\ippl$ to represent the sky
+radiances from the solar almucantar and solar principal plane, respectively.
+
+\begin{table}[t]
+  \centering
+  \footnotesize
+  \caption{Measurement sequences of the CIMEL-318 SunPhotometer.}
+  \label{tab:cimel318}
+  \begin{tabular}{p{5em} p{8em} p{20em} p{6em} }
+    \toprule
+           & Spectra (nm)& Viewing Geometry ($^\circ$)& Applications \\ 
+    \midrule
+    Direct sun & 340--1020 \newline 340--1640\textsuperscript{a} & Target to
+the sun & AOD, \newline $P_\text{w}$, AE \\
+    \hline
+    Almucantar ($\ialm$)& 440, 675, 870, 1020 \newline (340, 380, 500,
+1640)\textsuperscript{a} & Azimuth angles relative to
+Sun: 6, 5, 4.5, 4, 3.5, 3, 2.5, 2, --2, --2.5, --3, --3.5, --4, --4.5, --5, --6,
+--8, --10, --12, --14, --16, --18, --20, --25, --30, --35, --40, --45, --50,
+--60, --70, --80, --90, --100, --110, --120, --130, --140, --160, --180
+(Duplicate above sequence for a complete counter clockwise rotation to --6) & 
+PSD, \newline $\mreal$, $\mimag$, \newline SSA, \newline phase function\\
+    \hline
+    Principal-plane ($\ippl$)& Same as above & Scattering angle from
+Sun: --6, --5, --4.5, --4, --3.5, --3, --2.5, --2, 2, 2.5, 3, 3.5, 4, 4.5, 5,
+6, 8, 10, 12, 14, 16, 18, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 110, 
+120, 130, 140 (negative is below the Sun) & Same as above \\
+    \hline
+    Polarization ($\ipp, \dolppp$) & 870, \newline (340, 380, 440, 500, 675, 870, 1020,
+1640)\textsuperscript{a} & Zenith angle on the
+solar principal plane: --85, --80, --75, --70, --65, --60, --55, --50, --45,
+--40, --35, --30, --25, --20, --15, --10, --5, 5, 10, 15, 20, 25, 30, 35, 40, 
+45, 50, 55, 60, 65, 70, 75, 80, 85 (negative is in the antisolar direction) &
+Not used yet \\
+    \bottomrule
+     \multicolumn{4}{m{35em}}{\textsuperscript{a}Additional measurements taken
+by the newer-generation CIMEL-318DP SunPhotometer.}
+  \end{tabular}
+\end{table}
 
 These sky radiance data are used in the current AEROENT operational inversion
 algorithm \citep{Dubovik00a,Dubovik06} (hereafter Dubovik00\&06) to derive: 
@@ -276,7 +293,7 @@ example, \citet{Li09}, based upon the \Dub algorithm, demonstrated
 the possibility to reduce errors in the fine-mode size distribution, real part
 of the refractive index, and particle shape parameters. 
 
-\section{General Research Goals}
+\section{Research Goals and Thesis Outline}
 
 As discussed above, this dissertation seeks to contribute to an improved
 research algorithm to retrieval aerosol micriphysical properties from AERONET
@@ -288,7 +305,9 @@ pursuing three following spcifci objectives:
 \item \textit{Develop ground-based inversion algorithms for the retrieval of $\reff$,
 $\veff$, $\mreal$, and $\mimag$ from a combined use of direct solar radiance, 
 skylight radiance and skylight linear polarization measurements from AERONET.}
-\item Lalala
+\item \textit{Perform a sensitivity study and error budgeting exercise to
+characterize retrieval accuracy and error sources.} \newline By doing so, we
+can answer the questions: 
+\item \textit{Perform ground-based retrievals using available AERONET
+polarimetric measurements.}
 \end{enumerate}
-
-\section{Theis Outline}

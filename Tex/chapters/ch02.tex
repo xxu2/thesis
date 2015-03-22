@@ -1,14 +1,79 @@
 %%
-\chapter{Model Developments}
+\chapter{Model Developments} \label{ch:model}
 
 \section{Introduction}
 
 The radiation fields---radiance and the state of polarization---measured by the
-remote sensing instruments are the outcome of the interations of solar
+AERONET SunPhotometer are the outcome of the interations of solar
 radiation with various physical processes including the absorption and
 scattering by atmospheric molecules, aerosols and clouds, as well the
-reflection and absorption by underlying surface. The radiance and polarization
-of light at 
+reflection and absorption by underlying surface. 
+The radiance and polarization of light at any wavelength can be represented by
+a Stokes column vector $\mathbf{I}$ having four elements \citep{Hansen74}:
+\begin{equation}
+\mathbf{I} = [I,Q,U,V]^T,
+\end{equation}
+where $I$ is the total intensity (or radiance), $Q$ and $U$ describe the state of
+linear polarization, $V$ describes the state of circular polarization, and $T$
+indicates a transposed matrix. It should be noted that all radiation fields and
+optical parameters used in this paper are functions of the light wavelength
+$\lambda$. For simplicity, however, we omit $\lambda$ in all formulas. 
+The degree of linear polarization ($\dolp$) is defined by
+\begin{equation}
+\dolp = \frac{\sqrt{Q^2+U^2}}{I}.
+\end{equation}
+
+In the solar principal plane, $U$ is negligibly small and the above formula
+becomes $\dolp=-Q/I$. Let $\mathbf{I}_0=[I_0,0,0,0]^T$ denote the Stokes vector 
+for incident Solar radiation at the top of the atmosphere (TOA) from 
+the direction ($\theta_0$, $\phi_0$), where $\theta_0$ and $\phi_0$
+are the incident solar zenith and azimuth angles, respectively.
+For a plane-parallel atmosphere bounded below by a reflective surface, the
+vector radiative transfer equation in the medium for the specific intensity
+column vector $\mathbf{I}$ of light propagating in the viewing direction 
+($\theta$, $\phi$) can be written \citep{Hovenier04, Mishchenko02}:
+\begin{align}
+\mu \frac{\partial \mathbf{I}(\tau,\mu,\phi)}{\partial \tau} &=
+    \mathbf{I}(\tau,\mu,\phi) - \mathbf{J}(\tau,\mu,\phi; \mu_0, \phi_0)
+    \label{eq:rte} \\
+\begin{split}
+\mathbf{J}(\tau,\mu,\phi; \mu_0, \phi_0) &= 
+     \frac{\omega}{4\pi}\int_{-1}^{1}\int_{0}^{2\pi} 
+     \mathbf{P}(\tau,\mu,\mu_0,\phi-\phi_0) 
+     \mathbf{I}(\tau,\mu_0,\phi_0)\text{d}\phi_0\text{d}\mu_0  \\
+     & + \frac{\omega}{4\pi}\mathbf{P}(\tau,\mu,\mu_0,\phi-\phi_0)
+     \mathbf{I}_0 \exp(-\tau/\mu_0)
+\end{split}
+\end{align}
+Here, $\tau$ is the extinction optical depth measured from TOA, $\mu$ and
+$\mu_0$ are cosines of $\theta$ and $\theta_0$, respectively, $\omega$ is the
+SSA and $\mathbf{P}$ is the phase matrix. The first term in equation
+\eqref{eq:rte} represents multiple scattering contributions, while
+the second indicates scattered light from the direct solar beam. 
+
+Parameters required to solve the above radiative transfer equation are $\tau$,
+$\omega$, and $\mathbf{P}(\Theta)$ for the atmosphere, and the reflectance
+matrix $\mathbf{R}_\text{s}(\tau,\mu,\phi; \mu_0, \phi_0)$ of 
+the underlying surface. Considering a cloud-free atmosphere, the solar
+radiation is attenuated by molecular scattering, gaseous absorption, and
+aerosol scattering and absorption. For a given layer, we have
+\begin{align}
+\tau   &= \taua + \taur + \taug \\
+\omega &= \frac{\taua\assa + \taur}{\tau} \\
+\mathbf{P}(\Theta) &=\mathbf{P}_\text{A}(\Theta)
+                     \frac{\taua\assa}{\taua\assa+\taur} 
+                    + \mathbf{P}_\text{R}(\Theta)
+                    \frac{\taur}{\taua\assa+\taur}
+\end{align}
+where $\taua$, $\taur$, and $\taug$ are optical depth, respectively, by 
+aerosol extinction, Rayleigh scattering of air density fluctuations, 
+and gaseous absorption. $\assa$ is the SSA of aerosol,  and
+$\mathbf{P}_\text{A}(\Theta)$ and $\mathbf{P}_\text{R}(\Theta)$ are, 
+respectively, the aerosol and Rayleigh phase matrices as functions of the 
+scattering angle $\Theta$. The forward
+modeling of radiance/polarization measurements thus requires knowledge of
+single scattering properties for aerosols and air density fluctuations,
+absorption of trace gases, and reflectance/polarization by surface. 
 
 \section{The UNL-VRTM}
 
