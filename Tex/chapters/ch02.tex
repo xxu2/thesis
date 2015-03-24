@@ -4,8 +4,8 @@
 \section{Introduction}
 
 The radiation fields---radiance and the state of polarization---measured by the
-AERONET SunPhotometer are the outcome of the interations of solar
-radiation with various physical processes including the absorption and
+AERONET SunPhotometer are the outcome of solar radiation interacting
+with various physical processes including the absorption and
 scattering by atmospheric molecules, aerosols and clouds, as well the
 reflection and absorption by underlying surface. 
 The radiance and polarization of light at any wavelength can be represented by
@@ -20,7 +20,7 @@ optical parameters used in this paper are functions of the light wavelength
 $\lambda$. For simplicity, however, we omit $\lambda$ in all formulas. 
 The degree of linear polarization ($\dolp$) is defined by
 \begin{equation}
-\dolp = \frac{\sqrt{Q^2+U^2}}{I}.
+\dolp = \frac{\sqrt{Q^2+U^2}}{I}. \label{eq:dolp}
 \end{equation}
 
 In the solar principal plane, $U$ is negligibly small and the above formula
@@ -70,21 +70,333 @@ aerosol extinction, Rayleigh scattering of air density fluctuations,
 and gaseous absorption. $\assa$ is the SSA of aerosol,  and
 $\mathbf{P}_\text{A}(\Theta)$ and $\mathbf{P}_\text{R}(\Theta)$ are, 
 respectively, the aerosol and Rayleigh phase matrices as functions of the 
-scattering angle $\Theta$. The forward
-modeling of radiance/polarization measurements thus requires knowledge of
-single scattering properties for aerosols and air density fluctuations,
-absorption of trace gases, and reflectance/polarization by surface. 
+scattering angle $\Theta$. Therefore, the forward modeling development 
+thus requires the computation of single scattering properties for aerosols and
+air density fluctuations, rigorous treatment for absorption of trace gases, 
+accuracte representation of reflectance/polarization by surface, an the
+realistic simulation of polarimetric radiative transfer. 
 
-\section{The UNL-VRTM}
+In this regard, we have developed the UNified Linearized Vector
+Radiative Transfer Model, or UNL-VRTM, specifically for simulation,
+analysis, and inversion of the photo-polarimetric measurements.
+Components of the UNL-VRTM are described in section \ref{sec:unlvrtm},
+and the model benchmarking and verification are presented in section
+\ref{sec:rtmverify}.
 
-\subsection{Surface representations}
+\section{The UNL-VRTM} \label{sec:unlvrtm}
 
-\subsection{Molecular scattering and absorption}
+As shown in Figure \ref{fig:unlvrtm}, the UNL-VRTM comprises 6
+modules; they are 
+\begin{enumerate}
+\item A module computing Rayleigh scattering (section
+\ref{subsec:rayleigh});
+\item A module that deal with gaseous absorption (section \ref{subsec:rayleigh});
+\item A linearized Mie scattering code (section \ref{subsec:mie});
+\item A linearized T-matrix electromagnetic scattering code (section
+\ref{subsec:mie});
+\item A surface model computing various bidirectional
+reflectance/polarization functions (BRDF/BPDF) (section
+\ref{subsec:surface});
+\item A vector linearized radiative transfer model---VLIDORT (section
+\ref{subsec:vlidort}). 
+\end{enumerate}
+These modules are integrated for the forward calculation of
+aerosol single scattering, gas absorption, and vector radiative transfer
+hereafter, and thus they together constitute the UNified Linearized
+Radiative Transfer Model, UNL-VRTM. 
 
-\subsection{Aerosol single scattering}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width={0.95\textwidth}]{figures/unlvrtm.pdf}
+  \caption{Flowchart of the UNL-VRTM. See text for detail.}
+  \label{fig:unlvrtm}
+\end{figure}
 
-\subsection{Radiative transfer}
+Inputs for the UNL-VRTM are profiles of atmospheric properties and
+constituents (temperature, pressure, aerosol mass concentration or layer
+AOD, water vapor amount and other trace gas volume mixing ratio
+profiles), the surface properties, as well as the aerosol parameters 
+(such as PSD parameters and refractive index) themselves. 
+Bearing in mind the lack of
+sensitivity in passive remote sensing for the retrieval of vertical
+profiles of aerosol properties, the UNL-VRTM as it stands now is only
+designed to deliver radiative calculations for a maximum of two sets of
+aerosol single scattering properties (e.g., aerosol PSD,
+refractive index, and particle shape), typically with one fine-mode and
+one coarse-mode aerosol. Other inputs for model include spectral and
+geometrical definitions that characterizing specification of an
+observing sensor. 
 
-\subsection{Capability of calculating Jacobians}
+Outputs of the model include the Stokes vector ($\mathbf{I}$) at
+user-defined spectral wavelengths and desired atmospheric
+levels for both upwelling and downwelling radiation, from which the
+light radiance and degree of polarization can be derived. Outputs also
+include analytical Jacobians of $\mathbf{I}$ with respect to all aerosol
+particle parameters (PSD, refractive index, vertical profile), Rayleigh
+scattering optical depth, optical depth of all trace gases, and
+parameters describing surface optical property. A detail description of
+the UNL-VRTM's Jacobian capability is presented in section
+\ref{subsec:jacobian}. 
 
-\section{Model Benchmarking and Verifications}
+\subsection{Molecular scattering and absorption} \label{subsec:rayleigh}
+
+The Rayleigh scattering optical depth at certain wavelength in any 
+atmospheric layer ($\taur$) is computed by
+\begin{equation}
+\taur = N_\text{air}\sigma_\text{R} 
+\end{equation}
+where $N_\text{air}$ is air molecular number density of that layer
+(molec cm$^{-2}$), and $\sigma_\text{R}$ is the Rayleigh scattering 
+cross-section (cm$^2$ molec$^{-1}$) computed following
+\citet{Bodhaine99}. The Rayleigh phase matrix,
+$\mathbf{P}_\text{R}(\Theta)$, depends upon molecular 
+anisotropy through the depolarization factor, also computed from the same 
+source. \citet{Bodhaine99} computes the wavelength-dependent Rayleigh
+scattering cross-section as a function of mixing ratios for \ce{N2},
+\ce{O2}, \ce{H2O}, and \ce{CO2}. The phase matrix for Rayleigh scattering
+follows \citet{Hansen74}; we use the set of spherical-function expansion
+ coefficients for the phase matrix as supplied for VLIDORT
+\citep{Spurr06}.
+
+Calculation of the absorption optical depth ($\taug$) at
+any atmospheric layer for $K$ different trace gases follows
+\begin{equation}
+\taug = \sum_{i=1}^K N_{\text{gas,}i}\sigma_{\text{A,}i}(T,P) 
+\end{equation}
+where $N_{\text{gas,}i}$ is the number density of \textit{i}th gas
+within that layer, and $\sigma_{\text{A,}i}$ is the corresponding
+absorption cross-section, a function of temperature and pressure. 
+Our model accounts for absorptions by a total number of
+22 trace gases: \ce{H2O}, \ce{CO2}, \ce{O3}, \ce{N2O}, \ce{CO},
+\ce{CH4}, \ce{O2}, \ce{NO}, \ce{SO2}, \ce{NO2}, \ce{NH3}, \ce{HNO3},
+\ce{OH}, \ce{HF}, \ce{KCl}, \ce{HBr}, \ce{HI}, \ce{ClO}, \ce{OCS},
+\ce{H2CO}, \ce{HOCl}, and \ce{N2}.
+The determination of $\sigma_\text{A}$  
+utilizes a UV-to-visible cross-section library and the line-spectroscopic
+absorption parameters archived in the HITRAN database \citep{Orphal03,
+Rothman09}. The cross-section library compiles the extinction
+cross-section for \ce{O3}, \ce{NO2}, \ce{SO2}, and \ce{O2-O2} in the UV
+and/or visible spectral regions. Meanwhile, line-spectroscopic 
+absorption databased are used to simulate the pressure- and
+temperature-dependent extinction cross-section with line-by-line (LBL) 
+approach \citep{Liou02,Rothman09} by accumulating each individual 
+absorption line. Doppler broadening is calculated from the molecular mass
+and the temperature, and Doppler and Lorentz broadening are included in the
+Voigt calculation.
+
+Particular to work, we only consider the most influential 
+trace species for the AERONET spectral bands: \ce{H2O} (vapor), \ce{O3}, 
+and \ce{NO2}. In our algorithm (section \ref{ch:algorithm}), the columnar
+amounts of \ce{O3} and \ce{NO2} are dynamically adjusted with retrievals from the
+Ozone Monitoring Instrument (OMI) \citep{Levelt06} on board the
+AURA satellite. We apply the columnar water vapor amount retrieved from
+the 940-nm radiances measured by the AERONET SunPhotometer
+\cite{Halthore97}.
+
+\subsection{Aerosol single scattering} \label{subsec:mie}
+
+Aerosol single scattering properties necessary to the radiative
+transfer calculation include aerosol optical depth ($\taua$)
+($\qext$), SSA ($\assa$), and scattering phase matrix ($\paer(\Theta)$).
+The calculation of these parameters is made with a Linearized Mie (LMIE)
+scattering electromagnetic code for spherical particles and a Linearized
+T-matrix (LTMATRIX) scattering code for non-spherical convex and axially
+symmetric particles \citep{Spurr12}. The LMIE code originates from the Mie code
+of \citet{deRooij84}, and the LTMATRIX code originates from the T-Matrix
+code developed by \citet{Mishchenko96, Mishchenko98}; both include
+linearization capabaility developed by \citet{Spurr12}.
+
+Common inputs for both codes are the complex refractive index
+($\mreal + i\mimag$), and the particle size distribution (PSD) 
+parameters for polydisperse scattering. The codes have several options 
+to specify the PSD function: two-parameter gamma, two-parameter 
+lognormal, three-parameter modified gamma, and four-parameter bi-lognormal. 
+In addition, the linearized T-matrix code offers options to characterize the 
+shape of non-spherical aerosols (spheroids, cylinders, or Chebyshev particles)
+\citep{Spurr12}. For non-spherical particles, the specified size distribution 
+is interpreted as the equivalent surface-area sphere in the linearized T-matrix
+calculation, regardless of the shape. 
+
+For AERONET inversion alorithm, we assume that the aerosol volume
+distribution follows a bi-modal lognormal function \citep[in agreement
+wit][]{Schuster06, Waquet09}:
+\begin{equation}
+\frac{\text{d}V}{\text{d}\ln{r}} = \sum_{i=1}^2 
+\frac{V_0^i}{\sqrt{2\pi}\ln{\sg^i}} 
+\exp{\left[ -\frac{(\ln{r}-\ln{\rv^i})^2}{2\ln^2{\sg^i}}\right]}
+\end{equation}
+where $V_0$, $\rv$, and $\sg$ are the total volume concentration, geometric
+median radius, and standard deviation, respectively. The superscript $i$
+indicates the size mode, and later will be replaced by ‘f’ for fine mode
+and ‘c’ for coarse mode. We assume that particle size ranges from 0.01
+to 10 $\mu$m for the fine mode and from 0.05 to 20 $\mu$m for
+the coarse mode, both covering $>$ 99.9\% of the total volume of an 
+idealistic size range (0, $+\infty$). An advantage of the lognormal 
+distribution is that standard deviations for the number, area, and 
+volume PSD functions are identical, and therefore allowing that the 
+median radii for these PSD functions can be converted from one to 
+another \citep{Seinfeld06}. The $\reff$ and $\veff$ are related to 
+the geometric parameters through:
+\begin{align}
+\reff &= \rv \exp{\left( -\frac{1}{2} \ln^2{\sg}\right)}, \\
+\veff & = \exp{\left(\ln^2{\sg}\right)} - 1.
+\end{align}
+
+The LMIE/LTMATRIX code computes the aerosol extinction efficiency
+factor $\qext$, single scattering albedo $\assa$, and phase matrix 
+$\paer(\Theta)$, as well as Jacobians of these quantities with respect
+to input parameters including $\reff$, $\veff$, $\mreal$, and $\mimag$.
+The phase matrix and its Jacobians are expressed in terms of the
+coefficients $\baer(\Theta)$ for each moment $l$ in terms of the 
+generalized spherical function expansions
+for each non-zero phase matrix element. Let $\mathbf{A}$ denotes the
+vector of aerosol microphysical parameters, 
+$\mathbf{A}=[V_0,\reff,\veff,\mreal,\mimag]^T$, and $\mathbf{M}$
+the vector of aerosol optical parameters, 
+$\mathbf{M}=[\taua,\assa,\baer(\Theta)]^T$, 
+where $\taua$ is related to $\qext$ by 
+$\taua=\frac{3V_0 \qext}{4\reff}$. The LMIE/LTMATRIX code acts
+as an operator that maps vector $\mathbf{A}$ to $\mathbf{M}$. 
+The Jacobian matrix of $\mathbf{M}$ with respect to $\mathbf{A}$ calculated by 
+means of the linearization feature of the code, and it can be expressed by
+$\nabla_\mathbf{A}\mathbf{M}$. 
+
+\subsection{Surface representations} \label{subsec:surface}
+
+VLIDORT has a supplementary module for specification of the surface BRDF
+as a linear combination of (up to) three semi-empirical kernel
+functions; for details, see \citet{Spurr04}. This supplementary module can also
+provide partial derivatives of the BRDF with respect to the kernel
+weighting factors or with respect to kernel parameters such as the wind
+speed for glitter reflectance. These kernel functions include
+Lambertian, Ross-Thick, and Li-Sparse functions \citep{Wanner95, Lucht00}, a
+Bi-directional Polarization Distribution Function (BPDF)
+\citep{Maignan09}, and an ocean surface model based on the 
+Cox-Munk model \citep{Cox54}. In addition, VLIDORT has
+an option for using a surface-leaving radiation field, either as a
+fluorescence term or as a water-leaving term expressed as a function of
+chlorophyll absorption.
+
+Although surface reflectance has in general a low influence on AERONET
+down-welling sky radiances and polarization, a state-of-the-art
+representation of the surface reflectivity potentially reduces model
+uncertainties, especially for measurements taken at low elevation angles
+that could be affected by surface diffusion. Here, we utilize the
+spectral BRDF parameters from the MODIS surface products that are
+operationally reported every 16 days at a 1-km resolution
+\citep{Lucht00}. Here we use time-matched MODIS BRDF products 
+to reconstruct the bidirectional reflectance over AERONET stations.
+The MODIS BRDF product supplies three weighting parameters
+($f_\text{iso}$, $f_\text{vol}$, and $f_\text{geo}$) for the first 
+7 MODIS bands, respectively, corresponding to three kernel types:
+isotropic, Ross-Thick ($K_\text{vol}$), and Li-Sparse ($K_\text{geo}$):
+\begin{equation}
+\rho_\text{R}(\mu,\phi;\mu_0,\phi_0) = f_\text{iso} + 
+f_\text{vol}K_\text{vol}(\mu,\phi;\mu_0,\phi_0) +
+f_\text{geo}K_\text{geo}(\mu,\phi;\mu_0,\phi_0)  \label{eq:brdf}
+\end{equation}
+Expanded expressions for $K_\text{vol}$ and $K_\text{geo}$ appear in
+\citet{Wanner95, Lucht00}. 
+
+Studies have shown that the BPDF for land surfaces is generally rather
+small and is “spectrally neutral” \citep{Nadal99, Maignan04, Maignan09,
+Waquet07, Litvinov11}. 
+Most empirical BPDF models are based on Fresnel coefficients of light
+reflectance from the surface. Here we have incorporated the
+one-parameter model developed by \citet{Maignan09}, which was
+derived from analyses of several years of POLDER/PARASOL measurements.
+This model describes the polarized reflectance at any viewing geometry
+($\mu$, $\phi$) from the given incident geometry ($\mu_0$, $\phi_0$) as:
+\begin{equation}
+\rho_\text{P}(\mu,\phi;\mu_0,\phi_0) = 
+\frac{C_0 \exp(-\tan \theta_\text{h})\exp(-\text{NDVI})}{\mu_0+\mu} 
+\mathbf{F}_\text{P}(\theta_\text{h},n_\text{v}) \label{eq:bpdf}
+\end{equation}
+where $C_0$ is a constant parameter chosen for a certain surface type,
+$\theta_\text{h}$ is half of the phase angle of reflectance, $n_\text{v}$ is 
+the refractive index of vegetation (1.5 is used), and
+$\mathbf{F}_\text{P}$ is the Fresnel reflection matrix. 
+We chose a spectrally-independent value for $C_0$ based
+on the recommendations by \citet{Maignan09} for relevant surface types. 
+
+The combination of the BRDF and BPDF for land surface follows the
+discussion by \citet{Dubovik11}. The surface reflectance matrix 
+$\mathbf{R}_\text{s}(\mu,\phi;\mu_0,\phi_0)$
+is represented as a sum of diffuse unpolarized
+reflectance and specular reflectance; the former is modeled using the
+MODIS BRDF in equation \eqref{eq:brdf}, and the latter using the BPDF 
+formula in equation \eqref{eq:bpdf}. 
+
+\subsection{Radiative transfer} \label{subsec:vlidort}
+
+The radiative transfer equation \eqref{eq:rte} is solved with the 
+Vector Linearized Discrete Ordinate Radiative Transfer (VLIDORT)
+model, which is a core part of the UNL-VRTM. VLIDORT, 
+developed by \citet{Spurr06}, is a
+linearized pseudo-spherical vector discrete ordinate radiative transfer
+model for multiple scattering of diffuse radiation in a stratified
+multi-layer atmosphere. It computes four elements of the Stokes vector I
+for downwelling and upwelling radiation at any desired atmospheric
+level. The VLIDORT includes the pseudo-spherical approximation to
+calculate solar beam attenuation in a curved medium. It also uses the
+delta-M approximation for dealing with sharply peaked forward
+scattering. Specifically for the AERONET inversion, we consider 16
+discrete ordinate streams in the radiative transfer calculation and
+retain 180 terms in the spherical-function expansion of the scattering
+matrix to ensure accurate calculation of diffuse radiation. 
+
+Along with the Stokes vector $\mathbf{I}$, VLIDORT also computes the Jacobian
+matrix of I with respect to aerosol optical vector $\mathbf{M}$, 
+$\nabla_\mathbf{M}\mathbf{I}$. Therefore,
+the combination of the VLIDORT and the LMIE/LTMATRIX codes allows for a
+direct calculation of the Jacobian matrix of the Stokes vector with
+respect to aerosol microphysics, $\mathbf{A}$, by
+\begin{equation}
+\nabla_\mathbf{A}\mathbf{I} = \nabla_\mathbf{M}\mathbf{I}
+\cdot \nabla_\mathbf{A}\mathbf{M}
+\end{equation}
+Essentially, the above equation can yield the derivatives of the
+radiance $I$ and $\dolp$ with respect to any aerosol microphysical parameter,
+i.e., $\nabla_\mathbf{A}I$ and $\nabla_\mathbf{A}\dolp$. 
+While obtaining $\nabla_\mathbf{A}I$ is straightforward,
+$\nabla_\mathbf{A}\dolp$ can be derived from equation \eqref{eq:dolp} 
+following:
+\begin{equation}
+\nabla_\mathbf{A}\dolp = -\frac{\dolp \nabla_\mathbf{A}}{I} +
+\frac{Q\nabla_\mathbf{A}{Q}+U\nabla_\mathbf{A}{U}}{I\sqrt{Q^2+U^2}}
+\end{equation}
+
+\subsection{Capability of calculating Jacobians} \label{subsec:jacobian}
+
+This section analytically derives the Jacobian of $\mathbf{I}$ with
+respect to various aerosol related parameters, including $\taua$,
+$\assa$, $\baer$, refractive index, PSD parameters, and aerosol vertical
+profile.
+
+\begin{table}[t]
+  \centering
+  \small
+  \caption{Elements of transformation vector for various aerosol single
+scattering parameters (composite of fine and coarse mode).}
+  \label{tab:jacobian1}
+  \begin{tabular}{p{2em} p{2em} p{5em} p{15em} }
+    \toprule
+       $x$ & $\phi_x$ & $ \varphi_x$ & $\Psi_x^j$ \\
+    \midrule
+    $\taua$        & $\frac{\taua}{\tau}$ &
+$\frac{\taua}{\tau}\left( \frac{\assa}{\omega}-1\right)$ & 
+$\left\{ \begin{array}{ll} \frac{\assa\taua}{\omega\tau}\left(
+\frac{\baer^j}{\mathbf{B}^j}-1 \right)
+&\mbox{for } j<3  \\ \frac{\taur}{\omega\tau} & \mbox{for } j\geq 3 \end{array} \right.$\\  
+    $\assa$        & 0 & $\frac{\taua\assa}{\tau\taua\assa+\taur}$ &
+Same as above \\
+    $B_\text{A}^j$ & 0 & 0 & $\left\{ \begin{array}{ll}
+\frac{\assa\taua\baer^j}{\assa\taua\baer^j+\taur\mathbf{B}_\text{R}^j}
+&\mbox{for } m=j<3  \\ 1 & \mbox{for } m=j\geq 3 \\ 0 & \mbox{for } m\neq j
+\end{array} \right.$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\section{Model Benchmarking and Verifications} \label{sec:rtmverify}
