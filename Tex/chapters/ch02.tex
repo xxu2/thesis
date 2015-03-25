@@ -58,12 +58,12 @@ the underlying surface. Considering a cloud-free atmosphere, the solar
 radiation is attenuated by molecular scattering, gaseous absorption, and
 aerosol scattering and absorption. For a given layer, we have
 \begin{align}
-\tau   &= \taua + \taur + \taug \\
-\omega &= \frac{\taua\assa + \taur}{\tau} \\
+\tau   &= \taua + \taur + \taug  \label{eq:opt1} \\
+\omega &= \frac{\taua\assa + \taur}{\tau} \label{eq:opt2} \\
 \mathbf{P}(\Theta) &=\mathbf{P}_\text{A}(\Theta)
                      \frac{\taua\assa}{\taua\assa+\taur} 
                     + \mathbf{P}_\text{R}(\Theta)
-                    \frac{\taur}{\taua\assa+\taur}
+                    \frac{\taur}{\taua\assa+\taur} \label{eq:opt3}
 \end{align}
 where $\taua$, $\taur$, and $\taug$ are optical depth, respectively, by 
 aerosol extinction, Rayleigh scattering of air density fluctuations, 
@@ -115,9 +115,9 @@ Radiative Transfer Model, UNL-VRTM.
 Inputs for the UNL-VRTM are profiles of atmospheric properties and
 constituents (temperature, pressure, aerosol mass concentration or layer
 AOD, water vapor amount and other trace gas volume mixing ratio
-profiles), the surface properties, as well as the aerosol parameters 
-(such as PSD parameters and refractive index) themselves. 
-Bearing in mind the lack of
+profiles \citep{McClatchey72}), the surface properties, as well as 
+the aerosol parameters  (such as PSD parameters and refractive index)
+themselves. Bearing in mind the lack of
 sensitivity in passive remote sensing for the retrieval of vertical
 profiles of aerosol properties, the UNL-VRTM as it stands now is only
 designed to deliver radiative calculations for a maximum of two sets of
@@ -308,7 +308,7 @@ derived from analyses of several years of POLDER/PARASOL measurements.
 This model describes the polarized reflectance at any viewing geometry
 ($\mu$, $\phi$) from the given incident geometry ($\mu_0$, $\phi_0$) as:
 \begin{equation}
-\rho_\text{P}(\mu,\phi;\mu_0,\phi_0) = 
+\pmb{\rho}_\text{P}(\mu,\phi;\mu_0,\phi_0) = 
 \frac{C_0 \exp(-\tan \theta_\text{h})\exp(-\text{NDVI})}{\mu_0+\mu} 
 \mathbf{F}_\text{P}(\theta_\text{h},n_\text{v}) \label{eq:bpdf}
 \end{equation}
@@ -353,7 +353,7 @@ direct calculation of the Jacobian matrix of the Stokes vector with
 respect to aerosol microphysics, $\mathbf{A}$, by
 \begin{equation}
 \nabla_\mathbf{A}\mathbf{I} = \nabla_\mathbf{M}\mathbf{I}
-\cdot \nabla_\mathbf{A}\mathbf{M}
+\cdot \nabla_\mathbf{A}\mathbf{M} \label{eq:adj-i}
 \end{equation}
 Essentially, the above equation can yield the derivatives of the
 radiance $I$ and $\dolp$ with respect to any aerosol microphysical parameter,
@@ -364,6 +364,7 @@ following:
 \begin{equation}
 \nabla_\mathbf{A}\dolp = -\frac{\dolp \nabla_\mathbf{A}}{I} +
 \frac{Q\nabla_\mathbf{A}{Q}+U\nabla_\mathbf{A}{U}}{I\sqrt{Q^2+U^2}}
+\label{eq:adj-dolp}
 \end{equation}
 
 \subsection{Capability of calculating Jacobians} \label{subsec:jacobian}
@@ -371,8 +372,55 @@ following:
 This section analytically derives the Jacobian of $\mathbf{I}$ with
 respect to various aerosol related parameters, including $\taua$,
 $\assa$, $\baer$, refractive index, PSD parameters, and aerosol vertical
-profile.
+profile. Computation of the Stokes vector in VLIDORT requires input of
+an optical property set $[\tau,\omega,\left<\mathbf{B}^j\right>_{j=0,J}]$ for
+each atmospheric layer, where $<>_{j=0,J}$ denotes the vector that
+consists of elements having the similar expression as that inside $<>$
+but for $j=0, J$. For each atmospheric layer $L$, the optical property
+inputs are assumed constant and are given by equations 
+\eqref{eq:opt1}--\eqref{eq:opt2}, as well as equation \eqref{eq:opt3}
+with $\mathbf{P}(\Theta)$ replaced by $\mathbf{B}^j$. 
+It should be noted that all parameters
+in these requations are for each layer, but we ignore $L$ for
+convenience.
 
+Since VLIDORT generates Jacobians with respect to layer-integrated
+single scattering properties in each atmospheric layer as well as
+column-integrated single scattering property as a whole, and LMIE and
+LTMATRIX offer the sensitivity of aerosol scattering properties to
+microphysical aerosol physical parameters, an integrated use of VLIDORT
+and LTMATRIX/LMIE can, in principle, provide the Jacobians of Stokes
+parameters with respect to both aerosol single scattering properties as
+well as aerosol microphysical parameters (as expressed by equations
+\eqref{eq:adj-i}--\eqref{eq:adj-dolp}). Practically, the VLIDORT
+calculation of Jacobians of any Stokes parameter $\xi$ with respect to 
+any aerosol parameter $x$ proceeds according to
+\begin{equation}
+\begin{split}
+x\frac{\ptxi}{\partial x} &=
+  x\left[ \frac{\ptxi}{\pttau}, \frac{\ptxi}{\ptssa}, 
+          \left< \frac{\ptxi}{\ptb^j}\right>_{j=1,J}\right] 
+  \left[ \frac{\pttau}{\ptx}, \frac{\ptssa}{\ptx}, 
+         \left< \frac{\ptb^j}{\ptx}\right>_{j=1,J}\right]^T \\
+  &= \left[ \tau \frac{\ptxi}{\pttau}, \omega \frac{\ptxi}{\ptssa}, 
+          \left< \mathbf{B}^j \frac{\ptxi}{\ptb^j}\right>_{j=1,J}\right]
+     \left[ \phi_x, \varphi_x, \left< \pmb{\Psi}_x^j\right>_{j=1,J}
+\right]^T. 
+\end{split}
+\label{eq:adj-x}
+\end{equation}
+
+The first square bracket on the right-hand side of equation
+\eqref{eq:adj-x} contains quantities computed internally by VLIDORT, 
+while the second so-called “transformation vector” must be supplied 
+by users and is defined as:
+\begin{equation}
+\phi_x = \frac{x}{\tau}\frac{\pttau}{\ptx}; \quad 
+\varphi_x = \frac{x}{\omega}\frac{\ptssa}{\ptx}; \quad 
+\pmb{\Psi}_x^j = \frac{x}{\mathbf{B}^j}\frac{\ptb^j}{\ptx}.
+\end{equation}
+
+%% Table 
 \begin{table}[t]
   \centering
   \small
@@ -381,22 +429,288 @@ scattering parameters (composite of fine and coarse mode).}
   \label{tab:jacobian1}
   \begin{tabular}{p{2em} p{2em} p{5em} p{15em} }
     \toprule
-       $x$ & $\phi_x$ & $ \varphi_x$ & $\Psi_x^j$ \\
+       $x$ & $\phi_x$ & $ \varphi_x$ & $\pmb{\Psi}_x^j$ \\
     \midrule
     $\taua$        & $\frac{\taua}{\tau}$ &
-$\frac{\taua}{\tau}\left( \frac{\assa}{\omega}-1\right)$ & 
+$\frac{\taua}{\tau}\left( \frac{\assa}{\omega}-1\right)$ &
 $\left\{ \begin{array}{ll} \frac{\assa\taua}{\omega\tau}\left(
 \frac{\baer^j}{\mathbf{B}^j}-1 \right)
-&\mbox{for } j<3  \\ \frac{\taur}{\omega\tau} & \mbox{for } j\geq 3 \end{array} \right.$\\  
+&\mbox{for } j<3  \\ \frac{\taur}{\omega\tau} & \mbox{for } j\geq 3
+\end{array} \right.$\\  
     $\assa$        & 0 & $\frac{\taua\assa}{\tau\taua\assa+\taur}$ &
 Same as above \\
     $B_\text{A}^j$ & 0 & 0 & $\left\{ \begin{array}{ll}
 \frac{\assa\taua\baer^j}{\assa\taua\baer^j+\taur\mathbf{B}_\text{R}^j}
-&\mbox{for } m=j<3  \\ 1 & \mbox{for } m=j\geq 3 \\ 0 & \mbox{for } m\neq j
+&\mbox{for } m=j<3  \\ 1 & \mbox{for } m=j\geq 3 \\ 0 & \mbox{for }
+m\neq j
 \end{array} \right.$ \\
     \bottomrule
   \end{tabular}
 \end{table}
 
+As we are interested in aerosol parameters, this transformation vector
+can be further expanded as 
+\begin{equation}
+\left[ \phi_x, \varphi_x, \left< \pmb{\Psi}_x^j\right>_{j=1,J}\right]^T
+=\pmb{\Pi} \left[ \phi_x^\prime, \varphi_x^\prime, \left<
+\pmb{\Psi}_x^{\prime j}\right>_{j=1,J}\right]^T, \label{eq:trans}
+\end{equation}
+where
+\begin{equation}
+\phi_x^\prime = \frac{x}{\taua}\frac{\pttaua}{\ptx}, \quad 
+\varphi_x^\prime = \frac{x}{\scaa}\frac{\ptscaa}{\ptx}, \quad  \mbox{and} 
+\pmb{\Psi}_x^{\prime j} = \frac{x}{\baer^j}\frac{\ptbaer^j}{\ptx},
+\end{equation}
+and $\pmb{\Pi}$ is a matrix expressed by
+\begin{equation}
+\pmb{\Pi} = \left[ 
+            \begin{array}{lll}
+            \frac{1}{\tau}  & \pmb{0} & \pmb{0} \\
+            -\frac{1}{\tau} & \frac{1}{\scaa+\taur} & \pmb{0} \\
+            \pmb{0} & \left<
+\frac{\baer^j-\bray^j}{\mathbf{B}^j(\scaa+\taur)}\right>_{j=1,J} & 
+\left< \frac{\scaa}{\mathbf{B}^j(\scaa+\taur)}\right>_{j=1,J}
+            \end{array}
+            \right]. \label{eq:pi}
+\end{equation}
+Here, $\scaa$ is the scattering optical depth of aerosols. The detailed
+derivations of the matrix $\pmb{\Pi}$ are presented in Appendix \ref{app:pi}. 
+Hence, the transformation vector for calculating Stokes profile Jacobians 
+with respect to $\taua$, $\assa$, $\baer^j$ can be obtained by combining 
+equations \eqref{eq:trans} and \eqref{eq:pi}, and the components of 
+this vector are listed in Table \ref{tab:jacobian1}.
 
+In an atmosphere where both fine (superscript “f”) and coarse
+(superscript “c”) aerosol particles co-exist, the ensemble aerosol
+optical properties may be derived by assuming external mixing:
+\begin{equation}
+\left\{  
+\begin{array}{ll}
+\taua &= \taua^\text{f} + \taua^\text{c} \\
+\scaa &= \scaa^\text{f} + \scaa^\text{c} \\
+\baer^j &= \frac{\scaa^\text{f} + \scaa^\text{c}}
+           {\scaa^\text{f}\baer^{\text{f},j} + \scaa^\text{c}\baer^{\text{c},j} }
+\end{array} 
+\right.
+\end{equation}
+
+
+\begin{table}[t]
+  \centering
+  \small
+  \caption{Elements of transformation vector for various microphysical
+parameters of fine and coarse mode aerosols.}
+  \label{tab:jacobian2}
+  \begin{tabular}{p{4em} p{10em} p{10em} p{11em} }
+    \toprule
+       $x$ & $\phi_{x\fine}^\prime$ & $\varphi_{x\fine}^\prime$ &
+$\pmb{\Psi}_{x\fine}^{\prime j}$ \\
+    \midrule
+    $\taua\fine$ & $\taua\fine$ & $\scaa\fine$ & 
+    $\frac{\scaa\fine}{\taua}(\baer^{\text{f}j}-\baer^j)$ \\
+    $\assa$ & 0 & $\scaa\fine$ &
+    $\frac{\scaa\fine}{\taua}(\baer^{\text{f}j}-\baer^j)$ \\ 
+    $V_0\fine$ & $\frac{3V_0\fine\qext\fine}{4\reff\fine}$ &
+    $\frac{3V_0\fine\qsca\fine}{4\reff\fine}$ &
+    $\frac{\scaa\fine}{\taua}(\baer^{\text{f}j}-\baer^j)$ \\ 
+    $\mreal\fine,\mimag\fine$ & 
+    $\taua\fine\frac{x\fine}{\qext\fine}\frac{\partial\qext\fine}{\ptx\fine}$ &
+    $\scaa\fine\frac{x\fine}{\qsca\fine}\frac{\partial\qsca\fine}{\ptx\fine}$ & 
+    $\frac{\varphi_{x\fine}^\prime}{\scaa\fine}(\baer^{\text{f}j}-\baer^j)+x\fine\frac{\partial\baer^{\text{f}j}}{\ptx\fine}$ \\
+    $\rg\fine,\sg\fine,\epsilon\fine$ &
+    $\taua\fine(\frac{x\fine}{\qext\fine}\frac{\partial\qext\fine}{\ptx\fine}-\frac{x\fine}{\reff\fine}\frac{\partial\reff\fine}{\ptx\fine})$ & 
+    $\scaa\fine(\frac{x\fine}{\qsca\fine}\frac{\partial\qsca\fine}{\ptx\fine}-\frac{x\fine}{\reff\fine}\frac{\partial\reff\fine}{\ptx\fine})$ &
+    $\frac{\varphi_{x\fine}^\prime}{\scaa\fine}(\baer^{\text{f}j}-\baer^j)+x\fine\frac{\partial\baer^{\text{f}j}}{\ptx\fine}$ \\
+    $H\fine$ & $H\fine\frac{\pttaua}{\partial{H\fine}}$ &
+    $\phi_{x\fine}^\prime\assa\fine$ &
+    $\frac{\scaa\fine}{\taua}(\baer^{\text{f}j}-\baer^j)$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+We can generate the transformation vectors (as listed in Table
+\ref{tab:jacobian2}) for any of the following parameters: $\taua\fine$, 
+$\assa\fine$, $V_0\fine$, $\mreal\fine$, $\mimag\fine$, $\rg\fine$,
+$\sg\fine$, $\epsilon\fine$, $H\fine$, and $\taua\coarse$,
+$\assa\coarse$, $V_0\coarse$, $\mreal\coarse$, $\mimag\coarse$,
+$\rg\coarse$, $\sg\coarse$, $\epsilon\coarse$, and $H\coarse$. Here,
+$\rg$, $\sg$, and $H$ denote the median and standard deviation of the
+particle radius (e.g., two parameters in the log-normal aerosol number
+distribution), and the scale height of aerosol extinction, respectively.
+$V_0$ is the aerosol volume concentration and $\epsilon$ the shape 
+factor of the non-spherical particle. Details of the algebra for deriving 
+the transformation vectors may be found in Appendix \ref{app:pi}. 
+Note that the shape of the aerosol extinction vertical profile in the
+testbed is assumed to be constant or exponentially decreasing with
+height or quasi-Gaussian (Appendix \ref{app:pi}). The analytical
+formulas for $\phi_x^\prime$, $\varphi_x^\prime$, and
+$\pmb{\Psi}_x^{\prime j}$ for coarse mode aerosol parameters are
+the same as their counterparts for fine-mode aerosols; we need only
+replace superscript “s” with “c” in Table 3 entries. Jacobians with
+respect to the fine mode fraction, either in terms of AOD
+($\fmftau$) or in terms of the volume concentration ($\fmfv$), 
+can be derived from the corresponding Jacobians with respect to 
+modal AOD and volume, respectively:
+
+
+%%%% New section
 \section{Model Benchmarking and Verifications} \label{sec:rtmverify}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width={0.8\textwidth}]{figures/unlvrtm1.pdf}
+  \caption{(a) Downward solar spectral irradiance at the TOA and the
+surface for solar zenith angle of 30$^\circ$. (b) Total-atmosphere gas
+absorption optical depth in the range 0.2--0.8 $\mu$m. (c) Same as (b) but
+for 0.8--4 $\mu$m. (d) Optical depth of \ce{SO2} and \ce{NO2} in
+ polluted cases. Also shown in (b) and (c) are the optical depth computed 
+from Santa Barbara DISORT Atmospheric Radiative Transfer (SBDART) model
+\citep{Ricchiazzi98}. The mid-latitude summer atmospheric profile is 
+assumed \citep{McClatchey72}. (Figure adopted from \citet{Wang14})}
+  \label{fig:unlvrtm1}
+\end{figure}
+
+Figure \ref{fig:unlvrtm1}a shows the downward solar spectral irradiance 
+at the top-of-atmosphere and at the surface for a solar zenith angle of
+30$^\circ$. Spectral regions dominated by gas absorption can be 
+clearly identified, including the \ce{O3} Hartley-Huggins bands 
+in the UV, the \ce{O2}B band (0.69 $\mu$m) and \ce{O2}A band (0.76 
+$\mu$m), as well as a number of water vapor bands. The
+spectroscopic calculations shown in Figure \ref{fig:unlvrtm1} were 
+performed at a resolution of 0.01 nm. In general this resolution is 
+high enough to pick up fine structure in gas absorptions. 
+In the UV below 300 nm, and in parts of the \ce{O2}A and \ce{O2}B 
+bands, whole-atmosphere gas absorption optical depths can reach 
+50 or more, and the downward irradiance is nearly zero
+at the ground (Figure \ref{fig:unlvrtm1}b). The inset in Figure
+\ref{fig:unlvrtm1}b shows a close-up view of the fine structure 
+in absorption optical depth for the \ce{O2}A band, with
+dual peaks centered at 0.761 $\mu$m and 0.764 $\mu$m, and a deep, 
+narrow valley around 0.762 $\mu$m. Similarly, the continuum of water 
+vapor absorption from the near-infrared to about 4 $\mu$m is also well 
+simulated (Figure \ref{fig:unlvrtm1}c). Also of note is the 
+non-negligible absorption of \ce{SO2} and \ce{NO2} in UV and blue
+wavelength regions respectively (Figure \ref{fig:unlvrtm1}d). 
+In urban regions, high \ce{SO2} and \ce{NO2} can together contribute 
+optical depths of around 0.03--0.07 (Figure \ref{fig:unlvrtm1}d). 
+Hence, in order to take advantage of low surface reflectance
+in the UV and the use of deep-blue wavelengths for the retrieval of AOD
+in urban regions, it is critical to treat absorption by \ce{SO2} and
+\ce{NO2}. In contrast, calculations performed at moderate spectral 
+resolution (such as those from Santa Barbara Discrete-Ordinate Atmospheric 
+Radiative Transfer, or SBDART \citep{Ricchiazzi98}, shown as the blue 
+lines in Figure \ref{fig:unlvrtm1}b and c) do not resolve fine-structure 
+details, sometimes missing the absorption lines for \ce{SO2} or \ce{NO2}, 
+and in general producing significant underestimation of optical depths 
+in the \ce{O2}A band.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width={0.8\textwidth}]{figures/unlvrtm2.pdf}
+  \caption{Degree of linear polarization ($-Q/I$) of downward radiation
+for a pure Rayleigh atmosphere: (a) computed by UNL-VRTM for the case
+analyzed in Figure 5.7 of \citet{Coulson88} and shown here as (b). (c)--(e)
+shows the comparisons of $I$, $Q$, and $U$ computed by \citet{Coulson60} and
+those from UNL-VRTM. In (a) and (b), As represents the surface albedo
+value. In (c) and (d), the calculation is for $\tau=1.0$, surface albedo
+is 0.25, $\cos{\theta_0}=0.8$, and for 8 different viewing angles.
+(Figure adopted from \citet{Wang14}) }
+  \label{fig:unlvrtm2}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width={0.8\textwidth}]{figures/unlvrtm3.pdf}
+  \caption{Counterparts in Tables 3--10 of \citet{Garcia89} for
+upwelling radiation on the top of the same atmospheric conditions of
+aerosol scattering. No gas absorption and Rayleigh scattering are
+considered. Note that compared here are $I$ and $Q$ values reported 
+in \citet{Garcia89} for 9 view angles (with cosine values from 0.1 
+to 0.9 at equal spacing of 0.1) and 3 relative azimuth angles 
+(0, $\pi/2$, and $\pi$), which yields a total of 27 data points. 
+For $U$ and $V$, their values are reported for the same 9 viewing angles 
+but for one relative azimuth angle ($\pi/2$) only. 
+The calculation is performed at wavelength of 951 nm and $\tau$ of 1.0, 
+and aerosol size distribution parameters $\reff=0.2$, 
+$\veff=0.07$, refractive index $\mreal=1.44$, and SSA of 0.99.
+(Figure adopted from \citet{Wang14}) }
+  \label{fig:unlvrtm3}
+\end{figure}
+
+Figure \ref{fig:unlvrtm2} shows the calculation of the degree of linear 
+polarization (DOLP) of downward radiation in a pure Rayleigh scattering 
+atmosphere. The solid blue line in Figure \ref{fig:unlvrtm2}a (dotted 
+line in Figure \ref{fig:unlvrtm2}b) reproduces the theoretical results 
+shown in Figure 5.7 of \citet{Coulson88}, which was used to interpret 
+the DOLP measured at Mauna Loa Observatory on February 19, 1977. 
+Furthermore, Figure \ref{fig:unlvrtm2}a shows that the anisotropy in
+Rayleigh scattering reduces the peak DOLP by 5\% (e.g., the difference
+between the green and red lines) at 0.7 $\mu$m. Surface reflection and its
+concomitant increase of atmosphere scattering will decrease the DOLP of
+downward radiation. An increase of surface reflectance from 0 to 0.25
+decreases the peak DOLP by 10\%.
+
+Quantitatively, the Stokes-vector $I$, $Q$, and $U$ components computed with
+UNL-VRTM differ from their counterparts found in the tables by
+\citet{Coulson60} by average (relative) deviations of $1.9\times 10^{-4}$
+(0.05\%), $2\times 10^{-5}$ (0.14\%), and $4\times 10^{-5}$ (0.03\%), 
+respectively (Figure \ref{fig:unlvrtm2}c--e). These
+differences are similar to the values $2.1\times 10^{-4}$, $9\times
+10^{-5}$, and $4\times 7^{-5}$ identified by \citet{Evans91}. More recently,
+Rayleigh-atmosphere benchmark results have been re-computed by
+\citet{Vijay12} to a much higher degree of accuracy; this work also
+included benchmarking of the VLIDORT model.
+
+Figure \ref{fig:unlvrtm3} shows benchmark calculations of four 
+Stokes parameters for radiative transfer in an aerosol-only atmosphere.
+\citet{Garcia89} documented their results for unpolarized incident 
+radiation at 951 nm and $cos{\Theta_0}$ of 0.2, for an atmosphere with a
+Lambertian reflectance of 0.1. The aerosols in that atmosphere were
+assumed to satisfy a gamma-function size distribution with $\reff$ of
+0.2 $\mu$m and $\veff$ of 0.07, and a refractive index yielding an 
+aerosol single scattering albedo of 0.99. Compared to their results, 
+the Stokes parameters computed by UNL-VRTM show relative differences 
+of less than 0.6\%, with maximum relative differences 
+(at certain viewing geometries) of up to 2\% for $Q$ and 3.8\% for $V$. 
+The DOLP computed from the UNL-VRTM (with 15 streams for the hemisphere) 
+and documented by \citet{Garcia89} (with 3 streams) differ on average 
+by 0.5\%, with a maximum relative difference of 0.65\%.
+
+The simultaneous calculation of analytic Jacobians of the four Stokes
+parameters with respect to the aerosol optical depth, size parameters,
+refractive indices, and aerosol-loading peak height for both fine and
+coarse model aerosols may be validated against Jacobians calculated
+using the finite difference method (Figures \ref{fig:unlvrtm4} and
+\ref{fig:unlvrtm5}). Overall, results from the two methods are 
+highly correlated as seen in the scatter plots
+shown in these figures. Relative differences in all comparisons are
+less than 0.5\%, and in many cases the differences are less than 0.05\%.
+
+\begin{landscape}
+\begin{figure}[p]
+  \centering
+  \includegraphics[width={1.4\textwidth}]{figures/unlvrtm4.pdf}
+  \caption{Intercomparison of Jacobians ($\ptxi/\partial\ln{x}$) 
+calculated with UNL-VRTM using the analytical method (y-axis) with 
+those computed from UNL-VRTM using finite-difference estimates (x-axis). 
+Here $\xi$ is one of the Stokes parameters: $I$ (top row), $Q$
+(middle row), and $U$ (last row). x is one of 7 parameters associated 
+with fine-mode aerosols: mass concentration $m_\text{A}$, $\taua$,
+$\mreal$, $\mimag$, $\rg$ and $\sg$ (of the lognormal PSD), and height
+($H$) of peak aerosol concentration in the vertical. Note,
+the calculation is done for an atmosphere containing both fine- 
+and coarse-mode aerosols as described in \citet{Hess98}.
+(Figure adopted from \citet{Wang14}) }
+  \label{fig:unlvrtm4}
+\end{figure}
+\end{landscape}
+
+\begin{landscape}
+\begin{figure}[p]
+  \centering
+  \includegraphics[width={1.4\textwidth}]{figures/unlvrtm5.pdf}
+  \caption{Same as in Fig. 5, but for coarse mode aerosols.
+(Figure adopted from \citet{Wang14}) }
+  \label{fig:unlvrtm5}
+\end{figure}
+\end{landscape}
