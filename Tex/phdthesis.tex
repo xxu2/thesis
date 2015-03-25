@@ -53,6 +53,9 @@
 %% For land scape page
 \usepackage{lscape}
 
+%% For multi-page tables
+\usepackage{longtable} 
+
 %% Natbib for reference
 \usepackage[square]{natbib}
 \renewcommand{\bibname}{References}
@@ -161,9 +164,10 @@ Photo-Polarimetric Measurements}
 %% Start the correct formatting for the appendices
 \appendix
 
-\chapter{Abbreviations and Acronyms}
-\chapter{Symbols}
-\chapter{Derivations of Transformation Vector $\pmb{\Pi}$} \label{app:pi}
+%% Appendix chapters
+\include{./chapters/app01}
+\include{./chapters/app02}
+\include{./chapters/app03}
 
 %% Bibliography goes here (You better have one)
 %% BibTeX is your friend

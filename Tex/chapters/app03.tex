@@ -1,0 +1,221 @@
+%%% Apendix 03
+\chapter{Derivations of Transformation Vector $\pmb{\Pi}$} \label{app:pi}
+
+Let $x$ be an aerosol microphysical parameter. The aerosol extinction and
+scattering optical thickness ($\taua$ and $\scaa$), single scattering albedo
+($\assa$), and Greek coefficient matrix ($\baer^j$) are functions of $x$. 
+However, the gaseous absorption and Rayleigh scattering parameters are 
+independent of $x$. This appendix outlines the derivations of equations 
+\eqref{eq:trans} and \eqref{eq:pi} and the expressions in
+Table \ref{tab:jacobian1} and Table \ref{tab:jacobian2}. 
+
+First, we transform equation \eqref{eq:lopt} as below:
+\begingroup
+\allowdisplaybreaks
+\begin{align}
+\phi_x &= \frac{x}{\tau}\frac{\pttau}{\ptx} 
+        = \frac{x}{\tau}\frac{\partial(\taug+\taur+\taua)}{\ptx} 
+        = \frac{1}{\tau}x\frac{\pttaua}{\ptx} \label{eq:phix1} \\
+        \nonumber \\
+\varphi_x 
+        &= \frac{x}{\omega}\frac{\ptssa}{\ptx} 
+         = \frac{x}{\omega}\frac{[(\scaa+\taug)]}{\ptx}
+         \nonumber \\
+        &= \frac{x}{\omega}\frac{1}{\tau^2}
+           \left[ \tau\frac{\partial{(\scaa+\taur)}}{\ptx}
+                - (\scaa+\taur)\frac{\pttau}{\ptx}\right]
+         \nonumber \\
+        &= \frac{x}{\omega\tau}\frac{\ptscaa}{\ptx}
+           -(\scaa+\taur)\frac{x}{\omega\tau^2}\frac{\pttaua}{\ptx}
+         \nonumber \\
+        &= \frac{x}{\scaa+\taur}\frac{\ptscaa}{\ptx}
+           -\frac{1}{\tau}\frac{\pttaua}{\ptx}
+         \nonumber \\
+        &= \frac{x}{\scaa+\taur}\frac{\ptscaa}{\ptx} - \phi_x \label{eq:phix2}\\
+         \nonumber \\
+\pmb{\Psi}_x^j 
+        &= \frac{x}{\bbf^j}\frac{\ptb^j}{\ptx} 
+         = \frac{x}{\bbf^j}\frac{\partial{[(\taur\bray^j+\scaa\baer^j)/(\scaa+\taur)]}}{\ptx}
+         \nonumber \\
+        &= \frac{x}{\bbf^j}\frac{1}{(\scaa+\taur)^2}\left[
+           (\scaa+\taur)\frac{\partial(\scaa\baer^j)}{\ptx}
+           - (\taur\bray^j+\scaa\baer^j)\frac{\ptscaa}{\ptx}\right]
+         \nonumber \\
+        &= \frac{x}{\bbf^j}\frac{1}{\scaa+\taur} \left[
+           \frac{\partial(\scaa\baer^j)}{\ptx}-\bbf^j\frac{\ptscaa}{\ptx}\right]
+         \nonumber \\
+        &= \frac{1}{(\scaa+\taur)\bbf^j} \left[ 
+           \scaa x\frac{\baer^j}{\ptx}+(\baer^j-\bbf^j)x\frac{\ptscaa}{\ptx}
+           \right] \label{eq:phix3}
+\end{align}
+\endgroup
+
+These expressions are linear combinations of $\phi_x^\prime$,
+$\varphi_x^\prime$, and $\pmb{\Psi}_x^{\prime j}$ (as defined by equation
+\eqref{eq:alopt}), where 
+\begin{equation}
+\left[ \phi_x^\prime, \varphi_x^\prime, \left<
+\pmb{\Psi}_x^{\prime j}\right>_{j=1,J}\right]^T = 
+\left[x\frac{\pttaua}{\ptx}, x\frac{\ptscaa}{\ptx}, 
+      \left<x\frac{\ptbaer^j}{\ptx}\right>_{j=1,J} \right]^T
+\end{equation}
+We then can write above equations \eqref{eq:phix1}--\eqref{eq:phix3} into
+vector formulism (as equation \eqref{eq:trans}:
+\begin{equation}
+\left[ \phi_x, \varphi_x, \left< \pmb{\Psi}_x^j\right>_{j=1,J}\right]^T
+=\pmb{\Pi} \left[ \phi_x^\prime, \varphi_x^\prime, \left<
+\pmb{\Psi}_x^{\prime j}\right>_{j=1,J}\right]^T \label{eq:apptrans}
+\end{equation}
+where $\pmb{\Pi}$ is a matrix comprising the relevant coefficients, 
+as noted in equation \eqref{eq:pi}. Equations \eqref{eq:apptrans} and 
+\eqref{eq:pi} then act as a universal formulation for preparing
+linearized inputs of optical property for VLIDORT. Computation of
+$\left[ \phi_x, \varphi_x, \left< \pmb{\Psi}_x^j\right>_{j=1,J}\right]$ 
+can then be achieved by the calculation of
+$\left[ \phi_x^\prime, \varphi_x^\prime, \left<\pmb{\Psi}_x^{\prime j}\right>_{j=1,J}\right]$ 
+for a given parameter x.
+
+Let us first consider the derivation of 
+$\left[ \phi_x^\prime, \varphi_x^\prime, \left<\pmb{\Psi}_x^{\prime j}\right>_{j=1,J}\right]$
+for certain aerosol optical properties in a given atmospheric layer, 
+i.e., $\taua$, $\assa$, and $\betaak$, where $\betaak$ 
+indicates one of the elements in the $k$th aerosol scattering Greek
+matrix $\baer^k$. 
+
+For $x=\taua$, we have
+\begingroup
+\allowdisplaybreaks
+\begin{align}
+\phi_x^\prime &= \taua\frac{\pttaua}{\pttaua}=\taua \label{eq:adjtau} \\
+\varphi_x^\prime &= \taua\frac{\ptscaa}{\pttaua}=\taua\assa \\
+\pmb{\Psi}_x^{\prime j} &= \taua\frac{\ptbaer^j}{\pttaua} =\pmb{0} 
+\end{align}
+\endgroup
+
+For $x=\assa$, we have
+\begingroup
+\allowdisplaybreaks
+\begin{align}
+\phi_x^\prime &= \assa\frac{\pttaua}{\ptassa}=0 \\
+\varphi_x^\prime &= \assa\frac{\ptscaa}{\ptassa}=\assa\taua \\
+\pmb{\Psi}_x^{\prime j} &= \assa\frac{\ptbaer^j}{\ptassa} =\pmb{0} 
+\end{align}
+\endgroup
+
+For $x=\betaak$, we have
+\begingroup
+\allowdisplaybreaks
+\begin{align}
+\phi_x^\prime &= \betaak\frac{\pttaua}{\ptbetaak}=0  \\
+\varphi_x^\prime &= \betaak\frac{\ptscaa}{\betaak}=0 \\
+\pmb{\Psi}_x^{\prime j} &= \betaak\frac{\ptbaer^j}{\betaak} = 
+\begin{cases}
+ \frac{\scaa\betaak}{\beta^k} & \mbox{if $j=k$} \\
+ 0 & \mbox{if $j\neq k$}
+\end{cases}
+\label{eq:adjbeta}
+\end{align}
+\endgroup
+
+Expressions in Table \ref{tab:jacobian1} are then derived by substituting 
+equations \eqref{eq:adjtau}--\eqref{eq:adjbeta} into equation
+\eqref{eq:apptrans}.
+
+The UNL-VRTM integrates the VLIDORT with linearized Mie/T-matrix codes, and
+this combination allows us to generate Stokes vectors and associated analytical
+Jacobians with respect to aerosol microphysical parameters for two aerosol
+modes. Thus, we must supply the 
+$\left[ \phi_x^\prime, \varphi_x^\prime, \left<\pmb{\Psi}_x^{\prime j}\right>_{j=1,J}\right]$
+quantities for all such parameters. 
+We give an example here, assuming that the aerosols are bimodal,
+with two lognormal size distributions described by geometric standard
+deviations ($\sg\fine$ and $\sg\coarse$), geometric median radii 
+($\rg\fine$ and $\rg\coarse$), and non-sphericity parameters ($\epsilon\fine$ and
+$\epsilon\coarse$) for the fine and coarse modes. We note
+that $\epsilon$ is available only when non-spherical particles are assumed 
+(T-matrix code is applied). Complex refractive indices are 
+$\mreal\fine-\mimag\fine i$ and $\mreal\coarse-\mimag\coarse i$. Given
+these microphysical properties, the linearized Mie/T-matrix codes will compute
+for each mode the scattering and extinction efficiencies ($\qsca$ and $\qext$), 
+the set of expansion coefficients ($\baer^j$) of scattering phase matrix, 
+as well as the derivatives of these quantities with respect to these 
+microphysical properties. For a wide size range of aerosol particles, 
+which enable am about 100\% accumulated
+value for the bi-lognormal probability function, the optical thickness for
+aerosol extinction and scattering and the associated Greek matrix coefficients
+within for one atmospheric layer can be calculated through
+\begingroup
+\allowdisplaybreaks
+\begin{align}
+\taua &= \taua\fine + \taua\coarse 
+       = \frac{3V_0\fine\qext\fine}{4\reff\fine} +
+         \frac{3V_0\coarse\qext\coarse}{4\reff\coarse} \label{eq:apptau} \\
+\scaa &= \scaa\fine + \scaa\coarse 
+       = \frac{3V_0\fine\qsca\fine}{4\reff\fine} + 
+         \frac{3V_0\coarse\qsca\coarse}{4\reff\coarse} \\
+\baer^j &= \frac{\scaa\fine\baer^{\text{f}j}+\scaa\coarse\baer^{\text{c}j}}
+                {\scaa\fine + \scaa\coarse} \label{eq:appbaer}
+\end{align}
+\endgroup
+
+We can compute vector 
+$\left[ \phi_x^\prime, \varphi_x^\prime, \left<\pmb{\Psi}_x^{\prime j}\right>_{j=1,J}\right]$
+for a given parameter by differentiating above equations
+\eqref{eq:apptau}--\eqref{eq:appbaer}. For $x=V_0\fine$ as an example:
+\begingroup
+\allowdisplaybreaks
+\begin{align}
+\phi_x^\prime &= V_0\fine\frac{\pttaua}{\partial{V_0\fine}}
+               = V_0\fine\frac{3\qext\fine}{4\reff\fine}=\taua\fine \\
+\varphi_x^\prime &= V_0\fine\frac{\ptscaa}{\partial{V_0\fine}}
+                  = V_0\fine\frac{3\qsca\fine}{4\reff\fine}=\scaa\fine \\
+\pmb{\Psi}_x^{\prime j} 
+           &= V_0\fine\frac{\ptbaer^j}{\partial{V_0\fine}} 
+            = \frac{\scaa\fine}{\scaa}(\baer^{\text{f}j}-\baer^j)  
+\end{align}
+\endgroup
+
+And similarly for $x=\rg\fine$, we have 
+\begingroup
+\allowdisplaybreaks
+\begin{align}
+\phi_x^\prime &= \taua\fine 
+      \left(\frac{\rg\fine}{\qext\fine}\frac{\ptqext\fine}{\ptrg\fine}
+           -\frac{\rg\fine}{\reff\fine}\frac{\ptreff\fine}{\ptrg\fine}\right) \\
+\varphi_x^\prime &= \scaa\fine
+      \left(\frac{\rg\fine}{\qsca\fine}\frac{\ptqsca\fine}{\ptrg\fine}
+           -\frac{\rg\fine}{\reff\fine}\frac{\ptreff\fine}{\ptrg\fine}\right) \\
+\pmb{\Psi}_x^{\prime j}  
+           &= \frac{\varphi_x^\prime}{\scaa}(\baer^{\text{f},j}-\baer^j)
+            + \rg\fine\frac{\ptbaer^{\text{s}j}}{\ptrg\fine}
+\end{align}
+\endgroup
+
+In a similar fashion, we can obtain the vector 
+$\left[ \phi_x^\prime, \varphi_x^\prime, \left<\pmb{\Psi}_x^{\prime j}\right>_{j=1,J}\right]$
+for other fine-mode aerosol parameters including 
+$\taua\fine$, $\assa\fine$, $V_0\fine$, $\mreal\fine$, $\mimag\fine$, 
+$\rg\fine$, $\sg\fine$, and $\epsilon\fine$ (as listed in Table
+\ref{tab:jacobian2}). For coarse-mode aerosol parameters, the derivations are
+the same with superscript ‘s’ replaced by ‘c’.
+
+We have implemented various aerosol-loading vertical profiles into the testbed,
+including uniform, exponential-decreasing, and quasi-Gaussian profile shapes.
+For the uniform profile, aerosols are assumed evenly distributed with height.
+The layer AOD for the exponential-decreasing profile follows form
+\begin{equation}
+\int_{+\infty}^z\taua(z)\text{d}z = \tau_\text{a0}\exp\left(-\frac{z}{H}\right)
+\end{equation}
+where $\tau_\text{a0}$ is the columnar AOD, and $H$ is a scale height 
+parameter. The quasi-Gaussian profile is derived from a generalized 
+distribution function \citep{Spurr14}
+\begin{equation}
+\taua(z)=K\frac{\exp(-\gamma|z-z_\text{peak}|)}{[1+\exp(-\gamma|z-z_\text{peak}|)]^2}
+\end{equation}
+where $K$ is a constant related to $\tau_\text{a0}$, $\gamma$ is related to 
+half-width constant, and $z_\text{peak}$ is the height having peak loading. 
+Derivatives of layer aerosol optical thickness with respect to these profile 
+parameters ($H$, $\gamma$, and $z_\text{peak}$ are also included in order to 
+calculate Jacobians of Stokes vector to these parameters, and the vectors 
+$\left[ \phi_x^\prime, \varphi_x^\prime, \left<\pmb{\Psi}_x^{\prime j}\right>_{j=1,J}\right]$ 
+for these derivatives are also shown in Table \ref{tab:jacobian2}.
