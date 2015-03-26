@@ -224,6 +224,7 @@ wit][]{Schuster06, Waquet09}:
 \frac{\text{d}V}{\text{d}\ln{r}} = \sum_{i=1}^2 
 \frac{V_0^i}{\sqrt{2\pi}\ln{\sg^i}} 
 \exp{\left[ -\frac{(\ln{r}-\ln{\rv^i})^2}{2\ln^2{\sg^i}}\right]}
+\label{eq:bilognormal}
 \end{equation}
 where $V_0$, $\rv$, and $\sg$ are the total volume concentration, geometric
 median radius, and standard deviation, respectively. The superscript $i$
@@ -501,7 +502,7 @@ optical properties may be derived by assuming external mixing:
   \centering
   \small
   \caption{Elements of transformation vector for various microphysical
-parameters of fine and coarse mode aerosols.}
+parameters of fine and coarse mode aerosols\textsuperscript{a}.}
   \label{tab:jacobian2}
   \begin{tabular}{p{4em} p{10em} p{10em} p{11em} }
     \toprule
@@ -527,6 +528,10 @@ $\pmb{\Psi}_{x\fine}^{\prime j}$ \\
     $\phi_{x\fine}^\prime\assa\fine$ &
     $\frac{\scaa\fine}{\taua}(\baer^{\text{f}j}-\baer^j)$ \\
     \bottomrule
+    \multicolumn{4}{m{35em}}{\textsuperscript{a}
+Expressions are shown only for fine-mode parameters; expressions for
+coarse-mode parameters are the same but with superscripts replaced by
+'c'}
   \end{tabular}
 \end{table}
 
