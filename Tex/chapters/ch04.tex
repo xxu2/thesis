@@ -579,8 +579,267 @@ following section.
 
 \section{Sensitivity of retrieval error to AOD and fmf} \label{sec:infosensi}
 
+The performance of retrieval usually varies with aerosol conditions like
+the aerosol loading and the prevalence of aerosol in either the fine or
+the coarse modes (e.g., fine-mode volume fraction, $\fmfv$). As a result,
+uncertainties in aerosol retrievals can depend much more strongly on the
+AOD than they do on the properties of an individual aerosol model
+\citep{Knobelspiesse12}. For the same reason, the inversion of
+refractive indices and $\assa$ in the current AERONET algorithm is confined
+to the condition when the 440-nm AOD is larger than 0.4
+\citep{Dubovik00b, Holben06}. Our above analysis, which focused on three
+aerosol types by a constant AOD value at 440 nm (${\taua}_{440}$=1.0), is
+insufficient to represent variable global conditions. At the same time,
+we also found noticeable variability of the DFS components and a
+posteriori errors existing among three aerosol types with different
+$\fmfv$, especially for the coarse-mode parameters. Thus, it is necessary
+to investigate how aerosol conditions affect the retrieval error, in
+order to answer the question: under what aerosol conditions the AERONET
+measurements (with and without polarization) are capable to yield
+retrievals with satisfied accuracy?
 
+%% Figure DFS in sensitivity
+\begin{figure}[t]
+  \centering
+  \includegraphics[width={\textwidth}]{figures/info09.pdf}
+  \caption{Contours of DFS as a function of $\fmfv$ and AOD in scenarios
+I1 (a) and P1 (b). (c) the difference of DFS between (a) and (b).
+Simulations are for solar zenith angle of 55$^\circ$. The top abscissa denotes
+Ångström exponent (AE).}
+  \label{fig:infodfs2}
+\end{figure}
+
+We expand our analysis for the ${\taua}_{440}$ ranging from 0.1 to 2.0 
+and for the $\fmfv$ from 0.1 to 0.9. In practice, the $\fmfv$ is 
+inaccessible prior to inversion. Instead, we use the 
+Ångström exponent (AE) from 870 to 1020 nm together with
+${\taua}_{440}$ to define the aerosol conditions, because the AE
+in the longer paired wavelength is highly related to the $\fmfv$
+\citep{Schuster06} and immediately available from the AERONET direct sun 
+measurements. With the aerosol properties defined in the Table
+\ref{tab:infoy},the $\fmfv$ from 0.1 to 0.9 gives AE values from
+0.35 to 2.3. We exclude the scenarios of I2 and P2 in our following
+analysis, because the scenario P1 demonstrates the most superior
+performance and is also the focus of our algorithm development.
+
+%% Figure error fine-mode in sensitivity
+\begin{figure}[p]
+  \centering
+  \includegraphics[width={\textwidth}]{figures/info10.pdf}
+  \caption{Retrieval uncertainties as a function of $\fmfv$ (or AE) and
+AOD for each individual aerosol parameters in the \textit{fine} mode: (a) $V_0$,
+(b) $\reff$, (c) $\veff$, (d) $\mreal$, (e) $\mimag$, and (f) $\assa$.
+Two sub-panels in each panel indicate observations in the scenarios 
+I1 and P1, respectively. Simulations are for solar zenith angle of
+55$^\circ$. The x- and y-axis are identical to those in Figure
+\ref{fig:infodfs2}. Relative uncertainties are shown for
+$V_0$, $\reff$ and $\veff$, while absolute errors for $\mreal$, $\mimag$, 
+and $\assa$. Retrieval errors for $\mreal$, $\mimag$, 
+and $\assa$ are averaged values over the four spectral bands.}
+  \label{fig:infoerrf}
+\end{figure}
+
+%% Figure error coarse-mode in sensitivity
+\begin{figure}[p]
+  \centering
+  \includegraphics[width={\textwidth}]{figures/info11.pdf}
+  \caption{Same as Figure \ref{fig:infoerrf}, but for aerosol parameters in 
+the \textit{coarse} mode.}
+  \label{fig:infoerrc}
+\end{figure}
+
+Figure \ref{fig:infodfs2}a--b display the contours of DFS as a function 
+of the AE (or $\fmfv$) and ${\taua}_{440}$ in the scenarios I1 and P1, 
+respectively. We found that the DFS decreases with an increasing AE and
+$\fmfv$ for the same AOD. This is attributed to the fact that the 
+coarse-mode parameters are more difficult to retrieve than their 
+fine-mode counterparts, restrained by their weaker sensitivities to 
+the $\ialm$ and the $\dolppp$. Thus, the decrease in the coarse-mode 
+fraction significantly reduces the aerosol information for coarse-mode 
+parameters but retain the information for fine-mode parameters, resulting in 
+decreases in the total DFS. We also notice from Figure
+\ref{fig:infodfs2}a that the DFS increases with an increasing AOD in the
+scenario I1. However, AOD change has less impact in the scenario P1
+(Figure \ref{fig:infodfs2}b). For example, the DFS values are lower than 14 
+when AOD < 0.4 in the scenario I1, whereas even larger DFS can be found in 
+the scenario P1 when AOD $<$ 0.2. Therefore, we may expect that the inversion 
+in the scenario P1 will be capable to retrieve aerosol parameters in conditions
+of lower aerosol loading, and may bring down the ${\taua}_{440}$ threshold of 
+0.4 from the current AERONET inversion algorithm to retrieve the refractive
+index and $\assa$. Finally, as indicated in Figure \ref{fig:infodfs2}c, 
+the addition of $\ipp$ and $\dolppp$ in the inversion can add 2--5 pieces of 
+useful information. Such improvement occurs in all aerosol conditions but is 
+more dominated when enough coarse particles are present: $\fmfv<0.5$ (or
+AE$<1.6$), in which the radiance-only inversion usually yields a large 
+retrieval error for the fine-mode aerosol. 
+
+In Figures \ref{fig:infoerrf} and \ref{fig:infoerrc}, we show the contours of
+the a posteriori error $\hat\epsilon$ in the scenarios I1 and P1 for the 
+individual fine-mode and coarse-mode parameters, respectively. Overall, 
+observations in scenarios P1 offer more accurate retrievals for all parameters
+in both the fine and the coarse aerosol modes. In both scenarios, the
+$\hat\epsilon$ decreases for fine-mode parameters and increases for 
+coarse-mode parameters with increasing the AE (or $\fmfv$) for same
+${\taua}_{440}$, indicating that the relative contribution
+of fine and coarse modes determines the relative information of each
+mode. Extreme cases are $\fmfv$ of 1 or 0, i.e., the absence of the
+coarse- or fine-mode aerosols, which certainly will only allow a
+mono-modal retrieval. Thus, the bi-modal retrieval, especially for
+refractive indices, requires that aerosols reach certain mixture
+conditions to contain enough information for both modes. For example in
+the scenario I1, while the fine-mode $\reff$ can be well retrieved with 5\%
+accuracy when the $\fmfv>0.2$ at ${\taua}_{440}$ of 0.5 (Figure
+\ref{fig:infoerrf}b), the $\fmfv>0.3$ is required to ensure the
+$\hat\epsilon<0.02$ in the fine-mode $\mreal$ (Figures
+\ref{fig:infoerrf}e). Comparing to the change of the $\fmfv$, the change of
+${\taua}_{440}$ has less impact on the $\hat\epsilon$ of the PSD parameters;
+and this impact occurs in low aerosol loadings. For example, Figure
+\ref{fig:infoerrf}g shows that a minimum of $\sim$0.4
+for ${\taua}_{440}$ is required in the scenario I1 to guarantee a retrieval
+error in the fine-mode $\assa$ less than 0.04 when $\fmfv=0.5$. 
+
+%% Table of retrieval error 
+\begin{table}[t]
+  \centering
+  \small
+  \caption{Required aerosol conditions (${\taua}_{440}$ and AE) to achieve
+anticipated retrieval accuracy $<\epsilon>$ for observations in scenario 
+I1 and P1.}
+  \label{tab:infosensi}
+  \begin{tabular}{p{3em} R{3em} R{6em} R{6em} R{6em} R{6em} }
+  \toprule
+  & & \multicolumn{2}{c}{Scenario I1} & 
+      \multicolumn{2}{c}{Scenario P1}\\
+  \cmidrule(r){3-6}
+  $\xbf$ &  $<\epsilon>$ & ${\taua}_{440}$ & AE &  ${\taua}_{440}$ & AE \\
+  \midrule
+  $V_0\fine$     & 10\% & >0.3 & >1.5 & \textsuperscript{a}All & All \\ 
+  $V_0\coarse$   & 10\% & <1.3 & <2.2 & All & All \\
+  $\reff\fine$   & 5\%  & >0.3 & >1.3 & All & All \\
+  $\reff\coarse$ & 10\% & All  & <2.0 & All & <2.2 \\
+  $\veff\fine$   & 20\% & >0.3 & >1.5 & All & All \\
+  $\veff\coarse$ & 30\% & All  & <1.8 & All & <2.2 \\
+  $\mreal\fine$  & 0.02 & >0.4 & \textsuperscript{b}\textbf{>1.0} & All & All \\
+  $\mreal\coarse$& 0.04 & All  & \textbf{<1.0} & All  & <1.8 \\
+  $\assa\fine$   & 0.04 & >0.6 & \textbf{>1.5} & >0.2 & >0.7 \\
+  $\assa\coarse$ & 0.08 & >0.2 & \textbf{<1.1} & All  & <1.6 \\
+  \bottomrule
+  \multicolumn{6}{p{35em}}{
+   {\textsuperscript{a}}‘All’ indicates conditions:
+$0.1<{\taua}_{440}<2.0$ and $0.35<\text{AE}<2.3$; \newline
+   {\textsuperscript{b}}2Underlined bold indicate conditions that cannot
+allow bi-modal retrievals.}
+  \end{tabular}
+\end{table}
+
+From the Figures \ref{fig:infoerrf} and \ref{fig:infoerrc}, we can identify 
+required aerosol conditions in terms of the AE and ${\taua}_{440}$ in order
+to achieve certain anticipated accuracy $<\epsilon>$, which are summarized
+in Table \ref{tab:infosensi}. Clearly, observations with polarization can enable 
+retrievals of same accuracy in a lower aerosol loading. For example, the 
+retrieval accuracy of 10\% for the $V_0$ and $\reff$ and 30\% for the
+$\veff$ in the fine mode requires ${\taua}_{440}$ to be larger than 0.3 for 
+inversion in the scenario I1 (Figure \ref{fig:infoerrf}a--c). In
+contrast, inversion in the scenario P1 can easily ensure retrievals of
+the same accuracy when ${\taua}_{440}$ is 0.1. For the fine-mode
+$\mreal$ retrieval, an accuracy of 0.04 requires ${\taua}_{440}>0.4$ for the
+inversion I1 but ${\taua}_{440}>0.2$ for the inversion P1 (Figure
+\ref{fig:infoerrf}e). Moreover, the radiance-only inversion
+is unable to resolve the bi-modal $\mreal$ and $\assa$ under any circumstance,
+because AE$>$1.5 is necessary for retrieving the fine-mode $\assa$
+(Figure \ref{fig:infoerrf}g), meanwhile AE$<$1.1 is required for its 
+coarse-mode retrieval (Figure \ref{fig:infoerrc}g). This agrees with 
+\citet{Dubovik00b} in that the retrieval of refractive indices for both fine
+and coarse mode is essentially non-unique due to limited information in the
+AERONET (radiance-only) observations. In contrast, observations in the
+scenario P1 can allow bi-modal retrievals of the $\mimag$ and $\assa$ when 
+$0.7<\text{AE}<1.6$ and ${\taua}_{440}>0.2$ (Figures \ref{fig:infoerrf}g
+and \ref{fig:infoerrc}g). Therefore, our retrieval algorithm is designed
+to use observations of scenario P1 to retrieve bi-modal refractive indices 
+when ${\taua}_{440}$ and AE reach these criteria. In aerosol conditions beyond
+the criteria, bi-modal PSD along with a mono-modal refractive index will be 
+retrieved by assuming the refractive index is independent of the aerosol mode.
 
 \section{Summary} \label{sec:infosummary}
 
- To be filled \ldots
+In an effort to improve the AERONET inversion by including additional
+polarization measurements, this study examines the potential
+microphysical aerosol information contained in the AERONET
+photo-polarimetric observations. We have focused our analysis on how the
+added polarization measurements impact on the retrieval accuracy the in
+aerosol particle size distribution (PSD), spectral refractive index, and
+single scattering albedo $\assa$. A numerical testbed has been constructed
+to generate the synthetic AERONET radiance and degree of linear
+polarization (DOLP) over 440, 675, 870, and 1020 nm. We considered four
+scenarios of observations to whether or not include the DOLP for the
+inversion, i.e., (I1) direct Sun AOD and almucantar sky radiances, (I2)
+observations in the scenario I1 with additional radiance measurements in
+the solar principal plane, (P1) observations in the scenario I2 plus
+polarization measurements in the solar principal plane, and (P2)
+observations in the scenario I1 plus almucantar polarization.
+Measurements in the scenario I1 are those used in current AERONET
+inversion algorithm, and thus represent a control experiment. For each
+observation scenario, we also considered three aerosol types to
+represent general aerosol climatology.  The Bayesian statistical
+approach then was applied to relate information contained in those
+synthetic data and retrieval errors in aerosol physical parameters to
+the instrumental as well as the a priori characteristics. Then the
+error-normalized Jacobian, degree of freedom for signal (DFS), and the a
+posteriori error in each individual retrieved parameter were presented
+as function of solar zenith angle for these observation scenarios. 
+
+The results show a remarkable increase in information by adding
+additional polarization and/or radiances into the inversion. Overall,
+observations in the scenario P1 yield the highest DFS, which is larger
+than that in the scenario I1 by 2--5 for all defined aerosol types. This
+can be understood that polarization measurements in the solar principal
+plane, in comparing with sky radiances in solar almucantar, have
+complementary sensitivities with respect to retrieved aerosol
+parameters. Also, measurements in the principal plane allow a wider
+range of scattering angles and supplies more information on aerosol
+backscattering. In scenario P2, adding polarization in the solar
+almucantar offer an increase of $\sim$2 pieces of information with DFS values
+slightly below those in scenarios I2. We also note that the DFS
+increases with increasing solar zenith angle for all cases, resulting
+from more information contained in observations of a wider range of
+scattering angle.
+
+We also analyzed the DFS components and the a posteriori uncertainty for
+each individual retrieved parameter. As expected, the smallest retrieval
+errors were always found in the scenario P1: 2.3\% (2.9\%) for the volume
+concentration, 1.3\% (3.5\%) and 7.2\% (12\%) for the effective radius and
+effective variance, 0.005 (0.035) for the real part of refractive index,
+and 0.019 (0.068) for the single scattering albedo in the fine (coarse)
+mode. These values represent an error reduction from the scenario I1 of
+79\% (57\%), 76\% (49\%), 69\% (52\%), 66\% (46\%), and 49\% (20\%), respectively.
+Uncertainties in retrieved parameters averaged among these three aerosol
+types are summarized in the Table \ref{tab:infoerr} for each observation scenario. 
+
+Seeking to answer under what conditions the inversions can achieve a
+mode-resolved aerosol refractive index and $\assa$, we further investigated
+how the AOD (${\taua}_{440}$) and fine/coarse modal domination (in terms of
+Ångström exponent, or AE) influence the retrieving accuracy from
+observations in the scenarios I1 and P1. We found that adding
+principal-plane polarization measurements can increase the DFS by up to
+$\sim$5 in cases dominated by coarse-mode particles ($\fmfv<0.5$), in which
+the radiance-only inversion usually yields larger retrieval uncertainty
+for fine-mode aerosol. As a consequence, these photo-polarimetric
+observations can enable accurate retrievals in a lower aerosol loading
+when the ${\taua}_{440}$ is 0.1, except for the fine-mode $\mreal$ retrieval that
+requires ${\taua}_{440}>0.2$. The analysis also indicate that the radiance-only
+inversion is unable to resolve bi-modal $\mimag$ and $\assa$ under any
+circumstance. However, observations in the scenario P1 can allow
+bi-modal retrievals of $\mimag$ and $\assa$ when $0.7<\text{AE}<1.6$. 
+Such criteria can guide us in the practical retrieval algorithm to determine
+whether a mono-modal or bi-modal retrieval of the aerosol refractive index and
+$\assa$. In aerosol conditions beyond the criteria, bi-modal PSD along with
+the mode-independent refractive index will be retrieved. 
+
+Finally, it should be noted that in our analysis the aerosol particles
+in each mode are assumed to be poly-disperse homogeneous spheres.
+Although the linearized T-matrix code has been implemented in our model,
+the simulation of scattering properties for large non-spherical
+particles (for example spheroids) still remain computational
+limitations. Our future efforts will implement non-spherical treatment
+in order to more realistically represent mineral dust aerosols.
+
