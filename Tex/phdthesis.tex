@@ -46,6 +46,7 @@
 \usepackage{graphicx}
 \usepackage{rotating} % rotaing package to introduce sidewaysfigure
 \usepackage{tikz}
+\usepackage{sidecap}  % Caption on the side
 
 %% For spacing
 \usepackage{setspace}
@@ -138,10 +139,12 @@ Photo-Polarimetric Measurements}
 %% The ToC is required
 \tableofcontents*
 %% Uncomment these if need be
-\begin{onehalfspacing}
+\begingroup
+\onehalfspacing
+\allowdisplaybreaks
 \listoffigures
 \listoftables
-\end{onehalfspacing}
+\endgroup
 
 %% mainmatter is needed after the ToC, (LoF, and LoT) to set the
 %% page numbering correctly for the main body
