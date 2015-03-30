@@ -18,7 +18,7 @@ geographical distribution, optical properties, and efficiency as cloud
 condensation nuclei and ice nuclei. 
 Key quantities pertain to the aerosol optical and
 cloud-forming properties include particle size distribution (PSD), chemical
-composition, mixing state, and morphology [Boucher et al., 2013]. While the
+composition, mixing state, and morphology \citep{Boucher13}. While the
 daily aerosol optical depth (AOD) can be well measured from current satellite
 and ground-based remote sensing instrumentations \citep[e.g.,][]{Holben98,Kaufman02},
 the accurate quantification of aerosol ERF is in no
@@ -77,7 +77,7 @@ inversion products.
 \subsection{The AERONET measurements} \label{subsec:cimel318}
 
 With over 400 locations around the word, most AERONET sites are equipped with
-an automatic sun and sky scanning spectral radiometer, or the CIMEL-318 type
+an automatic sun and sky scanning spectral radiometer, or the CIMEL CE318 type
 SunPhotometer (Figure \ref{fig:cimel318}a), to routinely measure direct and 
 diffuse solar radiation in various atmospheric window channels \citep{Holben98}. 
 As listed in Table \ref{tab:cimel318} and illustrated in Figure \ref{fig:cimel318}, these
@@ -96,8 +96,11 @@ UV bands.
 \begin{figure}[t]
   \centering
   \includegraphics[width={0.95\textwidth}]{figures/cimel318.pdf}
-  \caption{A photo of the CIMEL-318 type SunPhotometer and its observational 
-modes.}
+  \caption{A photo of the CIMEL CE318 type SunPhotometer (a) and its 
+observational modes: (b) direct-sun radiance scan, (b) sky-radiance scan
+on the solar almucantar, (c) solar principal-plane scan for sky radiance
+and polarization. Detail scan information are presented in Table
+\ref{tab:cimel318} and text.}
   \label{fig:cimel318}
 \end{figure}
 
@@ -118,7 +121,7 @@ radiances from the solar almucantar and solar principal plane, respectively.
 \begin{table}[t]
   \centering
   \footnotesize
-  \caption{Measurement sequences of the CIMEL-318 SunPhotometer.}
+  \caption{Measurement sequences of the CIMEL CE318 SunPhotometer.}
   \label{tab:cimel318}
   \begin{tabular}{p{5em} p{8em} p{20em} p{6em} }
     \toprule
@@ -293,21 +296,50 @@ example, \citet{Li09}, based upon the \Dub algorithm, demonstrated
 the possibility to reduce errors in the fine-mode size distribution, real part
 of the refractive index, and particle shape parameters. 
 
-\section{Research Goals and Thesis Outline}
+\section{Research Goals and Thesis Outline} \label{sec:objective}
 
-As discussed above, this dissertation seeks to contribute to an improved
-research algorithm to retrieval aerosol micriphysical properties from AERONET
+As discussed above, this dissertation seeks to contribute an improved
+research algorithm retrieving aerosol micriphysical properties from AERONET
 measurements of light radiance and polarization, with emphasis on elucidating
 the potentially important role of polarization measurements. It does so by 
-pursuing three following spcifci objectives:
+pursuing the following three objectives:
 
 \begin{enumerate}
-\item \textit{Develop ground-based inversion algorithms for the retrieval of $\reff$,
-$\veff$, $\mreal$, and $\mimag$ from a combined use of direct solar radiance, 
-skylight radiance and skylight linear polarization measurements from AERONET.}
-\item \textit{Perform a sensitivity study and error budgeting exercise to
-characterize retrieval accuracy and error sources.} \newline By doing so, we
-can answer the questions: 
+\item \textit{Develop ground-based inversion algorithms for the
+retrieval of aerosol refractive indices and particle size distribution from a 
+combined use of direct and diffuse solar radiation measurements from AERONET.}
+\newline
+Retrieving aerosol infomation from remote sensing observation
+involves two type of development, i.e., the forward modeling and inverse
+modeling. In Chapter \ref{ch:model}, I present a unified radiative transfer 
+model---UNL-VRTM---that we have developed specifically for inversion of
+aerosol properties from remote sensing measurements \citep{Wang14}. The
+key feature of UNL-VRTM is that it not only simulates the
+polarimetric radiation in the atmosphere but also, more importantly,
+can compute the analytical deriatives of these radiation fields with respect
+to aerosol microphysical parameters. In the subsequent chapter, I
+describe an inversion algorithm that is developed by integrating the UNL-VRTM 
+with statistically optimization approach to retrieve 22 aerosol
+microphysical parameters from the AERONET measured multi-spectral and
+muti-angular light radiance and polarization. 
+
+\item \textit{Conduct a sensitivity study and error budgeting exercise to
+characterize retrieval accuracy and error sources.} 
+\newline 
+In order to explore the potential of the AERONET polarization measurements
+for improving aerosol microphysical retrieval, our inversion testbed is
+ued to examine the information content of these measurements with and without
+radiation in the Chapter \ref{ch:info}. The analysis focuses on
+how the added polarization measurements impact on the retrieval accuracy
+the in aerosol particle size distribution, spectral refractive
+index, and single scattering albedo. We also investigate the how the 
+added polarization measurements can reduce the retrieval error for these
+properties.  
+
 \item \textit{Perform ground-based retrievals using available AERONET
 polarimetric measurements.}
+\newline
+In Chapter \ref{ch:case}, I applied our new research algorithm to a suite of
+photo-polarimetric measurements taken from the new-generation SunPhotometer
+at the Beijing\_RADI AERONET station.
 \end{enumerate}

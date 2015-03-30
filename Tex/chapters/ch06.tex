@@ -1,8 +1,140 @@
 %%
-\chapter{Summary and Outlook}
+\chapter{Conclusions and Outlook} \label{ch:summary}
 
-\section{Summary of the Dissertation}
+\section{Conclusions}
 
-\section{Main Conclusions of This Work}
+Aerosols have been recognized as major components of the Earth's climate 
+system, influencing the radiative budget, clouds, and precipitation processes.
+An accurate assessment of these effects requires realistic representation of
+the aerosol loading and distribution across the globel, as well as the
+charateristics of the aerosol particle size distribution and 
+chemical composition (refractive index). 
+
+The objectvie of this thesis is to
+contribute an improved research algorithm retrieving aerosol micriphysical
+properties from AERONET measurements of light radiance and polarization, with
+emphasis on elucidating the potentially important role of polarization
+measurements. As outlined in section \ref{sec:objective}, specific 
+investigations towards this research goal are: the development of an retrieval
+algorithm that integrates a rigorous radiative transfer model 
+(Chapter \ref{ch:model}) and statistical optimized inversion
+(Chapter \ref{ch:algorithm}), the examination
+of potential aerosol information contained in the AERONET polarizaton
+measurements (Chapter \ref{ch:info}), and the application of our designed
+inversion algorithm to the real AERONET measurements (Chapter \ref{ch:case}).
+Below, I briefly summarize the contributions of this thesis by these three
+investigations.
+ 
+\subsection{UNL-VRTM and new AERONET inversion algorithm}
+
+The UNified Linearized Vector Radiative Transfer Model, or UNL-VRTM integrates
+the linearized codes computing vector radiative transfer (VLIDORT) and
+scattering of spherical (LMIE) and non-spherical (LTMATRIX) particles, 
+hyperspectral treatement for air molecular scattering and geseous absorption,
+and models describing bidirectional surface reflectance and polarization
+(BRDF/BPDF). As shown in Chapter \ref{ch:model}, the direct coupling of these
+components by UNL-VRTM allows it not only able to compute the four Stokes
+parameters and degree of linear polarization (DOLP) with high accuracy and high
+spectral resolution, but also to simutaneously and analytically generate
+sensitivities of these Stokes parameters with respect to aerosol parameters of
+both the fine and coarse modes. By inclusion of HITRAN and other molecular
+spectroscopy data for atmospheric trace gases, the UNL-VRTM is also able to
+perform line-by-line calculation of gas absorption, thus providing another
+opportunity for the future study of the effect of absorbing gases (such as
+\ce{SO2}, \ce{NO2}, \ce{O3}, and water vapor) on the aerosol retrieval. 
+Although the UNL-VRTM is used to simulate the AERONET measurements in
+this work, the module-based sturcture of UNL-VRTM allows a broad application
+to the remote sensing observations from other platforms.
+
+In Chapter \ref{ch:algorithm}, I have presented a new algorithm to 
+retrieve both fine- and coarse-mode aerosol properties from multi-spectral 
+and multi-angular solar polarimetric radiation fields measured by AERONET 
+including additional spectra of polarization observations. 
+The retrieval algorithm uses UNL-VRTM and incorporates the
+statistical optimized inversion to retrieve aerosol parameters pertaining to a
+bi-lognormal particle size distribution (PSD), including the aerosol volume
+concentration, effective radius and variance, and complex indices of
+refraction. While the new algorithm has heritage from the existing AERONET
+inversion algorithm in using multiple a priori constraints, it is different
+from the existing AERONET algorithm in that: (a) a bi-modal lognormal PSD
+(instead of 22 size bins) is assumed; (b) the spectral refractive indices are
+retrievable for both fine and coarse modes. The mode-separated aerosol
+microphysical and optical retrievals can benefit the analysis for aerosol
+chemical compositions and climate radiative impacts study of aerosol, 
+and most importantly, can thereby facilitate the evaluation of
+atmospheric chemistry models and the validation of aerosol products from
+satellite sensors with polarization capability.  
+
+\subsection{Potential information contained in AERONET polarization}
+
+In Chapter \ref{ch:info}, I have examined the potential microphysical aerosol
+information contained in the AERONET photo-polarimetric observations. The
+analysis focused on how the added polarization measurements impact on the
+retrieval accuracy the in aerosol particle size distribution, spectral
+refractive index, and single scattering albedo. We used the UNL-VRTM to generate
+the synthetic AERONET spectral radiance and DOLP, as well as their
+sensitivities with respect to these aerosol properties. Then, we quantify the
+aerosol infomation content in various observation scenarios in terms of degree
+of freedom for signal (DFS) and \textit{a posterior} error.
+
+The results show a remarkable increase in information by adding additional
+polarization and/or radiances into the inversion: an overall increase of 2--5
+of DFS comparing with radiance-only measurements. Correspondingly, smallest
+retrieval errors are found in the added-polarization scenario: 2.3\% (2.9\%) 
+for the fine-mode (coarse-mode) aerosol volume concentration, 1.3\% (3.5\%) 
+for the effective radius, 7.2\% (12\%) for the effective variance, 
+0.005 (0.035) for the real part refractive index, and 0.019 (0.068) for 
+the single scattering albedo. These errors represent a reduction from their 
+counterparts in the radiance-only scenario of 79\% (57\%), 76\% (49\%), 
+69\% (52\%), 66\% (46\%), and 49\% (20\%), respectively. 
+
+We have further investigated those retrieval errors over a variety of 
+aerosol loading and fine/coarse-mode prevalence (section \ref{sec:infosensi}),
+which indicates that the combined use of radiance
+and polarizatuon observations can yield the retrieval of refractive index 
+and single scattering albedo for both fine and coarse aerosol modes, 
+when AOD at 440 nm is larger than 0.2 and
+870/1020-nm Ångström exponent ranges between 0.7 and 1.6. 
+
+\subsection{Application to real retrieval}
+
+In Chapter \ref{ch:case}, we have applied our new AERONET inversion algorithm 
+to a suite of real cases over Beijing\_RADI site. We 
+found that our retrievals are overall consistent with AERONET operational
+inversions, but can offer mode-resolved refractive index and SSA with
+acceptable accuracy for the aerosol composed by spherical particles. Along with
+the retrieval using both radiance and polarization, we also performed
+radiance-only retrieval to demonstrate the improvements by adding polarization
+in the inversion. Contrast analysis indicates that with polarization, retrieval
+error can be reduced by over 50\% in PSD parameters, 10--30\% in the refractive
+index, and 10--40\% in SSA, which is consistent with theoretical analysis
+presented in Chapter \ref{ch:info}.
 
 \section{Outlook and Future Work}
+
+The promising results in this study are obtained from the initial development
+and preliminary applications of a new algorithm targeted for the retrieval of
+aerosol properties from new-generation AERONET measurements. Future
+developments will include, but not be limited to, the treatment of
+non-spherical large aerosol particles like mineral dust, and the consideration
+of tri-modal aerosols for special situations. Another interesting research 
+topic is to investigate the chemical composition from the multi-spectral and
+multi-angular photo-polarimetric measurements. Below, I list particularly
+promising directions for future investigations.
+
+\begin{enumerate}
+\item Implement the consideration of non-spherical dust.
+\item While the bi-lognormal PSD can well represent the aerosol size spectrum 
+in most cases, future research efforts  will include the implementation of 
+tri-modal aerosol mixtures in situations of cloud formation \citep{Eck12} 
+or volcanic aerosols \citep{Eck10}.
+\item Explore the potential use of multi-spectral and multi-angular 
+photo-polarimetric measurements for aerosol chemical composition. This will 
+benifit the source identification of species-specified aerosols.
+\item Last but not least, extensive retrievals for a longer period of time 
+will also be performed over sites where CE318-DP SunPhotometer instruments 
+have been installed (i.e., Beijing\_RADI and Lille). Such long-term retrieval 
+will provide more robust resources for studying the aerosol climatology. 
+\end{enumerate}
+
+

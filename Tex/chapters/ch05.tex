@@ -1,15 +1,27 @@
 %%
-\chapter{Case Demonstrations}
+\chapter{Case Demonstrations} \label{ch:case}
 
 \section{Introduction}
 
-We discuss the fitting residuals in section \ref{sec:invfit} and the retrieved 
-results in section \ref{sec:inv0}. A contrast analysis is presented in section 
-\ref{sec:inv1} to demonstrate the superiority of the inversion involving polarization.
+As suggested by the information content analysis in last chapter, 
+adding polarization data into the AERONET inversion will enable the 
+retrieval of bi-modal refractive index and SSA even for 440-nm AOD as 
+low as 0.2 when the Ångström exponents (AE) is between 0.7 and 1.6. 
+We also found that the uncertainty in the retrieval can be reduced by up 
+to 79\% (57\%), 76\% (49\%), 69\% (52\%), 66\%
+(46\%), and 49\% (20\%) for the fine-mode (coarse-mode) $V_0$, $\reff$,
+$\reff$, $\mreal$, and SSA, respectively. 
+In this chapter, our new research algorithm is applied to a suite of 
+photo-polarimetric measurements taken from the new-generation SunPhotometer 
+at the Beijing\_RADI AERONET station. I present the selected cases and the
+\textit{a priori} characterizaton in section \ref{sec:case}, and discuss the 
+fitting residuals in section \ref{sec:invfit} and the retrieved 
+results in section \ref{sec:inv0}. A contrast analysis is presented in section
+\ref{sec:inv1} to demonstrate the superiority of the 
+inversion involving polarization.
 
-
-
-\section{Selected case and the a priori characterization}
+\section{Selected Cases and the \textit{a priori} Characterization}
+\label{sec:case}
 
 We applied our algorithm to the radiance and polarization measured by the CIMEL
 CE318-DP SunPhotometer (instrument \#350) at Beijing\_RADI (116.37$^\circ$E,
@@ -389,16 +401,15 @@ instrumentation, and aerosol properties. These improvements in the P-type
 inversion are consistent with the theoretical analysis in Chapter \ref{ch:info}
 of this thesis.
 
-Put this to the last chatper:
 The promising results in this study are obtained from the initial development
 and preliminary applications of a new algorithm targeted for the retrieval of
 aerosol properties from new-generation AERONET measurements. Future
 developments will include, but not be limited to, the treatment of
 non-spherical large aerosol particles like mineral dust, and the consideration
 of tri-modal aerosols for special situations. While the bi-lognormal PSD can
-well represent the aerosol size spectrum in most cases, future research efforts
+well represent the aerosol size spectrum in most cases, future research efforts 
 will include the implementation of tri-modal aerosol mixtures in situations of
 cloud formation \citep{Eck12} or volcanic aerosols \citep{Eck10}.
 Moreover, extensive retrievals for a longer period of time will also be
 performed over sites where CE318-DP SunPhotometer instruments have been
-installed (i.e., Beijing\_RADI and Lille). 
+installed (i.e., Beijing\_RADI and Lille).

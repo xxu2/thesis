@@ -3,6 +3,20 @@
 
 \section{Introduction}
 
+Retrieving aerosol infomation from remote sensing observation
+involves two type of development, i.e., the forward modeling and inverse
+modeling. Mathematically, the forward modeling constructs a complete
+physical system to predict the outcome of measurements. The inverse
+modeling uses the actual measurements to infer the values of the
+parameters that characterize the system. The focus of this chapter is
+the development of a forward model that can accurately simulate the
+muti-spectral and multi-angular polarimetric quantities measured by the
+AERONET SunPhotometer. I first present the general physics of light 
+prapogaton within the atmosphere in the following text of this section. 
+Then I describe the forwrad model (UNL-VRTM) in section
+\ref{sec:unlvrtm}. Finally, I show the model benchmarking and verification are
+section \ref{sec:rtmverify}.
+
 The radiation fields---radiance and the state of polarization---measured by the
 AERONET SunPhotometer are the outcome of solar radiation interacting
 with various physical processes including the absorption and
@@ -76,15 +90,11 @@ air density fluctuations, rigorous treatment for absorption of trace gases,
 accuracte representation of reflectance/polarization by surface, an the
 realistic simulation of polarimetric radiative transfer. 
 
-In this regard, we have developed the UNified Linearized Vector
-Radiative Transfer Model, or UNL-VRTM, specifically for simulation,
-analysis, and inversion of the photo-polarimetric measurements.
-Components of the UNL-VRTM are described in section \ref{sec:unlvrtm},
-and the model benchmarking and verification are presented in section
-\ref{sec:rtmverify}.
-
 \section{The UNL-VRTM} \label{sec:unlvrtm}
 
+We have developed the UNified Linearized Vector
+Radiative Transfer Model, or UNL-VRTM, specifically for simulation,
+analysis, and inversion of the photo-polarimetric measurements.
 As shown in Figure \ref{fig:unlvrtm}, the UNL-VRTM comprises 6
 modules; they are 
 \begin{enumerate}
@@ -108,7 +118,7 @@ Radiative Transfer Model, UNL-VRTM.
 \begin{figure}[t]
   \centering
   \includegraphics[width={0.95\textwidth}]{figures/unlvrtm.pdf}
-  \caption{Flowchart of the UNL-VRTM. See text for detail.}
+  \caption{Flowchart of the UNL-VRTM components. See text for detail.}
   \label{fig:unlvrtm}
 \end{figure}
 
@@ -137,6 +147,25 @@ scattering optical depth, optical depth of all trace gases, and
 parameters describing surface optical property. A detail description of
 the UNL-VRTM's Jacobian capability is presented in section
 \ref{subsec:jacobian}. 
+
+Although the UNL-VRTM is used to simulate the AERONET measurements in
+this work, the module-based sturcture of UNL-VRTM allows its application 
+not limit to the AERONET inversion. 
+It can be easily used to simulate observations
+from other remote sensing platforms, like satellite sensors. For
+example, we have employed it to explore the aerosol information content
+of observations from the future TEMPO/GEO-CAPE geostationary satellite
+sensors \citep{Wang14}, to investigate the potential application of
+hyperspectral radiances at \ce{O2}A and \ce{O2}B bands for retrieving
+aerosol vertical profile \citep{Wang14, Ding14}, to retrieve aerosol 
+microphysical properties from GeoTASO measured UV-to-visible contiuneous 
+radiance spectra \citep{Hou14}, and to perform AOD retrieval from 
+GOSAT/TANSO-CAI's UV radiance \citep{Han14}. 
+
+Recently, we have made the UNL-VRTM publicly accessible. We published
+the source code on \url{http://meteo.unl.edu/~xxu/unlvrtm.php}. A
+detail description and a dedicated User's Guide for the model is also 
+available on the webpage.  
 
 \subsection{Molecular scattering and absorption} \label{subsec:rayleigh}
 
@@ -558,7 +587,18 @@ respect to the fine mode fraction, either in terms of AOD
 ($\fmftau$) or in terms of the volume concentration ($\fmfv$), 
 can be derived from the corresponding Jacobians with respect to 
 modal AOD and volume, respectively:
+\begin{align}
+\fmftau\frac{\ptxi}{\partial\fmftau} & = 
+   \taua\fine\frac{\ptxi}{\partial\taua\fine} - 
+   \frac{\fmftau}{1-\fmftau}\taua\coarse\frac{\ptxi}{\partial\taua\coarse} \\
+\fmfv\frac{\ptxi}{\partial\fmfv} & = 
+   V_0\fine\frac{\ptxi}{\partial{V_0}\fine} - 
+   \frac{\fmfv}{1-\fmfv}V_0\coarse\frac{\ptxi}{\partial{V_0}\coarse}
+\end{align}
 
+Details of these necessary VLIDORT inputs are presented in Appendix
+\ref{app:pi}, and a comprehensive verification of these Jacobian calculation are
+presnted in following section {\ref{sec:rtmverify}}.
 
 %%%% New section
 \section{Model Benchmarking and Verifications} \label{sec:rtmverify}
@@ -566,14 +606,15 @@ modal AOD and volume, respectively:
 \begin{figure}[p]
   \centering
   \includegraphics[width={0.8\textwidth}]{figures/unlvrtm1.pdf}
-  \caption{(a) Downward solar spectral irradiance at the TOA and the
+  \caption{Some benchmark simulations by the UNL-VRTM: 
+(a) Downward solar spectral irradiance at the TOA and the
 surface for solar zenith angle of 30$^\circ$. (b) Total-atmosphere gas
 absorption optical depth in the range 0.2--0.8 $\mu$m. (c) Same as (b) but
 for 0.8--4 $\mu$m. (d) Optical depth of \ce{SO2} and \ce{NO2} in
  polluted cases. Also shown in (b) and (c) are the optical depth computed 
 from Santa Barbara DISORT Atmospheric Radiative Transfer (SBDART) model
 \citep{Ricchiazzi98}. The mid-latitude summer atmospheric profile is 
-assumed \citep{McClatchey72}. (Figure adopted from \citet{Wang14})}
+assumed \citep{McClatchey72}. (Figure adopted from \citet{Wang14}.)}
   \label{fig:unlvrtm1}
 \end{figure}
 
@@ -618,10 +659,10 @@ in the \ce{O2}A band.
 for a pure Rayleigh atmosphere: (a) computed by UNL-VRTM for the case
 analyzed in Figure 5.7 of \citet{Coulson88} and shown here as (b). (c)--(e)
 shows the comparisons of $I$, $Q$, and $U$ computed by \citet{Coulson60} and
-those from UNL-VRTM. In (a) and (b), As represents the surface albedo
+those from UNL-VRTM. In (a) and (b), $A_\text{s}$ represents the surface albedo
 value. In (c) and (d), the calculation is for $\tau=1.0$, surface albedo
 is 0.25, $\cos{\theta_0}=0.8$, and for 8 different viewing angles.
-(Figure adopted from \citet{Wang14}) }
+(Figure adopted from \citet{Wang14}.)}
   \label{fig:unlvrtm2}
 \end{figure}
 
@@ -640,7 +681,7 @@ but for one relative azimuth angle ($\pi/2$) only.
 The calculation is performed at wavelength of 951 nm and $\tau$ of 1.0, 
 and aerosol size distribution parameters $\reff=0.2$, 
 $\veff=0.07$, refractive index $\mreal=1.44$, and SSA of 0.99.
-(Figure adopted from \citet{Wang14}.) }
+(Figure adopted from \citet{Wang14}.)}
   \label{fig:unlvrtm3}
 \end{figure}
 
@@ -707,7 +748,7 @@ $\mreal$, $\mimag$, $\rg$ and $\sg$ (of the lognormal PSD), and height
 ($H$) of peak aerosol concentration in the vertical. Note,
 the calculation is done for an atmosphere containing both fine- 
 and coarse-mode aerosols as described in \citet{Hess98}.
-(Figure adopted from \citet{Wang14}) }
+(Figure adopted from \citet{Wang14}.)}
   \label{fig:unlvrtm4}
 \end{figure}
 \end{landscape}

@@ -46,7 +46,6 @@
 \usepackage{graphicx}
 \usepackage{rotating} % rotaing package to introduce sidewaysfigure
 \usepackage{tikz}
-\usepackage{sidecap}  % Caption on the side
 
 %% For spacing
 \usepackage{setspace}
@@ -89,14 +88,6 @@ pdfpagelabels% This helps to fix the issue with hyperref with page numbering
 
 %% New commands
 \include{./chapters/newcommands}
-%% For equations
-%\newcommand{\bdeps}{\boldsymbol{\epsilon} } 
-%\newcommand{\bdsa} {\mathbf{S}_\text{a}}
-%\newcommand{\bdsy} {\mathbf{S}_\text{y}}
-%\newcommand{\bdxa} {\mathbf{x}_\text{a}}
-%\newcommand{\ialm} {I_\text{alm}}
-%\newcommand{\ippl} {I_\text{ppl}}
-
 
 \begin{document}
 %% Start formating the first few special pages
@@ -109,7 +100,7 @@ Photo-Polarimetric Measurements}
 \adviser{Professor Jun Wang}
 \adviserAbstract{Jun Wang}
 \major{Earth \& Atmospheric Sciences \\ (Meteorology/Climatology)}
-\degreemonth{May}
+\degreemonth{August}
 \degreeyear{2015}
 %%
 %% For most people the defaults will be correct, so they are commented
@@ -131,7 +122,7 @@ Photo-Polarimetric Measurements}
 \maketitle
 
 %% Front matters, including abstract, dedication, acknowledgements etc.
-%\include{./chapters/frontmatters}
+\include{./chapters/frontmatters}
 
 %% The ToC is required
 %% Uncomment these if need be
@@ -171,6 +162,7 @@ Photo-Polarimetric Measurements}
 \include{./chapters/app01}
 \include{./chapters/app02}
 \include{./chapters/app03}
+\include{./chapters/app04}
 
 %% Bibliography goes here (You better have one)
 %% BibTeX is your friend
@@ -182,10 +174,10 @@ Photo-Polarimetric Measurements}
 %% check all your references.
 %\nocite{*}
 
-\newpage
-\begin{listofpub}
-  List my publication here
-\end{listofpub}
+%\newpage
+%\begin{listofpub}
+%  List my publication here
+%\end{listofpub}
 
 %% Index go here (if you have one)
 

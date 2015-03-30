@@ -3,11 +3,28 @@
 
 \section{Introduction}
 
-To be filled \ldots
+The inverse problem of this work seeks the solution of a number of
+microphysical parameters from observations of different categories. We
+thus need to develop an retrieval algorithm that ueses statistically
+optimized multi-variable fitting, in which the solution is sought not
+only rely on the preassumed classes of potential solutions, but also in
+a continuous space of slotions under statistically formulated criteria
+optimizing the error distributon of the retrieval parameters. In this
+chapter, I first present the general theory of inverse problem (section
+\ref{sec:invtheory}), covering the Bayesion-based inversion (section
+\ref{subsec:map}) and information content analysis
+(\ref{subsec:infotheory}). After that in section \ref{sec:algorithm}, 
+I describe the key aspects of  designed inversion algorithm: the
+definition of the state vector (section \ref{subsec:xy}) and 
+considered constraining its \textit{a pripri} and smoothness feature 
+(section \ref{subsec:ap}), how the state
+vector is sought statistically (section \ref{subsec:alg-inv}), how the retrieval 
+error is characterized (section \ref{subsec:alg-error}), and quality
+conrtol of measurements (section \ref{subsec:alg-qaulity}).
 
 \section{Inversion Theories} \label{sec:invtheory}
 
-\subsection{Maximum a posteriori solution of an inverse problem}
+\subsection{Maximum a posteriori solution of an inverse problem} \label{subsec:map}
 
 Let $\xbf$ denote a state vector that contains $n$ parameters to be retrieved
 (such as PSD parameters and complex indices of refraction), and $\ybf$ an
@@ -220,6 +237,7 @@ relationship with the DFS and $\hat{\Sbf}$, we will not present
 the SIC and Fisher information analysis in this study. 
 
 \section{New Research Algorithm for AERONET Inversion}
+\label{sec:algorithm}
 
 Figure \ref{fig:alg} gives an overview of the retrieval algorithm specifically
 designed for the analysis and inversion of photo-polarimetric remote
@@ -244,12 +262,13 @@ characterized by the total particle number (or volume), the vertical
 profile, size distribution, and refractive index. The aerosol-related
 modules---Mie, T-matrix, and VLIDORT---are analytically linearized and fully
 coupled. Thus, the forward model not only simulates radiance and/or
-polarization for a given spectrum, but also computes the Jacobians of
+polarization for a given spectrum, but also simuteneously computes the Jacobians of
 these radiation fields with respect to input aerosol microphysical
 parameters. Our inversion-oriented UNL-VRTM supplies these Jacobians
 together with observation error characterizations and \textit{a priori}
 constraints to the statistical optimization procedure for the retrieval.
-Information content and error analysis are also included in the
+Objective information content (section \ref{subsec:infotheory}) and 
+error analysis (section \ref{subsec:map}) are also included in the
 procedure along with the inversion. Although our algorithm is tailored
 to measurements from the AERONET SunPhotometer, its modularized
 framework enables the simulation and inversion of observations from
@@ -277,7 +296,7 @@ strategy from the \Dub algorithm, in particular with regard to
 the smoothness constraint on the spectral dependence of the complex
 refractive index.
 
-\subsection{Definition of state vector and Observation vector}
+\subsection{Definition of state vector and observation vector}
 \label{subsec:xy}
 
 For this study, the observation vector $\ybf$ comprises components from
@@ -474,6 +493,7 @@ equations):
 \end{equation}
 
 \subsection{Statistical optimized inversion}
+\label{subsec:alg-inv}
 
 Under the assumption of Gaussian-distributed errors, the optimized
 solution of equation \eqref{eq:inverse3} according to the 
@@ -562,7 +582,8 @@ these 10 last iterations. In addition, to ensure a
 physically reasonable solution, we also perform retrieval error
 analysis, and impose a practical quality control on real measurements. 
 
-\subsection{Retrieval Error Characertization}
+\subsection{Characterizing retrieval error}
+\label{subsec:alg-error}
 
 The retrieval without error characterization is of significantly lesser
 value. Once the retrieval is achieved, the retrieval error can be
@@ -589,7 +610,8 @@ the uncertainty in parameters (such as $\assa$ and asymmetry factor in this
 study) that can be fully determined by the parameters in $\xbf$ but are not
 themselves directly retrieved.
 
-\subsection{Qaulity Control of Measurements}
+\subsection{Qaulity control of measurements}
+\label{subsec:alg-qaulity}
 
 We apply a suite of quality criteria to ensure (a) a cloud-free condition,
 (b) that aerosol particles are quasi-homogeneously distributed in the
