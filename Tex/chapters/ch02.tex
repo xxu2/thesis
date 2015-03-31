@@ -279,17 +279,17 @@ to input parameters including $\reff$, $\veff$, $\mreal$, and $\mimag$.
 The phase matrix and its Jacobians are expressed in terms of the
 coefficients $\baer(\Theta)$ for each moment $l$ in terms of the 
 generalized spherical function expansions
-for each non-zero phase matrix element. Let $\mathbf{A}$ denotes the
+for each non-zero phase matrix element. Let $\pmb{\Lambda}$ denotes the
 vector of aerosol microphysical parameters, 
-$\mathbf{A}=[V_0,\reff,\veff,\mreal,\mimag]^T$, and $\mathbf{M}$
+$\pmb{\Lambda}=[V_0,\reff,\veff,\mreal,\mimag]^T$, and $\mathbf{M}$
 the vector of aerosol optical parameters, 
 $\mathbf{M}=[\taua,\assa,\baer(\Theta)]^T$, 
 where $\taua$ is related to $\qext$ by 
 $\taua=\frac{3V_0 \qext}{4\reff}$. The LMIE/LTMATRIX code acts
-as an operator that maps vector $\mathbf{A}$ to $\mathbf{M}$. 
-The Jacobian matrix of $\mathbf{M}$ with respect to $\mathbf{A}$ calculated by 
-means of the linearization feature of the code, and it can be expressed by
-$\nabla_\mathbf{A}\mathbf{M}$. 
+as an operator that maps vector $\pmb{\Lambda}$ to $\mathbf{M}$. 
+The Jacobian matrix of $\mathbf{M}$ with respect to $\pmb{\Lambda}$, or
+$\frac{\partial\mathbf{M}}{\partial\pmb{\Lambda}}$, is calculated by 
+means of the linearization feature of the code.
 
 \subsection{Surface representations} \label{subsec:surface}
 
@@ -377,23 +377,27 @@ matrix to ensure accurate calculation of diffuse radiation.
 
 Along with the Stokes vector $\mathbf{I}$, VLIDORT also computes the Jacobian
 matrix of I with respect to aerosol optical vector $\mathbf{M}$, 
-$\nabla_\mathbf{M}\mathbf{I}$. Therefore,
+$\frac{\partial\mathbf{I}}{\partial\mathbf{M}}$. Therefore,
 the combination of the VLIDORT and the LMIE/LTMATRIX codes allows for a
 direct calculation of the Jacobian matrix of the Stokes vector with
-respect to aerosol microphysics, $\mathbf{A}$, by
+respect to aerosol microphysics $\pmb{\Lambda}$ by
 \begin{equation}
-\nabla_\mathbf{A}\mathbf{I} = \nabla_\mathbf{M}\mathbf{I}
-\cdot \nabla_\mathbf{A}\mathbf{M} \label{eq:adj-i}
+\frac{\partial\mathbf{I}}{\partial\pmb{\Lambda}} =
+\frac{\partial\mathbf{I}}{\partial\mathbf{M}}
+\cdot \frac{\partial\mathbf{M}}{\partial\pmb{\Lambda}}
+\label{eq:adj-i}
 \end{equation}
 Essentially, the above equation can yield the derivatives of the
 radiance $I$ and $\dolp$ with respect to any aerosol microphysical parameter,
-i.e., $\nabla_\mathbf{A}I$ and $\nabla_\mathbf{A}\dolp$. 
-While obtaining $\nabla_\mathbf{A}I$ is straightforward,
-$\nabla_\mathbf{A}\dolp$ can be derived from equation \eqref{eq:dolp} 
-following:
+i.e., $\frac{\partial{I}}{\partial\pmb{\Lambda}}$ and 
+$\frac{\partial\dolp}{\partial\pmb{\Lambda}}$. 
+While obtaining $\frac{\partial{I}}{\partial\pmb{\Lambda}}$ is straightforward,
+$\frac{\partial\dolp}{\partial\pmb{\Lambda}}$ can be derived from equation 
+\eqref{eq:dolp} following:
 \begin{equation}
-\nabla_\mathbf{A}\dolp = -\frac{\dolp \nabla_\mathbf{A}}{I} +
-\frac{Q\nabla_\mathbf{A}{Q}+U\nabla_\mathbf{A}{U}}{I\sqrt{Q^2+U^2}}
+\frac{\partial\dolp}{\partial\pmb{\Lambda}} = 
+-\frac{\dolp}{I} \frac{\partial{I}}{\partial\pmb{\Lambda}} +
+\frac{Q\frac{\partial{Q}}{\partial\pmb{\Lambda}}+U\frac{\partial{U}}{\partial\pmb{\Lambda}}}{I\sqrt{Q^2+U^2}}
 \label{eq:adj-dolp}
 \end{equation}
 

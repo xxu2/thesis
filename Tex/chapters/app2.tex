@@ -700,7 +700,7 @@ natural and anthropogenic sources. \citep[Figure adopted from][]{Xu13}}
  The first three stations, i.e., (a) Zhangye, (b) SACOL, and (c) Jingtai,
  which are located over rural regions in the south boundary of Gobi deserts
  and have little influence from anthropogenic emissions,
- are representative sites for dust aerosol \citep{ge10}.
+ are representative sites for dust aerosol \citep{Ge10}.
  The next three sites, (d) Beijing, (e) Xinglong, and (f) Heifei,
  are located in anthropogenic source regions.
  The last three sites, (g) Noto, (h) Shirahama, and (i) Gwangju\_K,
@@ -821,7 +821,7 @@ site. \citep[Figure adopted from][]{Xu13}}
  \ce{NO2} tropospheric column over 0.25$^{\circ}$ by 0.25$^{\circ}$ grid cells.
  Recent studies suggested that the uncertainty in OMI \ce{NO2} tropospheric column retrievals
  is about 40\% with an about 15\% positive systematical bias \citep{Boersma08,Celarier08}.
- Following \citet{lin10}, we apply a factor of 0.85 to OMI \ce{NO2} retrievals
+ Following \citet{Lin10}, we apply a factor of 0.85 to OMI \ce{NO2} retrievals
  in our comparison to correct the bias.
  Figure \ref{fig:omno2} shows the comparison of GEOS-Chem \ce{NO2} columns
  with re-gridded OMI \ce{NO2} retrievals.
@@ -1060,8 +1060,8 @@ While BC and OC emissions estimated by \citet{Lu11} and \citet{Zhao13} remain
 almost same between 2006 and 2008, \citet{Qin12} reported a 3.8\% increase. 
 The top-down BC emission is 0.10 Tg mon$^{-1}$ (or 1.509 Tg yr$^{-1}$ based on 
 the monthly variation in INTEX-B inventory), which is smaller than that in 
-INTEX-B, but close to estimates of 1.61 Tg yr$^{-1}$ by \citet{qin12} and 
-1.68 Tg yr$^{-1}$ by \citet{lu11}. In terms of China OC emission estimates 
+INTEX-B, but close to estimates of 1.61 Tg yr$^{-1}$ by \citet{Qin12} and 
+1.68 Tg yr$^{-1}$ by \citet{Lu11}. In terms of China OC emission estimates 
 for 2008, \citet{Lu11} suggested a slightly larger value (3.37 Tg yr$^{-1}$) 
 while \citet{Zhao13} indicated a smaller value (2.8 Tg yr$^{-1}$) than 
 INTEX-B (3.22 Tg yr$^{-1}$). Our OC emission estimate (0.18 Tg mon$^{-1}$ or 
@@ -1087,56 +1087,123 @@ PM\textsubscript{10} conentration (as in Figure \ref{fig:pm10}) with
 
 \section{Summary} \label{sec:invsummary}
 
- This study presents a two-stage inversion scheme to explore the capacity of using satellite radiance for inversion of species-specific aerosol emissions.
- Firstly, we prepare the observational constraints of AOD using an advanced aerosol retrieval algorithm,
- which integrates the GEOS-Chem aerosol optical properties to the MODIS observed radiance \citep{Wang10}.
- Secondly, the adjoint of the GEOS-Chem chemical transport model is applied to statistically optimize aerosol emission estimates using these AOD retrievals.
- Thus, the MODIS radiances are essentially used to optimize the estimates of the emitted aerosol tracers and precursors.
- We illustrate our concept first with an idealized numerical experiment,
- and subsequently demonstrate the feasibility and practicability of the proposed scheme by applying it to optimize aerosol emission inventories over China during April 2008.
- Emissions of \ce{SO2}, \ce{NH3}, \ce{NOx}, BC and OC from anthropogenic sources,
- which significantly influence the aerosol simulation, are selected to be constrained at a spatial resolution of 2$^{\circ}$ by 2.5$^{\circ}$ and a monthly temporal resolution.
- Mineral dust production from combined natural and disturbed sources are optimized at the same spatial resolution but with a daily temporal resolution.
- Independent observations from both satellite remote sensing and ground-based observations are used to assess the inversion results through their comparisons with relevant GEOS-Chem simulations using prior and posterior emission estimates. 
+ This study presents a two-stage inversion scheme to explore the capacity of 
+using satellite radiance for inversion of species-specific aerosol emissions.
+Firstly, we prepare the observational constraints of AOD using an advanced 
+aerosol retrieval algorithm, which integrates the GEOS-Chem aerosol optical 
+properties to the MODIS observed radiance \citep{Wang10}.
+Secondly, the adjoint of the GEOS-Chem chemical transport model is applied to 
+statistically optimize aerosol emission estimates using these AOD retrievals.
+Thus, the MODIS radiances are essentially used to optimize the estimates of 
+the emitted aerosol tracers and precursors.
 
-The inversion yields posterior best estimates of 1.73 Tg for \ce{SO2}, 0.72 Tg for \ce{NH3}, 1.38 Tg for NOx, 0.10 Tg for BC, and 0.18 for OC from anthropogenic sources, and 8.3 Tg for combined natural and disturbed mineral dust.
- These show notable decreases from their counterparts in the bottom-up inventories in amount (or percentage decrease): 0.87 Tg (33.5\%) for \ce{SO2}, 0.38 Tg (34.5\%) for \ce{NH3}, 0.32 Tg (18.8\%) for \ce{NOx}, 0.01 Tg (9.1\%) for BC, and 0.03 Tg (15.0\%) for OC.
- The total amount of the mineral dust emission is reduced by 56.4\% from 19.02 Tg simulated by the DEAD mobilization module.
- The distribution of emission scaling factors exhibits strong spatial variation for those anthropogenic-emitted tracers and considerable temporal variation for mineral dust.
- The use of top-down constrained emissions remarkably reduces the discrepancy between GEOS-Chem simulation and observational AOD constraints, in both spatial and temporal variation features.
+We illustrate our concept first with an idealized numerical experiment,
+ and subsequently demonstrate the feasibility and practicability of the 
+proposed scheme by applying it to optimize aerosol emission inventories over
+China during April 2008. Emissions of \ce{SO2}, \ce{NH3}, \ce{NOx}, BC and OC 
+from anthropogenic sources, which significantly influence the aerosol 
+simulation, are selected to be constrained at a spatial resolution of 
+2$^{\circ}$ by 2.5$^{\circ}$ and a monthly temporal resolution.
+Mineral dust production from combined natural and disturbed sources are 
+optimized at the same spatial resolution but with a daily temporal resolution.
+Independent observations from both satellite remote sensing and ground-based 
+observations are used to assess the inversion results through their 
+comparisons with relevant GEOS-Chem simulations using prior and posterior 
+emission estimates. 
 
- Resulting posterior estimates of emissions are evaluated with independent AOD observations from surface sites (AERONET) and satellite (MISR),
- \ce{SO2} and \ce{NO2} column retrievals from satellite (OMI), and surface SNA and PM\textsubscript{10} concentrations from ground-based measurements.
- While the prior simulation over China generally shows overestimation, the use of posterior emissions significantly enhances the consistency between simulations and those independent observations.
- The statistical analysis of those comprehensive comparisons summarized in the Taylor diagram shows an overall reduced bias and root-mean-squre difference along with increased correlation coefficient, further confirming the improvements in the posterior simulation and the effectiveness of the presented top-down scheme. 
+The inversion yields posterior best estimates of 1.73 Tg for \ce{SO2}, 0.72 Tg
+for \ce{NH3}, 1.38 Tg for NOx, 0.10 Tg for BC, and 0.18 for OC from 
+anthropogenic sources, and 8.3 Tg for combined natural and disturbed mineral 
+dust. These show notable decreases from their counterparts in the bottom-up 
+inventories in amount (or percentage decrease): 0.87 Tg (33.5\%) for \ce{SO2},
+0.38 Tg (34.5\%) for \ce{NH3}, 0.32 Tg (18.8\%) for \ce{NOx}, 0.01 Tg (9.1\%) 
+for BC, and 0.03 Tg (15.0\%) for OC. The total amount of the mineral dust 
+emission is reduced by 56.4\% from 19.02 Tg simulated by the DEAD mobilization
+module. The distribution of emission scaling factors exhibits strong spatial
+variation for those anthropogenic-emitted tracers and considerable temporal
+variation for mineral dust. The use of top-down constrained emissions 
+remarkably reduces the discrepancy between GEOS-Chem simulation and 
+observational AOD constraints, in both spatial and temporal variation
+features.
 
- We attribute the differences between prior and posterior aerosol emissions to the change of emitted amount from the base year of those bottom-up inventories to the study period and/or the under/over-estimations in those inventories.
- Through comparisons with emissions over China reported by recent studies, we find that our inversion results are consistent with following finding:
+ Resulting posterior estimates of emissions are evaluated with independent 
+AOD observations from surface sites (AERONET) and satellite (MISR), \ce{SO2} 
+and \ce{NO2} column retrievals from satellite (OMI), and surface SNA and 
+PM\textsubscript{10} concentrations from ground-based measurements. While the
+prior simulation over China generally shows overestimation, the use of
+posterior emissions significantly enhances the consistency between simulations
+and those independent observations. The statistical analysis of those 
+comprehensive comparisons summarized in the Taylor diagram shows an
+overall reduced bias and root-mean-squre difference along with increased
+correlation coefficient, further confirming the improvements in the
+posterior simulation and the effectiveness of the presented top-down
+scheme.
+
+ We attribute the differences between prior and posterior aerosol
+emissions to the change of emitted amount from the base year of those
+bottom-up inventories to the study period and/or the
+under/over-estimations in those inventories. Through comparisons with
+emissions over China reported by recent studies, we find that our
+inversion results are consistent with following finding:
  \begin{itemize}
- \item Anthropogenic \ce{SO2} emissions over China has been decreased by 5$-$10\% from 2006 to 2008;
+ \item Anthropogenic \ce{SO2} emissions over China has been decreased by
+5$-$10\% from 2006 to 2008;
  \item Anthropogenic BC/OC emissions may be slightly reduced;
- \item Anthropogenic emissions of \ce{SO2} and \ce{NOx} reported in the INTEX-B and \ce{NH3} from TRACE-P inventories could have been artificially overestimated;
- \item The DEAD mobilization scheme combined with GOCART dust source function, even works well over the United State \citep{fairlie07}, seems to simulate mineral dust surface fluxes with a systematic positive bias.  
+ \item Anthropogenic emissions of \ce{SO2} and \ce{NOx} reported in the
+INTEX-B and \ce{NH3} from TRACE-P inventories could have been
+artificially overestimated;
+ \item The DEAD mobilization scheme combined with GOCART dust source
+function, even works well over the United State \citep{Fairlie07}, seems
+to simulate mineral dust surface fluxes with a systematic positive bias.
  \end{itemize}
   
- As a first attempt to invert species-specific emissions with satellite radiance, this study has a number of limitations.
- Those limitations may impact the uncertainty in posterior emissions, which is supposed to be smaller than uncertainty characterizing either a priori or observational constraints \citep{rodgers00}.
-  While quantification of these is beyond the demonstrative purposes of this paper, we present a qualitative discussion as follows.
- First, in the stage of aerosol retrieval, we presume aerosol composition is unbiased, and contains errors only in the total amount.
- As the model inevitably has bias associating aerosol types, improvement of this assumption over regional to global scale can be obtained from innovative satellite measurements.
- Indeed, the radiance observations have potential information on the aerosol composition.
- For example, the spectral behavior of the radiance is used to discriminate smoke from mineral dust particles \citep{king99,kaufman02}.
- Radiances measured from multi-viewing-angle are sensitive to aerosol particle size and nonsphericity \citep{martonchik09}.
- Temporal variation and geographical location can also yield information about aerosol composition.
- For example, increase of AOD in semi-arid region may reflect the increase of dust, while change of AOD in the Eastern Asia may reflect the increase of industrial emission.
- Hence, as showed in this study, a combined use of the model-based knowledge of the dominant aerosol sources and the source-receptor relationship together with the satellite-based temporal variation of AOD at different locations can be a strong constraint for species-specific source estimates.
- Second, this study also assumes the sole cause of the radiance difference (or the AOD difference) is due to the uncertainty in aerosol emissions.
- However, other processes can contribute to the difference, e.g. aerosol transport, wet/dry deposition, diurnal variation, prescribed aerosol physical and optical properties, and errors in the meteorological fields and radiative transfer calculation, etc.
- The third assumption is related to the error covariance matrices that are specified as diagonal with errors based upon literature (but that themselves may have uncertainty).
- To properly address these issues in future, a logical next step would be to assimilate multiple-spectral and/or multi-angle satellite radiance to the CTM.
- Furthermore, errors in the processes including emission, transport, and deposition and radiative transfer, should be reasonably characterized and included in the optimization. 
+ As a first attempt to invert species-specific emissions with satellite
+radiance, this study has a number of limitations. Those limitations may
+impact the uncertainty in posterior emissions, which is supposed to be
+smaller than uncertainty characterizing either a priori or observational
+constraints \citep{Rodgers00}. While quantification of these is beyond
+the demonstrative purposes of this paper, we present a qualitative
+discussion as follows. First, in the stage of aerosol retrieval, we
+presume aerosol composition is unbiased, and contains errors only in the
+total amount. As the model inevitably has bias associating aerosol
+types, improvement of this assumption over regional to global scale can
+be obtained from innovative satellite measurements. Indeed, the radiance 
+observations have potential information on the aerosol composition.
+For example, the spectral behavior of the radiance is used to
+discriminate smoke from mineral dust particles\citep{King99, Kaufman02}.
+Radiances measured from multi-viewing-angle are sensitive to aerosol 
+particle size and nonsphericity \citep{Martonchik09}.
+Temporal variation and geographical location can also yield information 
+about aerosol composition. For example, increase of AOD in semi-arid
+region may reflect the increase of dust, while change of AOD in the
+Eastern Asia may reflect the increase of industrial emission.
+Hence, as showed in this study, a combined use of the model-based
+knowledge of the dominant aerosol sources and the source-receptor
+relationship together with the satellite-based temporal variation of AOD
+at different locations can be a strong constraint for species-specific
+source estimates. Second, this study also assumes the sole cause of the
+radiance difference (or the AOD difference) is due to the uncertainty in
+aerosol emissions. However, other processes can contribute to the
+difference, e.g. aerosol transport, wet/dry deposition, diurnal
+variation, prescribed aerosol physical and optical properties, and
+errors in the meteorological fields and radiative transfer calculation,
+etc. The third assumption is related to the error covariance matrices
+that are specified as diagonal with errors based upon literature (but
+that themselves may have uncertainty). To properly address these issues
+in future, a logical next step would be to assimilate multiple-spectral
+and/or multi-angle satellite radiance to the CTM. Furthermore, errors in
+the processes including emission, transport, and deposition and
+radiative transfer, should be reasonably characterized and included in
+the optimization. 
 
-The top-down inversion scheme using GEOS-Chem adjoint inverse modeling is a powerful tool to include observational constraints from different platforms for timely updating aerosol emissions.
- There is also a need of using combined tracer gas and aerosol measurements to simultaneously constrain the aerosol emissions and gas precursors.
- Encouraging results presented in this study reveal the potential of using aerosol observations from MODIS and MISR, \ce{SO2} and \ce{NO2} from OMI and other sensor, such as SCIAMACHY, in the inversion. Inclusion of those observations will undoubtedly add more information to the optimization of emission. 
+The top-down inversion scheme using GEOS-Chem adjoint inverse modeling
+is a powerful tool to include observational constraints from different
+platforms for timely updating aerosol emissions. There is also a need of
+using combined tracer gas and aerosol measurements to simultaneously
+constrain the aerosol emissions and gas precursors.
+Encouraging results presented in this study reveal the potential of
+using aerosol observations from MODIS and MISR, \ce{SO2} and \ce{NO2}
+from OMI and other sensor, such as SCIAMACHY, in the inversion.
+Inclusion of those observations will undoubtedly add more information to
+the optimization of emission.
 
