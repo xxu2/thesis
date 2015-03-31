@@ -3,7 +3,7 @@
 
 \section{Introduction}
 
-As suggested by the information content analysis in last chapter, 
+As suggested by the information content analysis in Chapter \ref{ch:info}, 
 adding polarization data into the AERONET inversion will enable the 
 retrieval of bi-modal refractive index and SSA even for 440-nm AOD as 
 low as 0.2 when the Ångström exponents (AE) is between 0.7 and 1.6. 
@@ -13,8 +13,8 @@ to 79\% (57\%), 76\% (49\%), 69\% (52\%), 66\%
 $\reff$, $\mreal$, and SSA, respectively. 
 In this chapter, our new research algorithm is applied to a suite of 
 photo-polarimetric measurements taken from the new-generation SunPhotometer 
-at the Beijing\_RADI AERONET station. I present the selected cases and the
-\textit{a priori} characterizaton in section \ref{sec:case}, and discuss the 
+at the AERONET station of Beijing\_RADI. Below I present the selected cases and the
+\textit{a priori} characterization in section \ref{sec:case}, and discuss the 
 fitting residuals in section \ref{sec:invfit} and the retrieved 
 results in section \ref{sec:inv0}. A contrast analysis is presented in section
 \ref{sec:inv1} to demonstrate the superiority of the 
@@ -95,7 +95,7 @@ range, and is listed in the last column of Table \ref{tab:inverr}.
 In addition, we found in the Figure \ref{fig:invap}e that the $\mreal$ 
 retrievals decrease quasi-linearly with the increasing $\fmfv$, which indicates
 the $\mreal$ has distinct values between aerosols in the fine and the coarse
-modes over this site. It is expected that, the $\mreal$ in the mixed aerosol
+modes over this site. It is expected that the $\mreal$ in the mixed aerosol
 situations, e.g., $0.3<\fmfv<0.6$, is also expected to have the separated 
 values for fine- and coarse-mode particles.
 
@@ -190,7 +190,7 @@ Also shown are the retrievals from the AERONET \Dub inversion.
 Table \ref{tab:invpsd} presents the values of the (P-type inversion) retrieved
 PSD parameters including $V_0$, $\reff$, $\veff$, $\rv$, and $\sg$ for both 
 fine and coarse modes, and corresponding values from the \Dub inversion. 
-The PSD in these cases consists separated fine and coarse aerosol modes. 
+The PSD in these cases consists of separated fine and coarse aerosol modes. 
 In the cases dominated by fine-mode aerosol (A) and
 well-mixed aerosol (B), our retrievals agree with the AERONET inversions,
 though marginal differences are found in the effective radius and standard
@@ -227,7 +227,7 @@ for panels a--c are summarized in Table \ref{tab:invpsd}.}
 
 In contrast with the \Dub algorithm, which retrieves a single
 refractive index for each spectrum that is independent of aerosol size, our
-retrieved aerosol refractive indices are pertain to the corresponding fine and
+retrieved aerosol refractive indices pertain to the corresponding fine and
 coarse modes. In order to get a general impression of the agreement between our
 retrievals and the AERONET inversions, we compute the bulk refractive index
 that is a weighted average by the particle volume of each mode in our retrieval
@@ -413,3 +413,13 @@ cloud formation \citep{Eck12} or volcanic aerosols \citep{Eck10}.
 Moreover, extensive retrievals for a longer period of time will also be
 performed over sites where CE318-DP SunPhotometer instruments have been
 installed (i.e., Beijing\_RADI and Lille).
+
+\section{Acknowledgements}
+
+We thank Li Li for providing the AERONET radiance and polarization
+measurements over Beijing\_RADI site. We acknowledge the computational
+support from the Holland Computing Center at Unversity of Nebraska.
+This work is supported by a NASA Earth and Space Science
+Fellowship and the NASA Radiation Sciences Program and the Glory mission
+program. This chapter has been submitted as an article to
+\textit{Journal of Geophysical Research – Atmospheres} \citep{Xu15b}.

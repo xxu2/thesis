@@ -3,19 +3,19 @@
 
 \section{Introduction}
 
-Retrieving aerosol infomation from remote sensing observation
-involves two type of development, i.e., the forward modeling and inverse
+Retrieving aerosol information from remote sensing observation
+involves two types of development, i.e., the forward modeling and the inverse
 modeling. Mathematically, the forward modeling constructs a complete
 physical system to predict the outcome of measurements. The inverse
 modeling uses the actual measurements to infer the values of the
 parameters that characterize the system. The focus of this chapter is
 the development of a forward model that can accurately simulate the
-muti-spectral and multi-angular polarimetric quantities measured by the
-AERONET SunPhotometer. I first present the general physics of light 
-prapogaton within the atmosphere in the following text of this section. 
-Then I describe the forwrad model (UNL-VRTM) in section
-\ref{sec:unlvrtm}. Finally, I show the model benchmarking and verification are
-section \ref{sec:rtmverify}.
+multi-spectral and multi-angular polarimetric quantities measured by the
+AERONET SunPhotometer. In the following text of this section, I present 
+the general physics of light propagation within the atmosphere. 
+Then I describe the forward model (UNL-VRTM) in section
+\ref{sec:unlvrtm}. Finally, I show the benchmark simulations and verifications 
+of the forward model in section \ref{sec:rtmverify}.
 
 The radiation fields---radiance and the state of polarization---measured by the
 AERONET SunPhotometer are the outcome of solar radiation interacting
@@ -87,7 +87,7 @@ respectively, the aerosol and Rayleigh phase matrices as functions of the
 scattering angle $\Theta$. Therefore, the forward modeling development 
 thus requires the computation of single scattering properties for aerosols and
 air density fluctuations, rigorous treatment for absorption of trace gases, 
-accuracte representation of reflectance/polarization by surface, an the
+accurate representation of reflectance/polarization by surface, an the
 realistic simulation of polarimetric radiative transfer. 
 
 \section{The UNL-VRTM} \label{sec:unlvrtm}
@@ -149,16 +149,16 @@ the UNL-VRTM's Jacobian capability is presented in section
 \ref{subsec:jacobian}. 
 
 Although the UNL-VRTM is used to simulate the AERONET measurements in
-this work, the module-based sturcture of UNL-VRTM allows its application 
+this work, the module-based structure of UNL-VRTM allows its application 
 not limit to the AERONET inversion. 
 It can be easily used to simulate observations
 from other remote sensing platforms, like satellite sensors. For
 example, we have employed it to explore the aerosol information content
 of observations from the future TEMPO/GEO-CAPE geostationary satellite
 sensors \citep{Wang14}, to investigate the potential application of
-hyperspectral radiances at \ce{O2}A and \ce{O2}B bands for retrieving
+hyper-spectral radiances at \ce{O2}A and \ce{O2}B bands for the retrieval of
 aerosol vertical profile \citep{Wang14, Ding14}, to retrieve aerosol 
-microphysical properties from GeoTASO measured UV-to-visible contiuneous 
+microphysical properties from GeoTASO measured UV-to-visible continuous 
 radiance spectra \citep{Hou14}, and to perform AOD retrieval from 
 GOSAT/TANSO-CAI's UV radiance \citep{Han14}. 
 
@@ -233,7 +233,7 @@ T-matrix (LTMATRIX) scattering code for non-spherical convex and axially
 symmetric particles \citep{Spurr12}. The LMIE code originates from the Mie code
 of \citet{deRooij84}, and the LTMATRIX code originates from the T-Matrix
 code developed by \citet{Mishchenko96, Mishchenko98}; both include
-linearization capabaility developed by \citet{Spurr12}.
+linearization capability developed by \citet{Spurr12}.
 
 Common inputs for both codes are the complex refractive index
 ($\mreal + i\mimag$), and the particle size distribution (PSD) 
@@ -246,7 +246,7 @@ shape of non-spherical aerosols (spheroids, cylinders, or Chebyshev particles)
 is interpreted as the equivalent surface-area sphere in the linearized T-matrix
 calculation, regardless of the shape. 
 
-For AERONET inversion alorithm, we assume that the aerosol volume
+For AERONET inversion algorithm, we assume that the aerosol volume
 distribution follows a bi-modal lognormal function \citep[in agreement
 wit][]{Schuster06, Waquet09}:
 \begin{equation}
@@ -257,8 +257,8 @@ wit][]{Schuster06, Waquet09}:
 \end{equation}
 where $V_0$, $\rv$, and $\sg$ are the total volume concentration, geometric
 median radius, and standard deviation, respectively. The superscript $i$
-indicates the size mode, and later will be replaced by ‘f’ for fine mode
-and ‘c’ for coarse mode. We assume that particle size ranges from 0.01
+indicates the size mode, and later will be replaced by `f' for fine mode
+and `c' for coarse mode. We assume that particle size ranges from 0.01
 to 10 $\mu$m for the fine mode and from 0.05 to 20 $\mu$m for
 the coarse mode, both covering $>$ 99.9\% of the total volume of an 
 idealistic size range (0, $+\infty$). An advantage of the lognormal 
@@ -415,7 +415,7 @@ inputs are assumed constant and are given by equations
 \eqref{eq:opt1}--\eqref{eq:opt2}, as well as equation \eqref{eq:opt3}
 with $\mathbf{P}(\Theta)$ replaced by $\mathbf{B}^j$. 
 It should be noted that all parameters
-in these requations are for each layer, but we ignore $L$ for
+in these equations are for each layer, but we ignore $L$ for
 convenience.
 
 Since VLIDORT generates Jacobians with respect to layer-integrated
@@ -602,7 +602,7 @@ modal AOD and volume, respectively:
 
 Details of these necessary VLIDORT inputs are presented in Appendix
 \ref{app:pi}, and a comprehensive verification of these Jacobian calculation are
-presnted in following section {\ref{sec:rtmverify}}.
+presented in following section {\ref{sec:rtmverify}}.
 
 %%%% New section
 \section{Model Benchmarking and Verifications} \label{sec:rtmverify}
@@ -738,6 +738,18 @@ highly correlated as seen in the scatter plots
 shown in these figures. Relative differences in all comparisons are
 less than 0.5\%, and in many cases the differences are less than 0.05\%.
 
+%%%%%%
+\section{Acknowledgements}
+I thank Rob Spurr for sharing the VLIDORT, Linearized Mie, and
+Linearized T-matrix codes, Xiong Liu and Kelly Chance for providing the
+HITRAN database and the line-by-line computing code. I also thank
+Shouguo Ding for plotting Figures \ref{fig:unlvrtm1} and
+\ref{fig:unlvrtm2}. Funding for this study was provided by the NASA
+Earth Science Division as part of GEO-CAPE mission study and Glory
+mission science activities. This chapter has been published in an article in
+\textit{Journal of Quantitative Spectroscopy and Radiative Transfer}
+\citep{Wang14}.  
+
 \begin{landscape}
 \begin{figure}[p]
   \centering
@@ -761,7 +773,7 @@ and coarse-mode aerosols as described in \citet{Hess98}.
 \begin{figure}[p]
   \centering
   \includegraphics[width={1.4\textwidth}]{figures/unlvrtm5.pdf}
-  \caption{Same as in Fig. 5, but for coarse mode aerosols.
+  \caption{Same as in Figure \ref{fig:unlvrtm4}, but for coarse mode aerosols.
 (Figure adopted from \citet{Wang14}) }
   \label{fig:unlvrtm5}
 \end{figure}

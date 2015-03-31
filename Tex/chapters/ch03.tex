@@ -5,13 +5,24 @@
 
 The inverse problem of this work seeks the solution of a number of
 microphysical parameters from observations of different categories. We
-thus need to develop an retrieval algorithm that ueses statistically
+thus need to develop an retrieval algorithm that uses statistically
 optimized multi-variable fitting, in which the solution is sought not
-only rely on the preassumed classes of potential solutions, but also in
-a continuous space of slotions under statistically formulated criteria
-optimizing the error distributon of the retrieval parameters. In this
-chapter, I first present the general theory of inverse problem (section
-\ref{sec:invtheory}), covering the Bayesion-based inversion (section
+only rely on the presumed classes of potential solutions, but also in
+a continuous space of solutions under statistically formulated criteria
+optimizing the error distribution of the retrieval parameters. 
+It should be noted that the development of this inversion algorithm 
+was built upon our experience with optimization of aerosol emissions 
+using the adjoint chemistry transport model (CTM) 
+(See Appendix \ref{ch:optems} and \citep{Wang12, Xu13}). 
+In essence, the optimization method is consistent  with the adjoint 
+modeling  \citep[e.g.,][]{Henze07} that constrains aerosol emissions 
+from measurements through inverting a CTM, although 
+different physical processes are involved for inversion of AERONET observation. 
+Both inversions seek the optimal solutions for a state vector that minimizes 
+the differences between the model simulation and observation.
+
+In this chapter, I first present the general theory of inverse problem (section
+\ref{sec:invtheory}), covering the Bayesian-based inversion (section
 \ref{subsec:map}) and information content analysis
 (\ref{subsec:infotheory}). After that in section \ref{sec:algorithm}, 
 I describe the key aspects of  designed inversion algorithm: the
@@ -20,7 +31,9 @@ considered constraining its \textit{a pripri} and smoothness feature
 (section \ref{subsec:ap}), how the state
 vector is sought statistically (section \ref{subsec:alg-inv}), how the retrieval 
 error is characterized (section \ref{subsec:alg-error}), and quality
-conrtol of measurements (section \ref{subsec:alg-qaulity}).
+control of measurements (section \ref{subsec:alg-qaulity}).
+
+It should be noted that 
 
 \section{Inversion Theories} \label{sec:invtheory}
 
@@ -37,16 +50,17 @@ physics on how $\ybf$ and $\xbf$ are related. Then, we have
 \end{equation}
 where the vector $\bbf$ consists of forward model parameters (such as the
 surface reflectance) that are not included in $\xbf$ but quantitatively
-influence the measurement to our known, the $\epbf\udy$ term is the error that
+influence the estimates to our known, and $\epbf\udy$ term is the error that
 results from inaccurate modeling and measurement processes. In this
 study, we use the best-estimated $\hat{\bbf}$ in the forward model and consider
-its contributions to the total measurement accuracy. Linearize the
+its contributions to the total measurement accuracy. Linearizing the
 forward model at $\bbf=\hat{\bbf}$:
 \begin{equation}
-\ybf = \Fbf(\xbf,\hat{\bbf})+\hat{\Kbf}\udb+\epbf\udy
+\ybf = \Fbf(\xbf,\hat{\bbf})+\hat{\Kbf}\udb(\bbf-\hat{\bbf})+\epbf\udy
+\label{eq:mfx-b}
 \end{equation}
 where $\hat{\Kbf}\udb$ is the weighting function (or Jacobian matrix) 
-of forward model to model parameters $\bbf$ at $\hat{\bbf}$,
+of the forward model to model parameters $\bbf$ at $\hat{\bbf}$,
 $\left.\frac{\partial\Fbf}{\partial\bbf}\right|_{\bbf=\hat{\bbf}}$. 
 If we treat the forward model as
 linear in the vicinity of the true state of x, the forward model can be
@@ -197,11 +211,11 @@ Matrix $\Abf$ quantifies the ability of the retrieval to infer
 $\hat{\xbf}$ given the relationship between $\ybf$ and $\xbf$ (i.e.,
 $\Kbf$) and given the observation noise and a priori characterization. 
 Thus, an identity matrix of A represents a perfect retrieval, 
-while a null matrix of $\Abf$ indicates that none of the
+while a null matrix of $\Abf$ indicates that no
 information can be gained from the observation. The trace of $\Abf$ is the
 degree of freedom for signal, i.e., $\text{DFS}=\text{Trace}(\Abf)$, 
 which represents independent pieces of information that the observation 
-can provide. The diagonal elements of averaging kernel matrix $\Abf$, 
+can provide. The diagonal elements of the averaging kernel matrix $\Abf$, 
 or the DFS components, indicate the partial sensitivity of each 
 individual retrieved parameters with respect to their corresponding truth: 
 \begin{equation}
@@ -231,7 +245,7 @@ In the Gaussian linear case, the Fisher information matrix is equal
 to the inverse of \textit{a posteriori} error covariance matrix, 
 $\hat{\Sbf}^{-1}$. The retrieval indeed corresponds to the maximum 
 of a posteriori PDF and the minimum of retrieval error. It is thus 
-straightforward that higher level of the Fisher information is 
+straightforward that a higher level of the Fisher information is 
 subject to a smaller retrieval error. Due to their close 
 relationship with the DFS and $\hat{\Sbf}$, we will not present 
 the SIC and Fisher information analysis in this study. 
@@ -285,8 +299,9 @@ photo-polarimetric measurements.}
 
 Development of the inversion component in our algorithm was built upon
 our experience with optimization of aerosol emissions using the adjoint
-chemistry transport model (CTM) \citep{Wang12, Xu13}. In
-essence, the optimization method is consistent with the adjoint modeling
+chemistry transport model (CTM) (See Appendix \ref{ch:optems} 
+and \citep{Wang12, Xu13}). In essence, the optimization method is 
+consistent with the adjoint modeling \citep[e.g.,][]{Henze07}
 that constrains aerosol emissions from measurements through inverting a
 CTM, although different physical processes are involved for inversion of
 AERONET observation. Both inversions seek the optimal solutions for a
@@ -361,7 +376,7 @@ AERONET site, we use the available inversion products that have been
 obtained with the \Dub algorithm, for which the \textit{a priori} can be
 well characterized by the mean values and standard deviations of each
 component in the state vector. At the same time, the a priori can also
-be determined from other sources if historical AERONET retrieval is not
+be determined from other sources if a historical AERONET retrieval is not
 available. For example, we could extract aerosol microphysical
 climatology from chemistry transport model simulations
 \citep[e.g.,][]{Wang10} or from measurements of in situ and/or even satellite
@@ -432,7 +447,7 @@ variable, and the vector $\epbf_\Delta$ indicates uncertainties in these
 derivatives. 
 
 In particular, for constraining the dependence of the spectral
-refractive index with wavelength, the matrix $\Gbf\udd$ calculates the dth
+refractive index with wavelength, the matrix $\Gbf\udd$ calculates the $d$th
 difference of the refractive index at four wavelengths (440, 675, 870,
 and1020 nm). As discussed by \citet{Dubovik00a}, we assume a linear
 relationship between the logarithm of the refractive index and the
@@ -481,7 +496,7 @@ multiple \textit{a priori} constrains in the retrieval.  Specifically,
 we combine the \textit{a priori} constraint of equation \eqref{eq:ap} 
 and the smoothness constraint of equation \eqref{eq:smooth}; 
 our inverse problem is equivalent to solving the following set of three
-equations (in contast to \eqref{eq:inverse2} that has two
+equations (in contrast to \eqref{eq:inverse2} that has two
 equations):
 \begin{equation}
 \begin{cases}
@@ -610,7 +625,7 @@ the uncertainty in parameters (such as $\assa$ and asymmetry factor in this
 study) that can be fully determined by the parameters in $\xbf$ but are not
 themselves directly retrieved.
 
-\subsection{Qaulity control of measurements}
+\subsection{Quality control of measurements}
 \label{subsec:alg-qaulity}
 
 We apply a suite of quality criteria to ensure (a) a cloud-free condition,
@@ -627,7 +642,7 @@ is smaller than 5$^\circ$; (iii) a symmetry check for the almucantar radiances: 
 difference is less than 5\% for the azimuthal angle of 180$^\circ$ and less than
 10\% elsewhere; and (iv) principal-plane observations are discarded when
 their second derivatives with respect to the scattering angle are beyond
-smoothing threshold. Although most of these criteria follow
+the smoothing threshold. Although most of these criteria follow
 \citet{Holben06}, we also check the smoothness of the principal-plane
 radiances and DOLP to identify scans that are contaminated by cloud. We
 apply the threshold on the second derivative of radiance (or DOLP) with
@@ -635,5 +650,15 @@ respect to scattering angle in order to restrain local oscillations of
 radiance (or DOLP) caused by clouds or heterogeneous aerosol plumes.
 Thus, applying such a threshold can effectively remove sharp kinks and
 ensure continuous quantities in the principal-plane scanning sequences. 
-Indeed, this smoothness check share the same principle to the smoothness 
+Indeed, this smoothness check shares the same principle to the smoothness 
 constraint presented in the section \ref{subsec:ap}. 
+
+\section{Acknowledgements}
+
+We thank Daven Henze, Oleg Dubovik, and Brent Holben for constructive
+suggestions and useful discussions on the inversion algorithm
+developement. This work is supported by a NASA Earth and Space Science
+Fellowship and the NASA Radiation Sciences Program and the Glory mission
+program. Most content in this chapter also appear in two articles
+submitted to \textit{Journal of Geophysical Research – Atmospheres}
+\citep{Xu15a, Xu15b}.

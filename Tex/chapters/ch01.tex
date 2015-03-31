@@ -3,19 +3,19 @@
 
 \section{Background and Motivation}
 
-Atmospheric aerosols play a crucial role in the global climate change. They
-affect earth energy budget directly by scattering and absorbing solar and
+Atmospheric aerosols play a crucial role in global climate change. They
+affect earth's energy budget directly by scattering and absorbing solar and
 terrestrial radiation, and indirectly through altering the cloud formation,
 lifetime, and radiative properties \citep{Haywood00,Ramanathan01}.
-However, quantification of these effects in the current climate
-models is fraught with uncertainties. The global average of aerosol effective
-radiative forcing were estimated to range from --0.1 to --1.9 Wm$^{-2}$ with the 
-best estimate of --0.9 Wm$^{-2}$ \citep{Boucher13}, indicating that the cooling
-effects of aerosol might counteract the warming effects of 1.82$\pm$0.19 Wm$^{-2}$
-caused by the increase of carbon dioxide since the industrial revolution 
-\citep{Myhre13}. The climate effects of aerosol particles depend on their
-geographical distribution, optical properties, and efficiency as cloud
-condensation nuclei and ice nuclei. 
+However, quantification of these effects in current climate models is fraught
+with uncertainties. The global average of the aerosol effective radiative 
+forcing were estimated to range from --0.1 to --1.9 Wm$^{-2}$ with the best 
+estimate of --0.9 Wm$^{-2}$ \citep{Boucher13}, indicating that the cooling
+effects of aerosol might counteract the warming effects of 1.82$\pm$0.19 
+Wm$^{-2}$ caused by the increase of carbon dioxide since the industrial 
+revolution \citep{Myhre13}. The climate effects of aerosol particles depend 
+on their geographical distribution, optical properties, and efficiency as 
+cloud condensation nuclei and ice nuclei. 
 Key quantities pertain to the aerosol optical and
 cloud-forming properties include particle size distribution (PSD), chemical
 composition, mixing state, and morphology \citep{Boucher13}. While the
@@ -25,7 +25,7 @@ the accurate quantification of aerosol ERF is in no
 small part hindered by our limited knowledge about the aerosol PSD and
 refractive index (describing chemical composition and mixing state). 
 
-To fully understand the role of aerosol particles in the global climate change, 
+To fully understand the role of aerosol particles in global climate change, 
 further development in observations along with retrieval algorithms for these
 aerosol microphysical properties from different platforms are thus highly
 needed \citep{Mishchenko04}, and the focus of this two-part series study
@@ -41,23 +41,23 @@ between the spectral dependency of extinction coefficients and the size of
 aerosol particles. Over thirty years later, \citet{Curcio61} inferred the aerosol
 PSD from the spectral particulate extinction coefficients in the visible and
 near-infrared regions. Soon with the effective numerical inversion technique
-developed by \citet{Phillips62} and \citet{Twomey63} specifically for error-involved
-optimization, a number of studies explored the use of either spectral
+developed by \citet{Phillips62} and \citet{Twomey63} specifically for 
+error-involved inverse problem, a number of studies explored the use of either spectral
 attenuations or scattered radiances (in a small range of scattering angles) to
 determine the aerosol PSD
 \citep{Twomey67,Yamamoto69,Dave71,Grassl71,Herman71,King78}.
 \citet{Shaw79} and \citet{Nakajima83} were among the first studies that have combined
 optical scattering measurements with spectral extinctions to recover particle
-size spectrum. \citet{Kaufman94} suggested useful information contained in
-the sky radiances of larger scattering angles to retrieve the aerosol
+size spectrum. \citet{Kaufman94} suggested that useful information is contained
+in the sky radiances of larger scattering angles for retrieval of the aerosol
 scattering phase function and PSD. The first operational retrieval algorithm
 for aerosol microphysical properties was introduced by \citet{Nakajima96},
 when the multi-band automatic sun- and sky-scanning radiometer was deployed in
 the AErosol RObotic NETwork, or the AERONET \citep{Holben98}. All of
 above mentioned methods treated aerosol particles as homogeneous spheres and
 with refractive index assumed a priori, even though the refractive index can
-highly impact the optical, especially the scattering characteristics \citep{Hansen74}.
-\citet{Tanaka82,Tanaka83} developed an inversion library
+highly impact the optical characteristics, especially the scattering 
+\citep{Hansen74}. \citet{Tanaka82,Tanaka83} developed an inversion library
 method to estimate the complex refractive index and PSD simultaneously from
 measurements of scattered radiances polarized in the perpendicular and parallel
 directions. Another concept for determining refractive index from both direct
@@ -80,10 +80,10 @@ With over 400 locations around the word, most AERONET sites are equipped with
 an automatic sun and sky scanning spectral radiometer, or the CIMEL CE318 type
 SunPhotometer (Figure \ref{fig:cimel318}a), to routinely measure direct and 
 diffuse solar radiation in various atmospheric window channels \citep{Holben98}. 
-As listed in Table \ref{tab:cimel318} and illustrated in Figure \ref{fig:cimel318}, these
-measurements include direct sun radiances, sky radiance on both the solar
-almuncantar and pruncipal planes, as well as the optional polarization of sky
-light on the solar principal plane.
+As listed in Table \ref{tab:cimel318} and illustrated in Figure 
+\ref{fig:cimel318}, these measurements include direct sun radiances, sky 
+radiance on both the solar almucantar and principal planes, as well as the 
+optional polarization of sky light on the solar principal plane.
 
 Direct sun radiances at various atmospheric window channels from the
 ultra-violet (UV) to near-infrared (NIR) are used to infer the spectral AODs with the
@@ -108,12 +108,12 @@ Sky radiance measurements, which are performed at 440, 670, 870, and 1020-nm
 bands with full width spectrum at half maximum (FWHM) of 10 nm, are acquired
 from both solar almucantar and solar principal plane. An almucantar is a series 
 of measurements taken at the viewing angle of the sun for 76 specified relative 
-azimuthal angles (for detail see table 2 of citep{holben98}). To achieve an
+azimuthal angles (Table \ref{tab:cimel318}). To achieve a wide
 enough range of scattering angles, almucantar scans are usually made at an
 optical air mass of 1.7 or more (corresponding to solar zenith angle larger
 than about 50$^\circ$). The principal-plane sequence for each spectrum performs
 right after almucantar scans. It begins with a sun observation, moves 6$^\circ$)
-below the sunray, sweeps up through the sun, and ends at a scattering angle of
+below the sun-ray, sweeps up through the sun, and ends at a scattering angle of
 150$^\circ$) or viewing angle achieves horizon, collecting radiances from up to
 42 viewing angles. Hereinafter, we will use $\ialm$ and $\ippl$ to represent the sky
 radiances from the solar almucantar and solar principal plane, respectively.
@@ -147,7 +147,7 @@ Sun: --6, --5, --4.5, --4, --3.5, --3, --2.5, --2, 2, 2.5, 3, 3.5, 4, 4.5, 5,
 1640)\textsuperscript{a} & Zenith angle on the
 solar principal plane: --85, --80, --75, --70, --65, --60, --55, --50, --45,
 --40, --35, --30, --25, --20, --15, --10, --5, 5, 10, 15, 20, 25, 30, 35, 40, 
-45, 50, 55, 60, 65, 70, 75, 80, 85 (negative is in the antisolar direction) &
+45, 50, 55, 60, 65, 70, 75, 80, 85 (negative is in the anti-solar direction) &
 Not used yet \\
     \bottomrule
      \multicolumn{4}{m{35em}}{\textsuperscript{a}Additional measurements taken
@@ -218,7 +218,7 @@ through measuring the first three Stokes vector elements simultaneously from
 effective variance ($\veff$), and spectral complex index of refraction for both
 fine and coarse modes \citep{Mishchenko07}. While no actual product is
 available because of the failure of Glory launch, several case studies with the
-APS’s prototype airborne sensor, RSP (the Remote Sensing Polarimeter),
+APS's prototype airborne sensor, RSP (the Remote Sensing Polarimeter),
 demonstrated feasibility of APS algorithm \citep{Chowdhary02,Chowdhary05,
 Mishchenko04,Waquet09}. At least in the case of
 spherical particles, the accuracy of APS’s bi-modal aerosol products was
@@ -232,7 +232,7 @@ identified in the detailed sensitivity study by \citep{Dubovik00b}.
 
 The second challenge is associated with the inconsistency in assumptions of PSD
 that exists between current AERONET inversion products and satellite retrievals
-on the one hand, as well as the aerosol models used by climate models on the
+on the one hand, and the aerosol models used by climate models on the
 other hand. Specifically, the \Dub algorithm retrieves the aerosol PSD
 on in 22 discrete size bins. In contrast, a continuous PSD function (e.g.,
 lognormal) is usually assumed in satellite retrieval algorithms, such as those
@@ -241,7 +241,7 @@ POLDER/PARASOL algorithm \citep{Hasekamp11}. Also, aerosol microphysical
 properties are usually calculated with continuous PSD assumptions in many
 chemistry transport models, such as GEOS-Chem \citep{Drury10, Wang10}
 and the GOCART model \citep{Chin02}. Clearly, the actual aerosol PSD
-is never a perfect lognormal distribution, but neither it is discrete. At least
+is never a perfect lognormal distribution, but neither is it discrete. At least
 from the scattering perspective, the aerosol PSD can be well characterized with
 an effective radius $\reff$ and an effective variance $\veff$, while the specific
 function of the PSD is shown to be much less important \citep{Hansen74}.
@@ -283,9 +283,9 @@ conclusions were based on consideration of
 spherical aerosol particles and were primarily from a theoretical point of
 view. In contrast, the studies by \citet{Dubovik06} and \citet{Deuze93,
 Deuze01} revealed serious limitation of polarimetric retrieval of the properties
-for coarse, especially non-spherical aerosols. Moreover, \citet{Dubovik06}
+for the coarse mode, especially non-spherical aerosols. Moreover, \citet{Dubovik06}
 have shown that while the polarimetic observation of fine particles and large
-spheres are highly sensitive to real part of refractive index, even they have
+spheres are highly sensitive to the real part of refractive index, even they have
 non-negligible sensitivity to particle shape. Therefore, adding polarization
 measurements to the inversion has great potential to improve the accuracy of
 AERONET microphysical retrievals, provided that the difficulty of representing
@@ -299,9 +299,9 @@ of the refractive index, and particle shape parameters.
 \section{Research Goals and Thesis Outline} \label{sec:objective}
 
 As discussed above, this dissertation seeks to contribute an improved
-research algorithm retrieving aerosol micriphysical properties from AERONET
+research algorithm that retrieves aerosol microphysical properties from AERONET
 measurements of light radiance and polarization, with emphasis on elucidating
-the potentially important role of polarization measurements. It does so by 
+the potential value of polarization measurements. It does so by 
 pursuing the following three objectives:
 
 \begin{enumerate}
@@ -309,26 +309,26 @@ pursuing the following three objectives:
 retrieval of aerosol refractive indices and particle size distribution from a 
 combined use of direct and diffuse solar radiation measurements from AERONET.}
 \newline
-Retrieving aerosol infomation from remote sensing observation
+Retrieving aerosol information from remote sensing observation
 involves two type of development, i.e., the forward modeling and inverse
 modeling. In Chapter \ref{ch:model}, I present a unified radiative transfer 
 model---UNL-VRTM---that we have developed specifically for inversion of
 aerosol properties from remote sensing measurements \citep{Wang14}. The
 key feature of UNL-VRTM is that it not only simulates the
 polarimetric radiation in the atmosphere but also, more importantly,
-can compute the analytical deriatives of these radiation fields with respect
+can compute the analytical derivatives of these radiation fields with respect
 to aerosol microphysical parameters. In the subsequent chapter, I
 describe an inversion algorithm that is developed by integrating the UNL-VRTM 
 with statistically optimization approach to retrieve 22 aerosol
 microphysical parameters from the AERONET measured multi-spectral and
-muti-angular light radiance and polarization. 
+multi-angular light radiance and polarization. 
 
 \item \textit{Conduct a sensitivity study and error budgeting exercise to
 characterize retrieval accuracy and error sources.} 
 \newline 
 In order to explore the potential of the AERONET polarization measurements
 for improving aerosol microphysical retrieval, our inversion testbed is
-ued to examine the information content of these measurements with and without
+used to examine the information content of these measurements with and without
 radiation in the Chapter \ref{ch:info}. The analysis focuses on
 how the added polarization measurements impact on the retrieval accuracy
 the in aerosol particle size distribution, spectral refractive
@@ -341,5 +341,8 @@ polarimetric measurements.}
 \newline
 In Chapter \ref{ch:case}, I applied our new research algorithm to a suite of
 photo-polarimetric measurements taken from the new-generation SunPhotometer
-at the Beijing\_RADI AERONET station.
+at the Beijing\_RADI AERONET station. In order to demonstrate the value of 
+adding polarization measurements, we performed aerosol retrievals from 
+radiance measurements only, in addition to the retrievals using both radiance 
+and polarization measurements. 
 \end{enumerate}

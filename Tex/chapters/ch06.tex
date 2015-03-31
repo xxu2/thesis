@@ -6,12 +6,12 @@
 Aerosols have been recognized as major components of the Earth's climate 
 system, influencing the radiative budget, clouds, and precipitation processes.
 An accurate assessment of these effects requires realistic representation of
-the aerosol loading and distribution across the globel, as well as the
-charateristics of the aerosol particle size distribution and 
+the aerosol loading and distribution across the globe, as well as the
+characteristics of the aerosol particle size distribution and 
 chemical composition (refractive index). 
 
-The objectvie of this thesis is to
-contribute an improved research algorithm retrieving aerosol micriphysical
+The objective of this thesis is to
+contribute an improved research algorithm retrieving aerosol microphysical
 properties from AERONET measurements of light radiance and polarization, with
 emphasis on elucidating the potentially important role of polarization
 measurements. As outlined in section \ref{sec:objective}, specific 
@@ -30,12 +30,12 @@ investigations.
 The UNified Linearized Vector Radiative Transfer Model, or UNL-VRTM integrates
 the linearized codes computing vector radiative transfer (VLIDORT) and
 scattering of spherical (LMIE) and non-spherical (LTMATRIX) particles, 
-hyperspectral treatement for air molecular scattering and geseous absorption,
+hyper-spectral treatment for air molecular scattering and gaseous absorption,
 and models describing bidirectional surface reflectance and polarization
 (BRDF/BPDF). As shown in Chapter \ref{ch:model}, the direct coupling of these
 components by UNL-VRTM allows it not only able to compute the four Stokes
 parameters and degree of linear polarization (DOLP) with high accuracy and high
-spectral resolution, but also to simutaneously and analytically generate
+spectral resolution, but also to simultaneously and analytically generate
 sensitivities of these Stokes parameters with respect to aerosol parameters of
 both the fine and coarse modes. By inclusion of HITRAN and other molecular
 spectroscopy data for atmospheric trace gases, the UNL-VRTM is also able to
@@ -43,7 +43,7 @@ perform line-by-line calculation of gas absorption, thus providing another
 opportunity for the future study of the effect of absorbing gases (such as
 \ce{SO2}, \ce{NO2}, \ce{O3}, and water vapor) on the aerosol retrieval. 
 Although the UNL-VRTM is used to simulate the AERONET measurements in
-this work, the module-based sturcture of UNL-VRTM allows a broad application
+this work, the module-based structure of UNL-VRTM allows a broad application
 to the remote sensing observations from other platforms.
 
 In Chapter \ref{ch:algorithm}, I have presented a new algorithm to 
@@ -123,18 +123,27 @@ multi-angular photo-polarimetric measurements. Below, I list particularly
 promising directions for future investigations.
 
 \begin{enumerate}
-\item Implement the consideration of non-spherical dust.
+\item Implement the consideration of non-spherical dust. Conclusions of
+of this work are based on consideration of spherical aerosol particles.
+However, the studies by \citet{Dubovik06} and \citet{Deuze93, Deuze01}
+revealed serious limitation of polarimetric retrieval
+of the properties for coarse, especially non-spherical aerosols.
+Therefore, treatment of non-spherical optical scattering properties is
+necessary to improve our understanding on how polarization can benefit
+the retrieval for dust aerosols.  
 \item While the bi-lognormal PSD can well represent the aerosol size spectrum 
 in most cases, future research efforts  will include the implementation of 
 tri-modal aerosol mixtures in situations of cloud formation \citep{Eck12} 
 or volcanic aerosols \citep{Eck10}.
 \item Explore the potential use of multi-spectral and multi-angular 
-photo-polarimetric measurements for aerosol chemical composition. This will 
-benifit the source identification of species-specified aerosols.
-\item Last but not least, extensive retrievals for a longer period of time 
-will also be performed over sites where CE318-DP SunPhotometer instruments 
-have been installed (i.e., Beijing\_RADI and Lille). Such long-term retrieval 
-will provide more robust resources for studying the aerosol climatology. 
+photo-polarimetric measurements for the retrieval of aerosol chemical 
+composition. This will benifit the source identification of species-specified
+aerosols.
+\item Last but not least, extensive retrievals for a longer period are
+on-going over sites where CE318-DP SunPhotometer instruments 
+have been installed (i.e., Beijing\_RADI and Lille). Such long-term
+retrievals will provide more robust resources for studying the aerosol 
+climatology. 
 \end{enumerate}
 
 
