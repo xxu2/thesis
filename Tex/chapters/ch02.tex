@@ -1,5 +1,5 @@
 %%
-\chapter{Model Developments} \label{ch:model}
+\chapter{Model Development} \label{ch:model}
 
 \section{Introduction}
 
@@ -57,12 +57,13 @@ column vector $\mathbf{I}$ of light propagating in the viewing direction
      \mathbf{I}(\tau,\mu_0,\phi_0)\text{d}\phi_0\text{d}\mu_0  \\
      & + \frac{\omega}{4\pi}\mathbf{P}(\tau,\mu,\mu_0,\phi-\phi_0)
      \mathbf{I}_0 \exp(-\tau/\mu_0)
+     \label{eq:rte2}
 \end{split}
 \end{align}
 Here, $\tau$ is the extinction optical depth measured from TOA, $\mu$ and
 $\mu_0$ are cosines of $\theta$ and $\theta_0$, respectively, $\omega$ is the
 SSA and $\mathbf{P}$ is the phase matrix. The first term in equation
-\eqref{eq:rte} represents multiple scattering contributions, while
+\eqref{eq:rte2} represents multiple scattering contributions, while
 the second indicates scattered light from the direct solar beam. 
 
 Parameters required to solve the above radiative transfer equation are $\tau$,
@@ -134,7 +135,7 @@ designed to deliver radiative calculations for a maximum of two sets of
 aerosol single scattering properties (e.g., aerosol PSD,
 refractive index, and particle shape), typically with one fine-mode and
 one coarse-mode aerosol. Other inputs for model include spectral and
-geometrical definitions that characterizing specification of an
+geometrical definition that characterizes specification of an
 observing sensor. 
 
 Outputs of the model include the Stokes vector ($\mathbf{I}$) at
@@ -142,7 +143,7 @@ user-defined spectral wavelengths and desired atmospheric
 levels for both upwelling and downwelling radiation, from which the
 light radiance and degree of polarization can be derived. Outputs also
 include analytical Jacobians of $\mathbf{I}$ with respect to all aerosol
-particle parameters (PSD, refractive index, vertical profile), Rayleigh
+particle parameters (PSD parameters, refractive index, vertical profile), Rayleigh
 scattering optical depth, optical depth of all trace gases, and
 parameters describing surface optical property. A detail description of
 the UNL-VRTM's Jacobian capability is presented in section
@@ -180,7 +181,7 @@ cross-section (cm$^2$ molec$^{-1}$) computed following
 \citet{Bodhaine99}. The Rayleigh phase matrix,
 $\mathbf{P}_\text{R}(\Theta)$, depends upon molecular 
 anisotropy through the depolarization factor, also computed from the same 
-source. \citet{Bodhaine99} computes the wavelength-dependent Rayleigh
+source. \citet{Bodhaine99} computed the wavelength-dependent Rayleigh
 scattering cross-section as a function of mixing ratios for \ce{N2},
 \ce{O2}, \ce{H2O}, and \ce{CO2}. The phase matrix for Rayleigh scattering
 follows \citet{Hansen74}; we use the set of spherical-function expansion
@@ -193,7 +194,7 @@ any atmospheric layer for $K$ different trace gases follows
 \taug = \sum_{i=1}^K N_{\text{gas,}i}\sigma_{\text{A,}i}(T,P) 
 \end{equation}
 where $N_{\text{gas,}i}$ is the number density of \textit{i}th gas
-within that layer, and $\sigma_{\text{A,}i}$ is the corresponding
+in that layer, and $\sigma_{\text{A,}i}$ is the corresponding
 absorption cross-section, a function of temperature and pressure. 
 Our model accounts for absorptions by a total number of
 22 trace gases: \ce{H2O}, \ce{CO2}, \ce{O3}, \ce{N2O}, \ce{CO},
@@ -206,11 +207,11 @@ absorption parameters archived in the HITRAN database \citep{Orphal03,
 Rothman09}. The cross-section library compiles the extinction
 cross-section for \ce{O3}, \ce{NO2}, \ce{SO2}, and \ce{O2-O2} in the UV
 and/or visible spectral regions. Meanwhile, line-spectroscopic 
-absorption databased are used to simulate the pressure- and
+absorption database are used to simulate the pressure- and
 temperature-dependent extinction cross-section with line-by-line (LBL) 
 approach \citep{Liou02,Rothman09} by accumulating each individual 
 absorption line. Doppler broadening is calculated from the molecular mass
-and the temperature, and Doppler and Lorentz broadening are included in the
+and temperature, and Doppler and Lorentz broadening are included in the
 Voigt calculation.
 
 Particular to work, we only consider the most influential 
@@ -220,7 +221,7 @@ amounts of \ce{O3} and \ce{NO2} are dynamically adjusted with retrievals from th
 Ozone Monitoring Instrument (OMI) \citep{Levelt06} on board the
 AURA satellite. We apply the columnar water vapor amount retrieved from
 the 940-nm radiances measured by the AERONET SunPhotometer
-\cite{Halthore97}.
+\citep{Halthore97}.
 
 \subsection{Aerosol single scattering} \label{subsec:mie}
 
@@ -228,7 +229,7 @@ Aerosol single scattering properties necessary to the radiative
 transfer calculation include aerosol optical depth ($\taua$)
 ($\qext$), SSA ($\assa$), and scattering phase matrix ($\paer(\Theta)$).
 The calculation of these parameters is made with a Linearized Mie (LMIE)
-scattering electromagnetic code for spherical particles and a Linearized
+scattering code for spherical particles and a Linearized
 T-matrix (LTMATRIX) scattering code for non-spherical convex and axially
 symmetric particles \citep{Spurr12}. The LMIE code originates from the Mie code
 of \citet{deRooij84}, and the LTMATRIX code originates from the T-Matrix
@@ -257,14 +258,14 @@ wit][]{Schuster06, Waquet09}:
 \end{equation}
 where $V_0$, $\rv$, and $\sg$ are the total volume concentration, geometric
 median radius, and standard deviation, respectively. The superscript $i$
-indicates the size mode, and later will be replaced by `f' for fine mode
+indicates the size mode, and will be replaced by `f' for fine mode
 and `c' for coarse mode. We assume that particle size ranges from 0.01
 to 10 $\mu$m for the fine mode and from 0.05 to 20 $\mu$m for
 the coarse mode, both covering $>$ 99.9\% of the total volume of an 
 idealistic size range (0, $+\infty$). An advantage of the lognormal 
 distribution is that standard deviations for the number, area, and 
 volume PSD functions are identical, and therefore allowing that the 
-median radii for these PSD functions can be converted from one to 
+median radii for these PSD functions be converted from one to 
 another \citep{Seinfeld06}. The $\reff$ and $\veff$ are related to 
 the geometric parameters through:
 \begin{align}
@@ -311,12 +312,12 @@ Although surface reflectance has in general a low influence on AERONET
 down-welling sky radiances and polarization, a state-of-the-art
 representation of the surface reflectivity potentially reduces model
 uncertainties, especially for measurements taken at low elevation angles
-that could be affected by surface diffusion. Here, we utilize the
-spectral BRDF parameters from the MODIS surface products that are
-operationally reported every 16 days at a 1-km resolution
-\citep{Lucht00}. Here we use time-matched MODIS BRDF products 
+that could be affected by surface diffusion.
+Here we use time-matched MODIS BRDF products 
 to reconstruct the bidirectional reflectance over AERONET stations.
-The MODIS BRDF product supplies three weighting parameters
+The MODIS BRDF products, reported every 16 days at a 1-km
+resolution\citep{Lucht00}, 
+supplie three weighting parameters
 ($f_\text{iso}$, $f_\text{vol}$, and $f_\text{geo}$) for the first 
 7 MODIS bands, respectively, corresponding to three kernel types:
 isotropic, Ross-Thick ($K_\text{vol}$), and Li-Sparse ($K_\text{geo}$):
@@ -415,8 +416,8 @@ inputs are assumed constant and are given by equations
 \eqref{eq:opt1}--\eqref{eq:opt2}, as well as equation \eqref{eq:opt3}
 with $\mathbf{P}(\Theta)$ replaced by $\mathbf{B}^j$. 
 It should be noted that all parameters
-in these equations are for each layer, but we ignore $L$ for
-convenience.
+in these equations are for each layer, but we drop $L$ when writing
+equations for convenience.
 
 Since VLIDORT generates Jacobians with respect to layer-integrated
 single scattering properties in each atmospheric layer as well as

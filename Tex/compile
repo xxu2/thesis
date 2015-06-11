@@ -1,4 +1,15 @@
+#!/bin/bash
+# This script comiples the phdthesis.tex file
+# A version number need to be input
+
+echo "Type the version of current thesis followed by [ENTER]:"
+read version
+echo "Generate version:" $version
+
 pdflatex phdthesis
 bibtex phdthesis
 pdflatex phdthesis
 pdflatex phdthesis
+
+# Rename the file
+mv phdthesis.pdf ./pdfs/thesis_xxu_v$version.pdf
