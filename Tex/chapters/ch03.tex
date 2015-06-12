@@ -6,8 +6,8 @@
 The inverse problem of this work seeks the solution of a number of
 microphysical parameters from observations of different categories. We
 thus need to develop an retrieval algorithm that uses statistically
-optimized multi-variable fitting, in which the solution is sought not
-only rely on the presumed classes of potential solutions, but also in
+optimized multi-variable fitting, in which the solution sought not
+only relies on the presumed classes of potential solutions, but also is in
 a continuous space of solutions under statistically formulated criteria
 optimizing the error distribution of the retrieval parameters. 
 It should be noted that the development of this inversion algorithm 
@@ -27,17 +27,17 @@ In this chapter, I first present the general theory of inverse problem (section
 (\ref{subsec:infotheory}). After that in section \ref{sec:algorithm}, 
 I describe the key aspects of  designed inversion algorithm: the
 definition of the state vector (section \ref{subsec:xy}) and 
-considered constraining its \textit{a pripri} and smoothness feature 
+considered constraining its \textit{a priori} and smoothness feature 
 (section \ref{subsec:ap}), how the state
 vector is sought statistically (section \ref{subsec:alg-inv}), how the retrieval 
 error is characterized (section \ref{subsec:alg-error}), and quality
 control of measurements (section \ref{subsec:alg-qaulity}).
 
-It should be noted that 
 
 \section{Inversion Theories} \label{sec:invtheory}
 
-\subsection{Maximum a posteriori solution of an inverse problem} \label{subsec:map}
+\subsection{Maximum a posteriori (MAP) solution of an inverse problem}
+\label{subsec:map}
 
 Let $\xbf$ denote a state vector that contains $n$ parameters to be retrieved
 (such as PSD parameters and complex indices of refraction), and $\ybf$ an
@@ -72,7 +72,7 @@ Where $\epbf$ represents the error that sums the errors from forward modeling
 and measurement processes. We only consider the errors propagated from
 errors in $\bbf$, but omit any other source in the forward modeling. Thus,
 $\epbf=\epbf\udy+\hat{\Kbf}\udb\epbf\udb$, where
-$\epbf\udb=\bbf-\hat{\bbf}$ indicates error of $\hat{\bbf}$. $K$ is the
+$\epbf\udb=\bbf-\hat{\bbf}$ indicates error of $\hat{\bbf}$. $\Kbf$ is the
 $m \times n$ Jacobian matrix comprising derivatives of the forward model
 with respect to each retrieved parameter,
 $\frac{\partial\Fbf}{\partial\xbf}$. 
@@ -89,17 +89,17 @@ priori}:
 \xbf = \xabf + \epbf\uda. \label{eq:ap}
 \end{equation}
 where $\xabf$ is the \textit{a priori estimate} and $\epbf\uda$
-indicates $a priori$ error.
+indicates \textit{a priori} error.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width={0.9\textwidth}]{figures/MAP.pdf}
-  \caption{The concept of an inverse problem that optimzing an estimates
+  \caption{The concept of an inverse problem that optimzes an estimates
 from observations. (Courtesy: Daniel Jacobs)}
   \label{fig:map}
 \end{figure}
 
-Then, the inverse problem becomes to solve the equation set (as
+Then, the inverse problem is solve the equation set (as
 illustrated in Figure \ref{fig:map}):
 \begin{equation}
 \begin{cases}
@@ -108,10 +108,10 @@ illustrated in Figure \ref{fig:map}):
 \end{cases}
 \label{eq:inverse2}
 \end{equation}
-Provided that errors of measurements and the a priori are characterized
+Provided that errors of measurements and the \textit{a priori} are characterized
 by a Gaussian probability distribution function (PDF) and the forward
 model is linear in the vicinity of the true state, the maximum
-a posteriori (MAP) solution of the state vector, also called the retrieval or
+\textit{a posteriori} (MAP) solution of the state vector, also called the retrieval or
 the a posteriori, can be derived with the Bayes's Theorem
 \citep{Rodgers00}:
 \begin{equation}
@@ -120,7 +120,7 @@ the a posteriori, can be derived with the Bayes's Theorem
 \end{equation}
 Here, $\Sbf\uda$ is the error covariance matrix of \textit{a priori},
 $\xbf\uda$; $\Sbf\udy$ is the error covariance matrix of the
-measurements; $T$ denote matrxi transpose operation. 
+measurements; $T$ denote matrix transpose operation. 
 
 The "retrieval", $\hat{\xbf}$, in above equation \eqref{eq:xhat}
 is corresponding to the maximum posterior
@@ -147,13 +147,15 @@ estimate the uncertainty for any parameter (for example, the aerosol single
 scattering albedo in this study) that can be fully
 determined by parameters (for example, aerosol refractive index and PSD
 parameters) in $\xbf$ but is not directly retrieved. If one
-parameter is a function defined by $\zeta=zeta{\xbf}$, then the 
+parameter is a function defined by $\zeta=\zeta{\xbf}$, then the 
 uncertainty in derived $\zeta$ is \citep{Rodgers00}:
 \begin{equation}
 \hat{\epsilon}_\zeta =
 \sqrt{\sum_{i=1}^n\sum_{i=1}^n
       \frac{\partial\zeta}{\partial{x_i}} 
-      \frac{\partial\zeta}{\partial{x_j}}}.\label{eq:zeta}
+      \frac{\partial\zeta}{\partial{x_j}}
+      \hat{\Sbf}_{i,j}
+      }.\label{eq:zeta}
 \end{equation}
 
 \subsection{Information theory} \label{subsec:infotheory}
@@ -209,10 +211,10 @@ Then we have
 
 Matrix $\Abf$ quantifies the ability of the retrieval to infer
 $\hat{\xbf}$ given the relationship between $\ybf$ and $\xbf$ (i.e.,
-$\Kbf$) and given the observation noise and a priori characterization. 
-Thus, an identity matrix of A represents a perfect retrieval, 
-while a null matrix of $\Abf$ indicates that no
-information can be gained from the observation. The trace of $\Abf$ is the
+$\Kbf$) and given the observation noise and \textit{a priori} characterization. 
+Thus, $\Abf$ represents a perfect retrieval if it is the identity matrix or,
+if $\Abf$ is the null matrix, indicates that no information can be gained
+from the observations. The trace of $\Abf$ is the
 degree of freedom for signal, i.e., $\text{DFS}=\text{Trace}(\Abf)$, 
 which represents independent pieces of information that the observation 
 can provide. The diagonal elements of the averaging kernel matrix $\Abf$, 
@@ -230,8 +232,8 @@ but not the retrieval, are important for the purpose of understanding
 information content.
 
 Other quantities used for information analysis of a measurement include
-the Shannon information content (SIC) \citep{Shannon48} and the Fisher
-information matrix. SIC, a widely used quantity \citep[e.g.,][]{Rodgers98,
+the Shannon information content ($H$) \citep{Shannon48} and the Fisher
+information matrix. $H$, a widely used quantity \citep[e.g.,][]{Rodgers98,
 Knobelspiesse12}, is defined as the reduction in entropy after 
 the measurement
 \begin{equation}
@@ -240,11 +242,11 @@ H=\frac{1}{2}\ln{|\Sbf\uda|}-\frac{1}{2}\ln{|\hat{\Sbf}|}
  =-\frac{1}{2}\ln{|\mathbf{I}_n-\Abf|}
 \end{equation}
 where $\mathbf{I}_n$ is an identity matrix of order $n$. Clearly, 
-SIC is highly related to the DFS for the information analysis. 
+$H$ is highly related to the DFS for the information analysis. 
 In the Gaussian linear case, the Fisher information matrix is equal 
 to the inverse of \textit{a posteriori} error covariance matrix, 
 $\hat{\Sbf}^{-1}$. The retrieval indeed corresponds to the maximum 
-of a posteriori PDF and the minimum of retrieval error. It is thus 
+of \textit{a posteriori} PDF and the minimum of retrieval error. It is thus 
 straightforward that a higher level of the Fisher information is 
 subject to a smaller retrieval error. Due to their close 
 relationship with the DFS and $\hat{\Sbf}$, we will not present 
