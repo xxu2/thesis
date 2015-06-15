@@ -87,12 +87,17 @@ fine-coarse aerosols. The AE derived from the 1020-nm and 870-nm AOD pairs is
 more linearly related to the $\fmfv$ than the 440-nm and 870-nm AE (Figure
 \ref{fig:invap}b), because AE over the longer-wavelength pairs is more
 sensitive to the component fraction and less sensitive to the change of
-component particle size \citep{Schuster06}. From Figure \ref{fig:invap}c--f, 
-we determine the \textit{a priori} state ($\xabf$) based on the corresponding mean values. 
-For refractive index, we pick their mean values when $\fmfv<0.2$ for the coarse
-mode and when $\fmfv>0.6$ for the fine mode. The \textit{a priori} error 
-($\epsilon\uda$) for each parameter is determined by the relevant physical 
-range, and is listed in the last column of Table \ref{tab:inverr}. 
+component particle size \citep{Schuster06}. From Figure \ref{fig:invap}c--d, 
+we determine the \textit{a priori} state ($\xabf$) of PSD parameters for
+both fine and coarse modes based on their mean values across all $\fmfv$
+intervals. For refractive index, we pick their mean values when $\fmfv<0.2$ 
+for the coarse mode and when $\fmfv>0.6$ for the fine mode (Figure
+\ref{fig:invap}e--f). 
+Along with determining $\xabf$, we estimate the \textit{a priori} error
+($\epsilon_\text{a}$) for each parameter (very-right column of Table
+\ref{tab:inverr}) is determined as two standard deviations for a 
+95\% confidence interval. Then we build $\Sbf\uda$ with zero off-diagonal 
+elements by neglecting the error correlation between retrieved parameters. 
 In addition, we found in the Figure \ref{fig:invap}e that the $\mreal$ 
 retrievals decrease quasi-linearly with the increasing $\fmfv$, which indicates
 the $\mreal$ has distinct values between aerosols in the fine and the coarse
@@ -148,16 +153,17 @@ uncertainty.}
 
 Because similar fitting results are found for these three aerosol types
 (cases), we illustrate in Figure \ref{fig:invfit} the fitting results for sky 
-radiances and DOLP only for the case B. The statistical residual errors are 
-displayed in Table \ref{tab:invfit} for all three cases. We found that 
+radiances and DOLP only for the case B. We found that 
 retrievals from both types of inversion can well reproduce these AERONET 
 measurements of AOD and sky radiances. Fitting residuals from both types of 
 inversions for individual ALM radiance measurement lie within the experimental
 uncertainty of 5\%, although the fit of radiances from the P-type inversion 
-is slightly deteriorated: residual error is 1.67\% for the P-type compared
-1.43\% for the I-type inversion. However, the DOLP residual
+is slightly deteriorated: residual error is 1.60\% for the P-type compared
+1.46\% for the I-type inversion. However, the DOLP residual
 error can be much larger for the I-type inversion than that for the P-type
-inversion: 0.014 versus 0.004. As these fitting results show, without the
+inversion: 0.011 versus 0.004. The statistical residual errors for all
+three cases are displayed in Table \ref{tab:invfit}. 
+As these fitting results show, without the
 constraints imposed by polarization, the retrieved aerosol microphysical
 parameters could result in larger error in polarization simulations,
 highlighting the necessity to include polarization in the inversion as an
@@ -174,12 +180,12 @@ additional source of constraint.
   Case &  Inversion type & AOD \newline residual error & 
     Radiance \newline residual error & DOLP \newline residual error \\
   \midrule
-   A & I & 0.0005 & 1.68\% & 0.008 \\
-     & P & 0.0010 & 1.78\% & 0.005 \\
-   B & I & 0.0003 & 1.43\% & 0.014 \\
-     & P & 0.0003 & 1.67\% & 0.004 \\
-   C & I & 0.0007 & 2.77\% & 0.027 \\
-     & P & 0.0034 & 3.73\% & 0.009 \\
+   A & I & 0.0008 & 1.78\% & 0.008 \\
+     & P & 0.0015 & 1.85\% & 0.005 \\
+   B & I & 0.0007 & 1.46\% & 0.011 \\
+     & P & 0.0005 & 1.60\% & 0.004 \\
+   C & I & 0.0006 & 2.67\% & 0.020 \\
+     & P & 0.0021 & 3.11\% & 0.009 \\
   \bottomrule
   \end{tabular}
 \end{table}
@@ -238,6 +244,9 @@ bulk value of $\mreal$ is in good agreement (differences $<$ 0.03) with that of
 the \Dub retrievals, our retrieval allows for a mode-resolved characterization
  of aerosol refractive index. For instance, the aerosol $\mreal$ has values 
 1.5--1.6 in the coarse mode, which is larger than that in the fine mode (1.4--1.5).
+A T-Test using the corresponding retrieving standard errors indicates a
+statistical significance level of about 98\% for the difference of
+real-part refractive indices between the fine and coarse modes. 
 In addition, we found that the P-type inversion usually yields higher values of
 $\mreal$ compared to the I-type inversion; this finding agrees with \citet{Li09}
 in that the radiance-only inversion underestimates $\mreal$. 
@@ -258,17 +267,17 @@ with values from the AERONET \Dub inversion.}
   \cmidrule(r){3-8}
   $\xbf$ &  Units & P-type & AERONET & P-type & AERONET & P-type & AERONET \\
   \midrule
-  $V_0\fine$     & $\vunit$ & 0.41  & 0.36  & 0.29  & 0.31  & 0.10  & 0.09  \\
-  $\reff\fine$   & $\runit$ & 0.218 & 0.208 & 0.226 & 0.201 & 0.163 & 0.156 \\
-  $\veff\fine$   &  --      & 0.25  & 0.32  & 0.22  & 0.32  & 0.31  & 0.33  \\
-  $\rv\fine$     & $\runit$ & 0.243 & 0.240 & 0.249 & 0.232 & 0.186 & 0.179 \\
-  $\sg\fine$     &  --      & 1.60  & 1.69  & 1.56  & 1.69  & 1.68  & 1.70  \\
+  $V_0\fine$     & $\vunit$ & 0.41  & 0.36  & 0.28  & 0.31  & 0.10  & 0.09  \\
+  $\reff\fine$   & $\runit$ & 0.215 & 0.208 & 0.223 & 0.201 & 0.163 & 0.156 \\
+  $\veff\fine$   &  --      & 0.26  & 0.32  & 0.23  & 0.32  & 0.30  & 0.33  \\
+  $\rv\fine$     & $\runit$ & 0.242 & 0.240 & 0.246 & 0.232 & 0.186 & 0.179 \\
+  $\sg\fine$     &  --      & 1.62  & 1.69  & 1.57  & 1.69  & 1.67  & 1.70  \\
   \hline
-  $V_0\coarse$   & $\vunit$ & 0.22 & 0.21 & 0.37 & 0.32 & 0.27 & 0.26 \\
-  $\reff\coarse$ & $\runit$ & 1.83 & 2.01 & 2.02 & 2.26 & 2.26 & 2.61 \\
-  $\veff\coarse$ & --       & 0.44 & 0.53 & 0.45 & 0.38 & 0.65 & 0.50 \\
-  $\rv\coarse$   & $\runit$ & 2.20 & 2.44 & 2.44 & 2.65 & 2.91 & 3.28 \\
-  $\sg\coarse$   & --       & 1.83 & 1.92 & 1.84 & 1.76 & 2.03 & 1.89 \\
+  $V_0\coarse$   & $\vunit$ & 0.24 & 0.21 & 0.39 & 0.32 & 0.28 & 0.26 \\
+  $\reff\coarse$ & $\runit$ & 2.02 & 2.01 & 2.05 & 2.26 & 2.24 & 2.61 \\
+  $\veff\coarse$ & --       & 0.59 & 0.53 & 0.55 & 0.38 & 0.75 & 0.50 \\
+  $\rv\coarse$   & $\runit$ & 2.55 & 2.44 & 2.57 & 2.65 & 2.97 & 3.28 \\
+  $\sg\coarse$   & --       & 1.98 & 1.92 & 1.94 & 1.76 & 2.12 & 1.89 \\
   \bottomrule
   \end{tabular}
 \end{table}
@@ -315,16 +324,16 @@ these three cases, the errors in the retrieved $V_0$ with polarization are less
 than 3\% for the fine mode and less than 5\% for the coarse mode, representing a
 significant decrease from their counterparts ($\sim$15\% and $\sim$10\%) in the I-type
 inversion. Adding polarization can also decrease the error in $\reff$ of both
-fine and coarse modes from 10--15\% for the I-type inversion to 3\% and below.
-Errors in $\veff$ retrieved by the P-type inversion are 9--11\% for aerosol in the
-fine mode and 17--26\% in the coarse mode, whereas they can exceed 60\% with the
+fine and coarse modes from 8--14\% for the I-type inversion to 3\% and below.
+Errors in $\veff$ retrieved by the P-type inversion are 8--12\% for aerosol in the
+fine mode and 11--26\% in the coarse mode, whereas they can exceed 50\% with the
 I-type inversion.
 
 (ii) Polarization measurements also provide useful constraints in improving the
 refractive index retrievals. The most significant improvement is found in the
 fine-mode $\mreal$, where the error is lower than 0.01 for the P-type inversion,
-compared to 0.02--0.04 for the I-type inversion. The error in the coarse-mode
-$\mreal$ from P-type inversion ranges from 0.04 to 0.11, depending on the prevalence
+compared to 0.02--0.03 for the I-type inversion. The error in the coarse-mode
+$\mreal$ from P-type inversion ranges from 0.04 to 0.06, depending on the prevalence
 of coarse-mode particles. For retrieving $\mimag$, the inclusion of polarization
 reduces the error by 10--30\%, a value also depending on coarse-mode dominance. 
 
@@ -349,21 +358,21 @@ inversion\textsuperscript{a}.}
   \cmidrule(r){2-7}
   $\xbf$ & $\errp$ & $\erri$ & $\errp$ & $\erri$ & $\errp$ & $\erri$ & $\epsilon\uda$ \\
   \midrule
-  $V_0\fine$     & 2.1\%&15\%&2.2\%&18\%&3.0\%&25\%&100\%\\
-  $\reff\fine$   & 1.3\%&9.2\%&1.3\%&11\%&2.4\%&14\%&80\%\\
-  $\veff\fine$   & 9.3\%&33\%&9.3\%&38\%&11\%&33\%&80\%\\
-  $\mreal\fine$  & 0.005&0.020&0.006&0.023&0.009&0.035&0.14\\
-  $\mimag\fine$  & 0.002&0.002&0.003&0.004&0.004&0.006&0.010\\
-  $\assa\fine$   & 0.009&0.010&0.016&0.018&0.021&0.037&--\\
-  Asy$\fine$     & 0.003&0.005&0.003&0.006&0.003&0.009&--\\
+  $V_0\fine$     & 1.9\%&12\%&2.1\%&13\%&2.9\%&19\%&100\%\\
+  $\reff\fine$   & 1.4\%&7.5\%&1.3\%&8.3\%&2.3\%&12\%&50\%\\
+  $\veff\fine$   & 8.4\%&27\%&8.9\%&31\%&12\%&29\%&60\%\\
+  $\mreal\fine$  & 0.005&0.016&0.006&0.018&0.008&0.027&0.14\\
+  $\mimag\fine$  & 0.002&0.002&0.003&0.004&0.004&0.006&0.009\\
+  $\assa\fine$   & 0.010&0.011&0.016&0.019&0.020&0.032&--\\
+  Asy$\fine$     & 0.003&0.005&0.003&0.005&0.004&0.007&--\\
   \hline
-  $V_0\coarse$   & 4.8\%&14\%&3.2\%&10\%&2.9\%&9.4\%&100\%\\
-  $\reff\coarse$ & 6.7\%&15\%&3.3\%&7.1\%&1.9\%&6.0\%&80\%\\
-  $\veff\coarse$ & 26\%& 66\%&17\%&48\%&10\%&33\%&80\%\\
-  $\mreal\coarse$& 0.108&0.137&0.080&0.122&0.044&0.100&0.16\\
-  $\mimag\coarse$& 0.006&0.007&0.005&0.006&0.003&0.005&0.008\\
-  $\assa\coarse$ & 0.059&0.065&0.050&0.058&0.031&0.051&--\\
-  Asy$\coarse$   & 0.024&0.036&0.018&0.028&0.012&0.025&--\\
+  $V_0\coarse$   & 4.7\%&14\%&3.2\%&10\%&3.0\%&8.8\%&100\%\\
+  $\reff\coarse$ & 6.7\%&16\%&3.3\%&7.4\%&2.0\%&6.0\%&50\%\\
+  $\veff\coarse$ & 26\%& 53\%&16\%&42\%&11\%&30\%&60\%\\
+  $\mreal\coarse$& 0.060&0.068&0.052&0.063&0.037&0.056&0.08\\
+  $\mimag\coarse$& 0.008&0.009&0.005&0.006&0.003&0.005&0.011\\
+  $\assa\coarse$ & 0.059&0.068&0.044&0.055&0.038&0.044&--\\
+  Asy$\coarse$   & 0.024&0.032&0.017&0.024&0.012&0.021&--\\
   \bottomrule
   \multicolumn{8}{p{32em}}{\textsuperscript{a}$\errp$ and $\erri$ are retrieval error 
 respectively from the P-type and I-type inversions, $\epsilon\uda$ is the a priori error.}
@@ -404,6 +413,32 @@ instrumentation, and aerosol properties. These improvements in the P-type
 inversion are consistent with the theoretical analysis in Chapter \ref{ch:info}
 of this thesis.
 
+The mode-specific retrieval of aerosol microphysical and optical
+properties not only facilitates the evaluation of atmospheric chemistry
+models and the validation of aerosol products from satellite sensors
+with polarization capability (the challenges we present in
+Introduction), but also can benefit the analysis of aerosol radiative
+impacts and aerosol chemical compositions. Aerosol radiative forcing
+depends on both particle size and refractive index \citep{Nemesure95,
+Mishchenko04}. \citet{Nemesure95} have shown that, for sulfate particles, 
+a change of particle size from 0.15 $\mu$m to 0.25 $\mu$m
+could lead to an 80\% increase of negative forcing. \citet{Mishchenko04}
+found that accuracies of 10\% in $\reff$, 50\% in $\veff$, 
+and 0.02 in $\mreal$ are required for radiative forcing calculations 
+that will be able to determine aerosol contributions to the Earth's 
+total energy balance. According to the real retrievals in this chapter 
+and the theoretical analysis in Chapter \ref{ch:info}, the
+accuracies suggested in \citet{Mishchenko04} can only be attained by
+the integrated use of radiance and polarization. Accurate PSD and real
+part of refractive index are also needed to identify the aerosol
+chemical composition, which can be used to derive the aerosol
+hygroscopicity, to diagnose the efficiency of cloud condensation, and to
+distinguish anthropogenic aerosol species from natural ones
+\citep{Wang08}. Indeed, efforts have been made by using the current AERONET
+inversions to derive aerosol composition \citep{Schuster05, Arola11, Li13}.
+Therefore, with more information on the refractive index, our inversion is 
+expected to provide more robust estimates of the aerosol chemical components.
+
 The promising results in this study are obtained from the initial development
 and preliminary applications of a new algorithm targeted for the retrieval of
 aerosol properties from new-generation AERONET measurements. Future
@@ -415,7 +450,14 @@ will include the implementation of tri-modal aerosol mixtures in situations of
 cloud formation \citep{Eck12} or volcanic aerosols \citep{Eck10}.
 Moreover, extensive retrievals for a longer period of time will also be
 performed over sites where CE318-DP SunPhotometer instruments have been
-installed (i.e., Beijing\_RADI and Lille).
+installed (i.e., Beijing\_RADI and Lille). ). Historically an issue with
+the Cimel polarization measurements has been their limited accuracy
+\citep{Li10}. It is thus worthwhile to investigate what level of
+accuracy in DOLP measurements is necessary to contribute useful
+information for the retrieval. This question is important not only for
+the historical polarization measurements by the older Cimel
+SunPhotometer, but also for providing guidance to the new instrument
+design.  
 
 \section{Acknowledgements}
 

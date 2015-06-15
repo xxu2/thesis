@@ -37,8 +37,10 @@ The degree of linear polarization ($\dolp$) is defined by
 \dolp = \frac{\sqrt{Q^2+U^2}}{I}. \label{eq:dolp}
 \end{equation}
 
-In the solar principal plane, $U$ is negligibly small and the above formula
-becomes $\dolp=-Q/I$. Let $\mathbf{I}_0=[I_0,0,0,0]^T$ denote the Stokes vector 
+In the solar principal plane, $U$ is negligibly small for a homogeneous
+atmosphere and the above formula becomes $\dolp=-Q/I$. Its deviation
+from zero is an indicator of a lack of homogeneity or instrumental
+issues. Let $\mathbf{I}_0=[I_0,0,0,0]^T$ denote the Stokes vector 
 for incident Solar radiation at the top of the atmosphere (TOA) from 
 the direction ($\theta_0$, $\phi_0$), where $\theta_0$ and $\phi_0$
 are the incident solar zenith and azimuth angles, respectively.
@@ -216,7 +218,8 @@ Voigt calculation.
 
 Particular to work, we only consider the most influential 
 trace species for the AERONET spectral bands: \ce{H2O} (vapor), \ce{O3}, 
-and \ce{NO2}. In our algorithm (section \ref{ch:algorithm}), the columnar
+and \ce{NO2}, \ce{O2} (\ce{O2}-\ce{O2} collision) and \ce{CO2}. 
+In our algorithm (section \ref{ch:algorithm}), the columnar
 amounts of \ce{O3} and \ce{NO2} are dynamically adjusted with retrievals from the
 Ozone Monitoring Instrument (OMI) \citep{Levelt06} on board the
 AURA satellite. We apply the columnar water vapor amount retrieved from
@@ -256,8 +259,8 @@ wit][]{Schuster06, Waquet09}:
 \exp{\left[ -\frac{(\ln{r}-\ln{\rv^i})^2}{2\ln^2{\sg^i}}\right]}
 \label{eq:bilognormal}
 \end{equation}
-where $V_0$, $\rv$, and $\sg$ are the total volume concentration, geometric
-median radius, and standard deviation, respectively. The superscript $i$
+where $V_0$, $\rv$, and $\sg$ are the total volume concentration, volume
+median radius, and geometric standard deviation, respectively. The superscript $i$
 indicates the size mode, and will be replaced by `f' for fine mode
 and `c' for coarse mode. We assume that particle size ranges from 0.01
 to 10 $\mu$m for the fine mode and from 0.05 to 20 $\mu$m for
@@ -266,7 +269,9 @@ idealistic size range (0, $+\infty$). An advantage of the lognormal
 distribution is that standard deviations for the number, area, and 
 volume PSD functions are identical, and therefore allowing that the 
 median radii for these PSD functions be converted from one to 
-another \citep{Seinfeld06}. The $\reff$ and $\veff$ are related to 
+another \citep{Seinfeld06}. ]. For instance, the volume median radius
+$\rv$ relates to the number geometric median radius $\rg$ by $\rv = \rg
+\exp{(3\ln^2{\sg})}$.The $\reff$ and $\veff$ are related to 
 the geometric parameters through:
 \begin{align}
 \reff &= \rv \exp{\left( -\frac{1}{2} \ln^2{\sg}\right)}, \\
