@@ -27,15 +27,17 @@ polarization and demonstrated improved retrievals in the real part of the aeroso
 refractive index for fine particles and the fraction of spherical particles.
 
 However, questions regarding the use of AERONET polarimetric observations for
-retrieving aerosol microphysical parameters remain unresolved: (1) Practically,
-do the existing AERONET photo-polarimetric measurements have any potential to
-improve the retrieval of aerosol information content that we now routinely
-obtain from radiance measurement only? and (2) Hypothetically, how can future
-upgrades to AERONET photo-polarimetric measurements and inversion algorithm
-maximize the retrieval information content of AERONET observations? 
-Answering these two questions is not only relevant to the future AERONET
-instrumentation design, but also for the ground-based passive polarimetric 
-remote sensing of aerosols in general. 
+retrieving aerosol microphysical parameters remain unresolved: (1)
+Practically and quantitatively, what is the magnitude of the information
+content that exists in AERONET's photo-polarimetric measurements for
+improving the retrieval of aerosol microphysical properties that we now
+routinely obtain from radiance-only measurements? and (2)
+Hypothetically, how can future upgrades to the AERONET
+photo-polarimetric measurements and inversion algorithm maximize the
+retrieval information content of AERONET observations? Answering these
+two questions is not only relevant to the future AERONET instrumentation
+design, but also for the ground-based passive polarimetric remote
+sensing of aerosols in general. 
 
 %% Table of a priori
 \begin{table}[b]
@@ -52,11 +54,11 @@ $\mathbf{m}_\text{i}$ & $\assa$ \\
   Fine & 0.21 \newline (80\%) & .25 \newline (80\%) &
     1.44, 1.44, 1.43, 1.42 \newline (.15) &
     .009, .011, .012, .011 \newline (.01) &
-    .95, .93, .92, .91 \\
+    .95, .93, .92, .91 \newline (.151) \\
   Coarse & 1.90 \newline (80\%) & .41 \newline (80\%) &
     1.56, 1.55, 1.54, 1.54 \newline (.15) &
     .004, .003, .003, .002 \newline (.005) &
-    .84, .91, .93, .96 \\
+    .84, .91, .93, .96 \newline (.198) \\
   \bottomrule
   \multicolumn{6}{m{35em}}{\textsuperscript{a}The complex refractive index
 $\mathbf{m}_\text{r}-\mathbf{m}_\text{i}i$, and single scattering albedo
@@ -222,20 +224,77 @@ These three kernels represent scatterings respectively from a
 Lambertain surface, a surface within a dense vegetation canopy, and a
 surface with larger gaps between objects accounting for self-shadowing.
 Amplitude factors for these kernels at AERONET bands are chosen from
-MODIS products to represent Beijing site during February 2011. We also
-use a BPDF model (equation \eqref{eq:bpdf}) introduced by
-\citet{Maignan09} for the angular
+MODIS products at Beijing site during February 2011 to represent a
+typical urban site. We also use a BPDF model (equation \eqref{eq:bpdf}) 
+introduced by \citet{Maignan09} for the angular
 polarized radiance, which was based on the Fresnel coefficients of light
 reflectance from the surface and fitted to the POLDER (POLarization
 and Directionality of the Earth's Reflectances) observations.
-Although parameters involving surface reflectance are not included in
-the state vector for the retrieval, they can significantly affect the
-radiance simulation. We must consider the inaccuracy of surface
-reflectance for the forward model error with the approach of equation
-\eqref{eq:mfx-b}. We assume that the amplitude factor for each BRDF kernel have 20\%
-uncertainty. But we ignore the error in the BPDF because BPDF of land
-surface is usually spectrally invariant and tends to have rather small
-values \citep{Nadal99, Maignan09}. 
+
+\subsection{Errors of obervations and \textit{a priori}}
+
+As discussed in section \ref{subsec:infotheory}, the resulting 
+DFS and retrieval error depend on the error specifications for the state 
+of \textit{a priori} and for the observations. A realistic uncertainty
+characterization is thus of crucial importance. 
+We consider the measurement errors consisting of uncertainties that 
+take place in both of the observation process and the
+forward modeling. The uncertainties of AOD and radiance measurements
+taken by a well-calibrated Cimel SunPhotoemter usually do not exceed
+0.01--0.02 and 3--5\%, respectively \citep{Holben98,Holben06,Li08}.
+For polarization measurements calibrated with the approach of
+\citet{Li10}, the uncertainty of DOLP was estimated to be 0.005 for the
+newer-generation CE318-DP SunPhotometer and 0.01 for the older CE318
+generation. In thus study, we conservatively choose absolute error of
+0.02 for AOD, and relative uncertainty of 5\% for $I_\text{alm}$ and
+$I_\text{pp}$, which are same as \citet{Dubovik00b}. We set the absolute
+uncertainty of DOLP as 0.01 in consistent with \citet{Li09,Waquet09}.
+We consider the forward modeling error incurred by the limited
+knowledge of surface reflectivity; the amplitude factor for each BRDF
+kernel is assumed to have 20\% relative uncertainty. However, we ignore the
+error in the BPDF because the polarized reflectance of the land surface is
+usually spectrally invariant and tends to be smaller than 0.02--0.04
+\citep{Nadal99, Maignan09}.
+
+As a result, the observation error covariance matrix is defined by
+\begin{equation}
+\Sbf_{\epsilon}=\Sbf\udy+\Kbf\udb\Sbf\udb\Kbf\udb^T
+\label{eq:sumerr}
+\end{equation}
+where $\Sbf\udy$ is the error covariance matrix representing the uncertainty
+occurring in the measuring process, $\Sbf\udb$ is the error covariance matrix
+for spectral BRDF amplitude factors ($\bbf$), and $\Kbf\udb$ is the Jacobian
+matrix of measurements $\ybf$ with respect to $\bbf$. Similar to 
+\citet{Dubovik00b}, we use zero off-diagonal elements for $\Sbf\udy$ by
+assuming errors are independent between measurements. Errors for $b$ are also
+assumed to be non-correlated, which gives a diagonal matrix of
+$\Sbf\udb$. As discussed in \citet{Dubovik00b}, the surface characteristics
+appear to have much less effect in AEROENT retrieval than in 
+satellite retrievals, because AERONET measures downward sky radiances.
+According to our simulation, the relative error in radiances incurred by
+surface BRDF uncertainties is 0.7\% by averaging all SunPhotometer
+observation geometries, with the maximum of about 2\% occurring at the
+near-horizontal viewing angles. The contribution of the term
+$\Kbf\udb\Sbf\udb\Kbf\udb^T$ to $\Sbf_{\epsilon}$
+in equation \eqref{eq:sumerr} is then less than 2\% (the square of 0.7\% to
+the square of 5\%).
+
+The uncertainties associated with the \textit{a priori} knowledge are given in
+Table \ref{tab:infox}. We consider that the aerosol columnar volume 
+concentrations for both modes are unknown with a relative uncertainty of
+100\%. Uncertainties for aerosol microphysical parameters are based on aerosol
+climatology of the companion paper and are consistent with
+\citet{Dubovik02} and \citet{Waquet09}. As listed in Table
+\ref{tab:infox}, the relative error of $\reff$ and $\veff$ are 80\% for
+both aerosol modes, and the absolute error is assumed to be 0.15 for
+$\mreal$ of both modes, 0.01 for fine-mode $\mimag$, and 0.05 for
+coarse-mode $\mimag$. These prescribed \textit{a priori}
+uncertainties give an error of 0.15 and 0.20 for aerosol single
+scattering albedo ($\omega_\text{A}$) of the fine-mode and the coarse-mode,
+respectively. We also assume that the a priori uncertainties are
+independent bewteenbetween retrieved parameters by using zero
+off-diagonal elements for $\Sbf\uda$.  
+
 
 \section{Results} \label{sec:inforesult}
 
@@ -567,7 +626,7 @@ can be reduced to 0.003 (0.003) in the scenario P1.
   \cmidrule(r){2-6} 
   Entries & $V_0$ (\%)& $\reff$ (\%)& $\veff$ (\%)& $\mreal$ & $\mimag$ & $\assa$ \\
   \midrule
-   A priori & 100/100 & 80/80 & 80/80& .15/.15 & .01/.05 & - \\
+   A priori & 100/100 & 80/80 & 80/80& .15/.15 & .01/.05 & .151/.198 \\
    Obs. I1 & 11./9.0 & 5.5/6.8 & 23/25 & .015/.065 & .0057/.0038 & .037/.085 \\
    Obs. I2 & 4.1/5.5 & 1.8/4.4 & 10/18 & .008/.037 & .0041/.0032 & .024/.073 \\
    Obs. P1 & 2.3/2.9 & 1.3/3.5 &7.2/12 & .005/.035 & .0033/.0030 & .019/.068 \\
@@ -576,7 +635,7 @@ can be reduced to 0.003 (0.003) in the scenario P1.
   \bottomrule
   \multicolumn{7}{m{35em}}{\textsuperscript{a}Results of our work are averaged
 values for three aerosol types and for solar zenith angles from 
-40$^\circ$ to 70$^\circ$. \newline \textsuperscript{b}Referred to
+40$^\circ$ to 75$^\circ$. \newline \textsuperscript{b}Referred to
 \citet{Mishchenko04}.}  
   \end{tabular}
 \end{table}
@@ -596,12 +655,21 @@ in the $\assa$ for each wavelength and each aerosol type, and the averaged
 values are summarized in Table \ref{tab:infoerr}. Observations in these four 
 scenarios can  retrieve $\assa$ with the uncertainty of 0.037, 0.024, 0.019, 
 and 0.026 for  the fine mode, and 0.085, 0.073, 0.068, and 0.076 for the coarse
-mode, respectively. Thus, only the fine-mode $\assa$ retrieval with polarization
+mode, respectively. This agrees with the conclusion of
+\citet{Hasekamp05a} that the retrieval uncertainty for $\omega_\text{A}$ 
+can be reduced by adding polarization measurementsThus, although , 
+only the fine-mode $\assa$ retrieval with polarization
 involved can meet the accuracy requirements (0.03) for accurate climate forcing
 estimates \citep{Mishchenko04}. We noted that the mean uncertainty in the
 coarse-mode $\assa$ exceeds 0.06 in all of these four scenarios, but higher
 accuracy may be achieved under coarse-dominated conditions as shown in the
-following section.  
+following section. We also note that our result contradicts with findings
+in \citet{Li09} who demonstrated that AERONET polarimetric
+measurements have no sensitivity to the imaginary part of the refractive
+index. This could pertain to the differences in assumptions of aerosol
+particle shape: sphere in this study while spheroid in
+\citet{Li09}. \citet{Dubovik06} also found weak sensitivity of
+polarization to the refractive index of non-spherical particles.
 
 \section{Sensitivity of Retrieval Error to AOD and $\fmfv$} 
 \label{sec:infosensi}
@@ -621,9 +689,11 @@ we also found noticeable variability of the DFS components and \textit{a
 posteriori} errors existing among three aerosol types with different
 $\fmfv$, especially for the coarse-mode parameters. Thus, it is necessary
 to investigate how aerosol conditions affect the retrieval error, in
-order to answer the question: under what aerosol conditions are the AERONET
-measurements (with and without polarization) capable of yielding
-retrievals with sufficient accuracy?
+order to answer the questions: : (1) Under what aerosol conditions are
+the AERONET measurements (with and without polarization) capable of
+yielding retrievals with sufficient accuracy? And (2) what aerosol
+conditions can allow the retrieval for both fine and coarse aerosol
+modes simultaneously (hereafter bi-modal retrieval)?  
 
 %% Figure DFS in sensitivity
 \begin{figure}[t]
@@ -839,9 +909,19 @@ concentration, 1.3\% (3.5\%) and 7.2\% (12\%) for the effective radius and
 effective variance, 0.005 (0.035) for the real part of refractive index,
 and 0.019 (0.068) for the single scattering albedo in the fine (coarse)
 mode. These values represent an error reduction from the scenario I1 of
-79\% (57\%), 76\% (49\%), 69\% (52\%), 66\% (46\%), and 49\% (20\%), respectively.
-Uncertainties in retrieved parameters averaged among these three aerosol
-types are summarized in the Table \ref{tab:infoerr} for each observation scenario. 
+79\% (57\%), 76\% (49\%), 69\% (52\%), 66\% (46\%), and 49\% (20\%), 
+respectively. Uncertainties in retrieved parameters averaged among these 
+three aerosol types are summarized in the Table \ref{tab:infoerr} for 
+each observation scenario. While agreeing with previous studies 
+\citep{Chowdhary01, Waquet09, Mishchenko07, Hasekamp05a} in that
+poarimetric retrieval can significantly improve the retrieval accuracy
+over the radiance-only retrieval, the retrieval uncertainties for the P1
+scenario in this theoretical study are smaller than those past
+results. This indicates that the accurate retrieval with AERONET
+photo-polarimetric measurements can allow us to retrieve more aerosol
+properties with the accuracy needed for long-term monitoring of the
+direct an indirect aerosol forcing of climate and for validating aerosol
+retrievals from space polarimetric remote sensing. 
 
 Seeking to answer under what conditions the inversions can achieve a
 mode-resolved aerosol refractive index and $\assa$, we further investigated
@@ -854,7 +934,8 @@ the radiance-only inversion usually yields larger retrieval uncertainty
 for fine-mode aerosol. As a consequence, these photo-polarimetric
 observations can enable accurate retrievals in a lower aerosol loading
 when the ${\taua}_{440}$ is 0.1, except for the fine-mode $\mreal$ retrieval that
-requires ${\taua}_{440}>0.2$. The analysis also indicate that the radiance-only
+requires ${\taua}_{440}>0.2$. The analysis also agrees with
+\citet{Dubovik00b} in that the radiance-only
 inversion is unable to resolve bi-modal $\mimag$ and $\assa$ under any
 circumstance. However, observations in the scenario P1 can allow
 bi-modal retrievals of $\mimag$ and $\assa$ when $0.7<\text{AE}<1.6$. 
@@ -865,11 +946,18 @@ along with the mode-independent refractive index will be retrieved.
 
 Finally, it should be noted that in our analysis the aerosol particles
 in each mode are assumed to be poly-disperse homogeneous spheres.
-Although the linearized T-matrix code has been implemented in our model,
-the simulation of scattering properties for large non-spherical
-particles (for example spheroids) still remain computational
-limitations. Our future efforts will implement non-spherical treatment
-in order to more realistically represent mineral dust aerosols.
+Although the linearized T-matrix code has been implemented in the
+forwrad model (UNL-VRTM), the simulation of scattering properties 
+for large non-spherical particles (for example spheroids) is still
+subject to computational limitations. It has been shown by \citet{Dubovik06}
+and \citet{Deuze01} that information content  in the polarimetric
+retrieval of refractive index for the coarse mode, especially
+non-spherical particles, is limited. Therefore, the results of our
+analysis are only applicable to the spherical aerosol particles; the
+information content and retrieval accuracy may be degraded for
+non-spherical coarse aerosol type. Our future efforts will implement 
+non-spherical treatment in order to more realistically represent 
+mineral dust aerosols.
 
 \section{Acknowledgements}
 
@@ -880,5 +968,5 @@ We acknowledge the computational
 support from the Holland Computing Center at Unversity of Nebraska.
 This work is supported by a NASA Earth and Space Science
 Fellowship and the NASA Radiation Sciences Program and the Glory mission
-program. This chapter has been published as an article to
+program. This chapter has been published as an article on
 \textit{Journal of Geophysical Research – Atmospheres} \citep{Xu15a}.

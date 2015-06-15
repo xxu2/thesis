@@ -44,7 +44,7 @@ Let $\xbf$ denote a state vector that contains $n$ parameters to be retrieved
 observation vector with $m$ elements of measurements (such as multi-band
 radiances from different viewing angles). Furthermore, let $\Fbf$ indicate a
 forward model (such as the radiative transfer model) that describes the
-physics on how $\ybf$ and $\xbf$ are related. Then, we have
+physics of how $\ybf$ and $\xbf$ are related. Then, we have
 \begin{equation}
 \ybf = \Fbf(\xbf,\bbf) + \epbf\udy
 \end{equation}
@@ -111,22 +111,22 @@ illustrated in Figure \ref{fig:map}):
 Provided that errors of measurements and the \textit{a priori} are characterized
 by a Gaussian probability distribution function (PDF) and the forward
 model is linear in the vicinity of the true state, the maximum
-\textit{a posteriori} (MAP) solution of the state vector, also called the retrieval or
-the a posteriori, can be derived with the Bayes's Theorem
-\citep{Rodgers00}:
+\textit{a posteriori} (MAP) solution of the state vector, also called the 
+retrieval or the \textit{a posteriori} derived with the Bayes's Theorem
+is \citep{Rodgers00}:
 \begin{equation}
-\hat{\xbf} = \xabf + (\Kbf^T\Sbf\udy^{-1}\Kbf+\Sbf\uda^{-1})^{-1}
-\Kbf^T\Sbf\udy^{-1}(\ybf-\Kbf\xabf) \label{eq:xhat}
+\hat{\xbf} = \xabf + (\Kbf^T\Sbf\udep^{-1}\Kbf+\Sbf\uda^{-1})^{-1}
+\Kbf^T\Sbf\udep^{-1}(\ybf-\Kbf\xabf) \label{eq:xhat}
 \end{equation}
 Here, $\Sbf\uda$ is the error covariance matrix of \textit{a priori},
-$\xbf\uda$; $\Sbf\udy$ is the error covariance matrix of the
+$\xbf\uda$; $\Sbf\udep$ is the error covariance matrix of the
 measurements; $T$ denote matrix transpose operation. 
 
 The "retrieval", $\hat{\xbf}$, in above equation \eqref{eq:xhat}
 is corresponding to the maximum posterior
 PDF and the minimum of a cost function defined by
 \begin{equation}
-J = (\ybf-\Kbf\xbf)^T\Sbf\udy^{-1}(\ybf-\Kbf\xbf) +
+J = (\ybf-\Kbf\xbf)^T\Sbf\udep^{-1}(\ybf-\Kbf\xbf) +
     (\xbf-\xabf)^T\Sbf\uda^{-1}(\xbf-\xabf).
 \label{eq:cost2}
 \end{equation} 
@@ -134,7 +134,7 @@ J is indeed the negative exponent term of the posterior PDF, which also
 follows a Gaussion shape with the expected value of $\hat{\xbf}$ and
 the error covariance matrix $\hat{\Sbf}$ given by
 \begin{equation}
-\hat{\Sbf}^{-1} = \Kbf^T\Sbf\udy^{-1}\Kbf+\Sbf\uda^{-1}. \label{eq:shat}
+\hat{\Sbf}^{-1} = \Kbf^T\Sbf\udep^{-1}\Kbf+\Sbf\uda^{-1}. \label{eq:shat}
 \end{equation}
 
 $\hat{\Sbf}$ describes the statistical uncertainties in retrieved
@@ -169,19 +169,19 @@ thus can impact the effective rank. To identify the effective
 sensitivity of individual measurement to each retrieved parameter, we
 define the error-normalized (EN) Jacobian matrix by
 \begin{equation}
-\tilde{\Kbf} = \Sbf\udy^{-\frac{1}{2}}\Kbf\Sbf\uda^{\frac{1}{2}}
+\tilde{\Kbf} = \Sbf\udep^{-\frac{1}{2}}\Kbf\Sbf\uda^{\frac{1}{2}}
 \label{eq:enj}
 \end{equation}
 
 $\tilde{\Kbf}$ is also called the ‘pre-whitening’ by \cite{Rodgers00}. 
 The superiority of the matrix $\tilde{\Kbf}$ over the matrix $\Kbf$ is 
 that it compares the observation error covariance
-($\Sbf\udy^{\frac{1}{2}}$) with the natural variability of the
+($\Sbf\udep^{\frac{1}{2}}$) with the natural variability of the
 observation vector as expressed by its prior covariance
 ($\Kbf\Sbf\uda^{\frac{1}{2}}$).
 Any component whose natural variability is smaller than the observation
 error is not measurable. Therefore, an element $\tilde{\Kbf}_{i,j}$ less than
-unity indicates that the measurement component $y_i$ contains null useful
+unity indicates that the measurement component $y_i$ does not contain useful
 information for determining parameter $x_j$. In contrast, when
 $\tilde{\Kbf}_{i,j}>1$, the larger of its value, the more useful
 information retained in $y_i$ for determining $x_j$. Therefore, the
@@ -199,14 +199,14 @@ the retrieval to the true state and is defined by
 Replace $y$ in equation \eqref{eq:xhat} with equation \eqref{eq:mfx}
 at $\xbf=\xabf$, 
 \begin{equation}
-\hat{\xbf} = \xabf + (\Kbf^T\Sbf\udy^{-1}\Kbf+\Sbf\uda^{-1})^{-1}
-\Kbf^T\Sbf\udy^{-1}[\Kbf(\xbf-\xabf)+\epbf] 
+\hat{\xbf} = \xabf + (\Kbf^T\Sbf\udep^{-1}\Kbf+\Sbf\uda^{-1})^{-1}
+\Kbf^T\Sbf\udep^{-1}[\Kbf(\xbf-\xabf)+\epbf] 
 \end{equation}
 Then we have
 \begin{equation}
 \Abf=\frac{\partial{\hat{\xbf}}}{\partial\xbf}
-    =\left(\Kbf^T\Sbf\udy^{-1}\Kbf+\Sbf\uda^{-1}\right)^{-1}
-     \Kbf^T\Sbf\udy^{-1}\Kbf
+    =\left(\Kbf^T\Sbf\udep^{-1}\Kbf+\Sbf\uda^{-1}\right)^{-1}
+     \Kbf^T\Sbf\udep^{-1}\Kbf
 \end{equation}
 
 Matrix $\Abf$ quantifies the ability of the retrieval to infer
@@ -517,7 +517,7 @@ solution of equation \eqref{eq:inverse3} according to the
 MAP method corresponds to the state vector that minimizes the quadratic cost
 function consisting of multiple terms \citep{Dubovik00a, Dubovik04}:
 \begin{equation}
-J(\xbf) = \pmb{\gamma}\udy[\ybf-\mfx]^T\Sbf\udy^{-1}[\ybf-\mfx] +
+J(\xbf) = \pmb{\gamma}\udy[\ybf-\mfx]^T\Sbf\udep^{-1}[\ybf-\mfx] +
           \pmb{\gamma}\uda(\xbf-\xabf)^T\Sbf\uda^{-1}(\xbf-\xabf) +
           \pmb{\gamma}_\Delta\xbf^T\pmb{\Omega}\xbf.
 \label{eq:cost3}
@@ -581,7 +581,7 @@ or $\nabla_{\xbf}J$. By linearizing the forward model F(x), we can
 determine $\nabla_{\xbf}J$ by 
 \begin{equation}
 \nabla_{\xbf}J(\xbf) = 
-   \pmb{\gamma}\udy\Kbf^T\Sbf\udy^{-1}[\ybf-\mfx] +
+   \pmb{\gamma}\udy\Kbf^T\Sbf\udep^{-1}[\ybf-\mfx] +
    \pmb{\gamma}\uda\Sbf\uda^{-1}(\xbf-\xabf) +
    \pmb{\gamma}_\Delta\pmb{\Omega}\xbf.
 \label{eq:costadj}
@@ -610,7 +610,7 @@ the solution $\hat{\xbf}$. We estimate the retrieval error on each
 state vector element using the error covariance matrix of the 
 \textit{a posteriori} state:
 \begin{equation}
-\hat{\Sbf}^{-1} = \hat{\Kbf}^T\Sbf\udy^{-1}\hat{\Kbf}+\Sbf\uda^{-1} +
+\hat{\Sbf}^{-1} = \hat{\Kbf}^T\Sbf\udep^{-1}\hat{\Kbf}+\Sbf\uda^{-1} +
 \pmb{\Omega}. 
 \label{eq:shat3}
 \end{equation}
@@ -663,5 +663,5 @@ suggestions and useful discussions on the inversion algorithm
 developement. This work is supported by a NASA Earth and Space Science
 Fellowship and the NASA Radiation Sciences Program and the Glory mission
 program. Most content in this chapter also appear in two articles
-submitted to \textit{Journal of Geophysical Research – Atmospheres}
+published on \textit{Journal of Geophysical Research – Atmospheres}
 \citep{Xu15a, Xu15b}.
