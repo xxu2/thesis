@@ -90,11 +90,11 @@ The state vector $\xbf$ comprises 22 (11 pairs) retrieved parameters,
 namely, the columnar volume concentration $V_0$, the effective radius $\reff$, the
 effective variance $\veff$, and the complex refractive index $\mreal+\mimag{i}$ 
 at 440, 675, 870, and 1020 nm (section \ref{subsec:xy}). These 11 pairs of 
-parameters characterizing aerosol properties in the both fine and coarse 
+parameters characterize aerosol properties in the both fine and coarse 
 aerosol modes; each mode follows a lognormal PSD function. Table \ref{tab:infox} 
 displays aerosol size parameters, refractive indices, and single scattering 
 albedo for each size mode adopted for error and information analysis; 
-also showed in brackets are their associated \textit{a priori} uncertainties. 
+also shown in brackets are their associated \textit{a priori} uncertainties. 
 The fine-mode particles correspond to water-soluble aerosols 
 obtained from OPAC database \citep{Hess98} with updates by \citet{Drury10}, 
 while the coarse-mode is for large spherical particles with 
@@ -150,7 +150,7 @@ information analysis. Relevant aerosol parameters are summarized in the Tables
 \subsection{Synthetic observations}
 
 As described in section \ref{subsec:cimel318} and Table \ref{tab:cimel318}, 
-The SunPhotometer equipped at AERONET sites routinely measures direct and
+The SunPhotometer installed at each AERONET site routinely measures direct and
 diffuse (sky) solar radiances and optionally the mono-band light 
 polarization \citep{Holben98}. Recently, multi-spectral polarizations 
 have also been taken with a newer-generation SunPhotometer (CIMEL CE318-DP) 
@@ -245,21 +245,22 @@ solar zenith angles from 40$^\circ$ to 75$^\circ$ for the three
 defined aerosol types (Table \ref{tab:infoopt}). The simulated radiances 
 ($\ialm$) on the solar almucantar plane and the degree of linear 
 polarization ($\dolppp$) on the solar principal plane are illustrated in 
-Figure \ref{fig:infosimu} for aerosols of type II with solar zenith angle of 
-55$^\circ$. These simulations for other aerosol types and other
-solar zenith angles are of similar pattern. According to Figure
+Figure \ref{fig:infosimu} for aerosols of well-mixed (type II) with solar 
+zenith angle of 55$^\circ$. These simulations for other aerosol types and 
+other solar zenith angles are of similar pattern. According to Figure
 \ref{fig:infosimu}a, $\ialm$ decreases as the scattering angle increases, 
 resulting from forward-dominated scattering phase function of aerosol 
 particles. The maximum $\dolppp$ takes place at the scattering angle of 
-90$^\circ$ as a result of composite effect of Rayleigh and aerosol scattering, 
+90$^\circ$ as a result of composite effect of Rayleigh and aerosol scattering,
 while the smaller $\dolppp$ values dominates at the small scattering angles 
 because of the predominance of diffracted light (Figure \ref{fig:infosimu}b).
 With the synthetic data and relevant error characterizations, we have computed
-the error-normalized (EN) Jacobian matrix, DFS, and a posteriori error to evaluate the capacity of
-AERONET measurements in inferring aerosol microphysical properties. Our
-analysis mainly focuses on the comparison of those quantities between
-measurements with and without including polarization, so that we can understand
-the importance of adding polarization for the retrieval.  
+the error-normalized (EN) Jacobian matrix, DFS, and \textit{a
+posteriori} error to evaluate the capacity of AERONET measurements in
+inferring aerosol microphysical properties. Our analysis mainly focuses
+on the comparison of those quantities between measurements with and without 
+including polarization, so that we can understand the importance of adding 
+polarization for the retrieval.  
 
 \begin{figure}[t]
   \centering
@@ -415,14 +416,14 @@ the principal-plane scans.}
 We illustrate the DFS components $\Abf_{i,i}$ in Figure \ref{fig:infodfspsd1} 
 for the $V_0$, $\reff$ and $\veff$, and in Figure \ref{fig:infodfsmr} and
 \ref{fig:infodfsmi} for the $\mreal$ and $\mimag$, respectively. Also shown
-in those figures are the a posteriori errors, which are the diagonal elements
-of $\hat{\Sbf}^{\frac{1}{2}}$. It should be noted that errors for $V_0$,
+in those figures are the \textit{a posteriori} errors, which are the diagonal 
+elements of $\hat{\Sbf}^{\frac{1}{2}}$. It should be noted that errors for $V_0$,
 $\reff$, and $\veff$ are in terms of relative uncertainties (\%), while errors
 in the $\mreal$ and $\mimag$ are absolute quantities. Curves of four different
 colors in each panel indicate these defined four observation scenarios and
 are averages for the three aerosol types. Error bars represent one fifth of 
-the standard deviations among the three aerosol types (the use of the o
-ne-fifth scale is only for plotting purpose). These error bars thus depict
+the standard deviations among the three aerosol types (the use of the 
+one-fifth scale is only for plotting purpose). These error bars thus depict
 the variability of the DFS component and retrieval error over the fine-mode 
 fraction ($\fmfv$). Mean retrieval uncertainties averaged over various solar 
 zenith angles are summarized in Table \ref{tab:infoerr}. We discuss these results 
@@ -616,8 +617,8 @@ to the condition when the 440-nm AOD is larger than 0.4
 \citep{Dubovik00b, Holben06}. Our analysis above, which focused on three
 aerosol types by a constant AOD value at 440 nm (${\taua}_{440}$=1.0), is
 insufficient to represent variable global conditions. At the same time,
-we also found noticeable variability of the DFS components and a
-posteriori errors existing among three aerosol types with different
+we also found noticeable variability of the DFS components and \textit{a
+posteriori} errors existing among three aerosol types with different
 $\fmfv$, especially for the coarse-mode parameters. Thus, it is necessary
 to investigate how aerosol conditions affect the retrieval error, in
 order to answer the question: under what aerosol conditions are the AERONET
@@ -640,7 +641,7 @@ and for the $\fmfv$ from 0.1 to 0.9. In practice, the $\fmfv$ is
 inaccessible prior to inversion. Instead, we use the 
 Ångström exponent (AE) from 870 to 1020 nm together with
 ${\taua}_{440}$ to define the aerosol conditions, because the AE
-in the longer paired wavelength is highly related to the $\fmfv$
+in the longer pair of wavelengths is highly related to the $\fmfv$
 \citep{Schuster06} and immediately available from the AERONET direct sun 
 measurements. With the aerosol properties defined in the Table
 \ref{tab:infoy}, the $\fmfv$ from 0.1 to 0.9 gives AE values from
@@ -700,8 +701,8 @@ more dominated when enough coarse particles are present: $\fmfv<0.5$ (or
 AE$<1.6$), in which the radiance-only inversion usually yields a large 
 retrieval error for the fine-mode aerosol. 
 
-In Figure \ref{fig:infoerr}, we show the contours of
-the a posteriori error $\hat\epsilon$ in the scenarios I1 and P1 for the 
+In Figure \ref{fig:infoerr}, we show the contours of the \textit{a
+posteriori} error $\hat\epsilon$ in the scenarios I1 and P1 for the 
 individual fine-mode and coarse-mode parameters. Overall, 
 observations in scenarios P1 offer more accurate retrievals for all parameters
 in both the fine and the coarse aerosol modes. In both scenarios, the
@@ -807,13 +808,13 @@ observations in the scenario I1 plus almucantar polarization.
 Measurements in the scenario I1 are those used in current AERONET
 inversion algorithm, and thus represent a control experiment. For each
 observation scenario, we also considered three aerosol types to
-represent general aerosol climatology.  The Bayesian statistical
+represent general aerosol climatology. A Bayesian statistical
 approach then was applied to relate information contained in those
 synthetic data and retrieval errors in aerosol physical parameters to
 the instrumental as well as the a priori characteristics. Then the
-error-normalized Jacobian, degree of freedom for signal (DFS), and the a
-posteriori error in each individual retrieved parameter were presented
-as function of solar zenith angle for these observation scenarios. 
+error-normalized Jacobian, degree of freedom for signal (DFS), and the
+\textit{a posteriori} error in each individual retrieved parameter were 
+presented as function of solar zenith angle for these observation scenarios. 
 
 The results show a remarkable increase in information by adding
 additional polarization and/or radiances into the inversion. Overall,
@@ -831,7 +832,7 @@ increases with increasing solar zenith angle for all cases, resulting
 from more information contained in observations of a wider range of
 scattering angle.
 
-We also analyzed the DFS components and the a posteriori uncertainty for
+We also analyzed the DFS components and the \textit{a posteriori} uncertainty for
 each individual retrieved parameter. As expected, the smallest retrieval
 errors were always found in the scenario P1: 2.3\% (2.9\%) for the volume
 concentration, 1.3\% (3.5\%) and 7.2\% (12\%) for the effective radius and
@@ -859,8 +860,8 @@ circumstance. However, observations in the scenario P1 can allow
 bi-modal retrievals of $\mimag$ and $\assa$ when $0.7<\text{AE}<1.6$. 
 Such criteria can guide us in the practical retrieval algorithm to determine
 whether a mono-modal or bi-modal retrieval of the aerosol refractive index and
-$\assa$ is possible. In aerosol conditions beyond the criteria, bi-modal PSD along with
-the mode-independent refractive index will be retrieved. 
+$\assa$ is possible. In aerosol conditions beyond the criteria, bi-modal PSD
+along with the mode-independent refractive index will be retrieved. 
 
 Finally, it should be noted that in our analysis the aerosol particles
 in each mode are assumed to be poly-disperse homogeneous spheres.
@@ -879,5 +880,5 @@ We acknowledge the computational
 support from the Holland Computing Center at Unversity of Nebraska.
 This work is supported by a NASA Earth and Space Science
 Fellowship and the NASA Radiation Sciences Program and the Glory mission
-program. This chapter has been submitted as an article to
+program. This chapter has been published as an article to
 \textit{Journal of Geophysical Research – Atmospheres} \citep{Xu15a}.

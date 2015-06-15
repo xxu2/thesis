@@ -5,7 +5,7 @@
 
 As suggested by the information content analysis in Chapter \ref{ch:info}, 
 adding polarization data into the AERONET inversion will enable the 
-retrieval of bi-modal refractive index and SSA even for 440-nm AOD as 
+retrieval of bi-modal refractive indices and SSA even for 440-nm AOD as 
 low as 0.2 when the Ångström exponents (AE) is between 0.7 and 1.6. 
 We also found that the uncertainty in the retrieval can be reduced by up 
 to 79\% (57\%), 76\% (49\%), 69\% (52\%), 66\%
@@ -73,7 +73,8 @@ aerosol SSA at the same wavelengths.}
   \end{tabular}
 \end{table}
 
-The \textit{a priori} is characterized with the climatology of aerosol properties
+The \textit{a priori} knowledgeis characterized 
+with the climatology of aerosol properties
 derived from the version 2.0 AERONET daily inversion products of the same site
 during 2011--2013. The PSD parameters were analyzed with 299 available daily
 inversions when the 440-nm AOD is larger than 0.2. The refractive index and SSA
@@ -87,7 +88,7 @@ more linearly related to the $\fmfv$ than the 440-nm and 870-nm AE (Figure
 \ref{fig:invap}b), because AE over the longer-wavelength pairs is more
 sensitive to the component fraction and less sensitive to the change of
 component particle size \citep{Schuster06}. From Figure \ref{fig:invap}c--f, 
-we determine the a priori ($\xabf$) based on the corresponding mean values. 
+we determine the \textit{a priori} state ($\xabf$) based on the corresponding mean values. 
 For refractive index, we pick their mean values when $\fmfv<0.2$ for the coarse
 mode and when $\fmfv>0.6$ for the fine mode. The \textit{a priori} error 
 ($\epsilon\uda$) for each parameter is determined by the relevant physical 
@@ -103,9 +104,10 @@ With the above \textit{a priori} characterization, we performed retrievals for t
 cases, respectively, on 22 February 2011, 17 March 2013, and 22 March 2013
 (hereinafter, cases A, B, and C). A brief characterization of these cases is
 presented in Table \ref{tab:invcase}. Indeed, these cases represent different 
-aerosol mixtures: (A) dominated by fine particles, (B) well-mixed, and (C) 
-dominated by large particles. Moreover, the present algorithm is designed to 
-run with two inversion scenarios: the first includes DOLP, while the second ignores
+aerosol mixtures (according to their AE values): (A) dominated by 
+fine particles, (B) well-mixed, and (C) dominated by large particles. 
+Moreover, the present algorithm is designed to run with two inversion 
+scenarios: the first includes DOLP, while the second ignores
 it---hereafter, we label these scenarios type P and I, respectively. An
 examination of the difference in the fitting results between these two types of
 inversion would indicate the value of DOLP in improving the retrieval. For all
@@ -134,7 +136,7 @@ $|e_\text{I}|$, $|e_\text{AOD}|$, and $|e_\text{DOLP}|$, respectively.
 \begin{figure}[t]
   \centering
   \includegraphics[width={\textwidth}]{figures/inv02.pdf}
-  \caption{a) Measured almucantar normalized radiances. (b) Measured DOLP in
+  \caption{(a) Measured almucantar normalized radiances. (b) Measured DOLP in
 the solar principal plane. (c) Fitting residuals for almucantar radiances by
 the P-type inversion (solid curves) and I-type inversion (crosses). (d) Same as
 panel (c), but for fitting the residuals of principal-plane DOLP. Four colors
@@ -244,16 +246,17 @@ in that the radiance-only inversion underestimates $\mreal$.
 \begin{table}[t]
   \centering
   \small
-  \caption{PSD-related parameters retrieved by our P-type inversion, compared
-with values from the AERONET \Dub inversion. }
+  \caption{PSD-related parameters (as illustrated in Figure
+\ref{fig:inv01}) retrieved by our P-type inversion, compared
+with values from the AERONET \Dub inversion.}
   \label{tab:invpsd}
-  \begin{tabular}{p{2em} C{4em} R{3em} R{4em} R{3em} R{4em} R{3em} R{4em}}
+  \begin{tabular}{p{2em} C{4em} R{4em} R{4em} R{4em} R{4em} R{4em} R{4em}}
   \toprule
   & & \multicolumn{2}{c}{Case A} &
       \multicolumn{2}{c}{Case B} & 
       \multicolumn{2}{c}{Case C} \\
   \cmidrule(r){3-8}
-  $\xbf$ &  Units & Ours & AERONET & Ours & AERONET & Ours & AERONET \\
+  $\xbf$ &  Units & P-type & AERONET & P-type & AERONET & P-type & AERONET \\
   \midrule
   $V_0\fine$     & $\vunit$ & 0.41  & 0.36  & 0.29  & 0.31  & 0.10  & 0.09  \\
   $\reff\fine$   & $\runit$ & 0.218 & 0.208 & 0.226 & 0.201 & 0.163 & 0.156 \\
@@ -421,5 +424,5 @@ measurements over Beijing\_RADI site. We acknowledge the computational
 support from the Holland Computing Center at Unversity of Nebraska.
 This work is supported by a NASA Earth and Space Science
 Fellowship and the NASA Radiation Sciences Program and the Glory mission
-program. This chapter has been submitted as an article to
+program. This chapter has been published as an article to
 \textit{Journal of Geophysical Research – Atmospheres} \citep{Xu15b}.

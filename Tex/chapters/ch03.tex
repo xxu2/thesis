@@ -364,25 +364,25 @@ aerosol PSD follows a bi-modal lognormal function expressed in equation
 \eqref{eq:bilognormal}. All parameters include both the fine and coarse
 modes and account for a total of 22 elements ($n=22$). 
 
-\subsection{Combine a priori and smoothness constraints}
+\subsection{Combine \textit{a priori} and smoothness constraints}
 \label{subsec:ap}
 
 \textit{A priori} information describes our knowledge of the state vector
  before measurements are applied, and an \textit{a priori} constraint is 
 commonly used to achieve a well-defined stable and physically reasonable 
-solution to an ill-posed problem. Usually, a priori knowledge comprises 
+solution to an ill-posed problem. Usually, \textit{a priori} knowledge comprises 
 both a mean state $\xbf\uda$ and its error $\epbf\uda$ (equation
 \eqref{eq:ap}). One of the satisfactory sources for the \textit{a
 priori} knowledge is a climatology based on historical measurements. For a given
 AERONET site, we use the available inversion products that have been
 obtained with the \Dub algorithm, for which the \textit{a priori} can be
 well characterized by the mean values and standard deviations of each
-component in the state vector. At the same time, the a priori can also
+component in the state vector. At the same time, the \textit{a priori} can also
 be determined from other sources if a historical AERONET retrieval is not
 available. For example, we could extract aerosol microphysical
 climatology from chemistry transport model simulations
-\citep[e.g.,][]{Wang10} or from measurements of in situ and/or even satellite
-sensors.
+\citep[e.g.,][]{Wang10} or from measurements of \textit{in situ} and/or 
+even satellite sensors.
 
 %% Table 
 \begin{table}[t]
@@ -439,7 +439,7 @@ Twomey63}, and has been successfully used to retrieve coherent
 aerosol size distributions \citep{Dubovik00a} and atmospheric
 vertical profiles \citep{Twomey77}. The principle of the smoothness
 constraint is to restrain the degree of non-linearity of a certain
-physical parameter by limiting the values of its dth derivatives:
+physical parameter by limiting the values of its $d$th derivatives:
 \begin{equation}
 \Gbf\udd+\epbf_\Delta=\pmb{0} \label{eq:smooth}
 \end{equation}
@@ -616,8 +616,9 @@ state vector element using the error covariance matrix of the
 \end{equation}
 where $\hat{\Kbf}$ is the Jacobian matrix of the forward model $\mfx$ 
 at the solution $\hat{\xbf}$. It should be noted that the above 
-three-term a posteriori formularized according to the three-term cost 
-function defined in the equation \eqref{eq:cost3}. Simply, the retrieval 
+three-term equation of \textit{a posteriori} are formularized 
+according to the cost function defined in the 
+equation \eqref{eq:cost3}. Simply, the retrieval 
 error for each element can be estimated by:
 \begin{equation}
 \hat{\epsilon}_i=\hat{\Sbf}_{i,i}^{\frac{1}{2}}
