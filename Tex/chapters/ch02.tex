@@ -121,7 +121,8 @@ Radiative Transfer Model, UNL-VRTM.
 \begin{figure}[t]
   \centering
   \includegraphics[width={0.95\textwidth}]{figures/unlvrtm.pdf}
-  \caption{Flowchart of the UNL-VRTM components. See text for detail.}
+  \caption[Flowchart of the UNL-VRTM components.]
+  {Flowchart of the UNL-VRTM components. See text for detail.}
   \label{fig:unlvrtm}
 \end{figure}
 
@@ -616,7 +617,8 @@ presented in following section {\ref{sec:rtmverify}}.
 \begin{figure}[p]
   \centering
   \includegraphics[width={0.8\textwidth}]{figures/unlvrtm1.pdf}
-  \caption{Some benchmark simulations by the UNL-VRTM: 
+  \caption[Some benchmark simulations by the UNL-VRTM.]
+  {Some benchmark simulations by the UNL-VRTM: 
 (a) Downward solar spectral irradiance at the TOA and the
 surface for solar zenith angle of 30$^\circ$. (b) Total-atmosphere gas
 absorption optical depth in the range 0.2--0.8 $\mu$m. (c) Same as (b) but
@@ -665,8 +667,11 @@ in the \ce{O2}A band.
 \begin{figure}[t]
   \centering
   \includegraphics[width={0.8\textwidth}]{figures/unlvrtm2.pdf}
-  \caption{Degree of linear polarization ($-Q/I$) of downward radiation
-for a pure Rayleigh atmosphere: (a) computed by UNL-VRTM for the case
+  \caption[Validation of UNL-VRTM for calculating the degree of linear
+polarization for a pure Rayleigh atmosphere.]
+  {Validating UNL-VRTM for calculating the degree of linear
+polarization ($-Q/I$) of downward radiation for a pure Rayleigh 
+atmosphere: (a) computed by UNL-VRTM for the case
 analyzed in Figure 5.7 of \citet{Coulson88} and shown here as (b). (c)--(e)
 shows the comparisons of $I$, $Q$, and $U$ computed by \citet{Coulson60} and
 those from UNL-VRTM. In (a) and (b), $A_\text{s}$ represents the surface albedo
@@ -679,7 +684,12 @@ is 0.25, $\cos{\theta_0}=0.8$, and for 8 different viewing angles.
 \begin{figure}[t]
   \centering
   \includegraphics[width={0.8\textwidth}]{figures/unlvrtm3.pdf}
-  \caption{Counterparts in Tables 3--10 of \citet{Garcia89} for
+  \caption[Validation of UNL-VRTM for calculating the degree of linear
+polarization for a Mie scattering
+atmosphere.]
+  {Validation of UNL-VRTM for calculating the degree of linear
+polarization ($-Q/I$) of upwelling radiation for a Mie scattering
+atmosphere. Counterparts in Tables 3--10 of \citet{Garcia89} for
 upwelling radiation on the top of the same atmospheric conditions of
 aerosol scattering. No gas absorption and Rayleigh scattering are
 considered. Note that compared here are $I$ and $Q$ values reported 
@@ -760,10 +770,10 @@ mission science activities. This chapter has been published in an article in
 \begin{figure}[p]
   \centering
   \includegraphics[width={1.4\textwidth}]{figures/unlvrtm4.pdf}
-  \caption{Intercomparison of Jacobians ($\ptxi/\partial\ln{x}$) 
-calculated with UNL-VRTM using the analytical method (y-axis) with 
-those computed from UNL-VRTM using finite-difference estimates (x-axis). 
-Here $\xi$ is one of the Stokes parameters: $I$ (top row), $Q$
+  \caption[Validation of UNL-VRTM's fine-mode Jacobians calculation.] 
+{Validation of UNL-VRTM's fine-mode Jacobians ($\ptxi/\partial\ln{x}$) 
+(y-axis) with those computed from UNL-VRTM using finite-difference estimates 
+(x-axis). Here $\xi$ is one of the Stokes parameters: $I$ (top row), $Q$
 (middle row), and $U$ (last row). x is one of 7 parameters associated 
 with fine-mode aerosols: mass concentration $m_\text{A}$, $\taua$,
 $\mreal$, $\mimag$, $\rg$ and $\sg$ (of the lognormal PSD), and height
@@ -779,8 +789,9 @@ and coarse-mode aerosols as described in \citet{Hess98}.
 \begin{figure}[p]
   \centering
   \includegraphics[width={1.4\textwidth}]{figures/unlvrtm5.pdf}
-  \caption{Same as in Figure \ref{fig:unlvrtm4}, but for coarse mode aerosols.
-(Figure adopted from \citet{Wang14}) }
+  \caption[Same as Figure \ref{fig:unlvrtm4}, but for coarse-mode
+Jacobians.]{Same as in Figure \ref{fig:unlvrtm4}, but for coarse-mode
+Jacobians.(Figure adopted from \citet{Wang14}) }
   \label{fig:unlvrtm5}
 \end{figure}
 \end{landscape}
